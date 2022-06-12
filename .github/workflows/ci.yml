@@ -54,6 +54,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: License validation
         shell: bash
         run: echo no validation
