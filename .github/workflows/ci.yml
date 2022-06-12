@@ -16,11 +16,11 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
       - name: Building
         run: yarn build
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
 
   lint:
     name: 🪥 Lint
@@ -32,7 +32,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
 
       - name: Linting
         run: echo no lint
@@ -47,7 +47,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
       - name: Testing
         run: echo no tests
 
@@ -61,7 +61,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
       - name: License validation
         shell: bash
         run: echo no validation
