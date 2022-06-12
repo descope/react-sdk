@@ -1,5 +1,5 @@
 {
-  "name": "web-react-sdk",
+  "name": "@descope/web-react-sdk",
   "version": "0.0.21",
   "main": "dist/Descope.js",
   "types": "dist/Descope.d.ts",
