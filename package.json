@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/descope/web-react-sdk.git"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@descope/web-js-sdk": "0.0.8"
   },

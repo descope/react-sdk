@@ -4,6 +4,9 @@ inputs:
   node_version:
     description: Node version to use
     required: true
+  repo-token:
+    description: Repo token to use
+    required: true
 runs:
   using: composite
   steps:
@@ -28,4 +31,10 @@ runs:
     - name: Install Dependencies 🪛
       shell: bash
       run: npm i
+      with:
+        repo-token: ${{ inputs.repo-token }}
+      env:
+          NODE_AUTH_TOKEN: ${{ inputs.repo-token }}
       
+
+
