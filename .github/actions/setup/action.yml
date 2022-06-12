@@ -31,8 +31,6 @@ runs:
     - name: Install Dependencies 🪛
       shell: bash
       run: npm i
-      with:
-        repo-token: ${{ inputs.repo-token }}
       env:
           NODE_AUTH_TOKEN: ${{ inputs.repo-token }}
       
