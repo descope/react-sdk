@@ -12,11 +12,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup
-        uses: ./.github/actions/setup
+      - uses: actions/setup-node@v3
         with:
-          node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com/
+      # Skip post-install scripts here, as a malicious
+      # script could steal NODE_AUTH_TOKEN.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
+      # `npm rebuild` will run all those post-install scripts for us.
+      - run: npm rebuild && npm run prepare --if-present
       - name: Building
         run: yarn build
         env:
@@ -28,12 +36,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup
-        uses: ./.github/actions/setup
+      - uses: actions/setup-node@v3
         with:
-          node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
-
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com/
+      # Skip post-install scripts here, as a malicious
+      # script could steal NODE_AUTH_TOKEN.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
+      # `npm rebuild` will run all those post-install scripts for us.
+      - run: npm rebuild && npm run prepare --if-present
       - name: Linting
         run: echo no lint
 
@@ -43,11 +58,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup
-        uses: ./.github/actions/setup
+      - uses: actions/setup-node@v3
         with:
-          node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com/
+      # Skip post-install scripts here, as a malicious
+      # script could steal NODE_AUTH_TOKEN.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
+      # `npm rebuild` will run all those post-install scripts for us.
+      - run: npm rebuild && npm run prepare --if-present
       - name: Testing
         run: echo no tests
 
@@ -57,11 +80,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup
-        uses: ./.github/actions/setup
+      - uses: actions/setup-node@v3
         with:
-          node_version: ${{ env.NODE_VERSION }}
-          repo-token: ${{ secrets.CI_NPM_READ_ORG }}
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com/
+      # Skip post-install scripts here, as a malicious
+      # script could steal NODE_AUTH_TOKEN.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
+      # `npm rebuild` will run all those post-install scripts for us.
+      - run: npm rebuild && npm run prepare --if-present
       - name: License validation
         shell: bash
         run: echo no validation
