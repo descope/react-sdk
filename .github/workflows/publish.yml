@@ -28,7 +28,7 @@ jobs:
         run: npm ci --ignore-scripts
         env:
           CI: true
-          NODE_AUTH_TOKEN: ${{ secrets.CI_READ_COMMON }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # `npm rebuild` will run all those post-install scripts for us.
       - run: npm rebuild && npm run prepare --if-present
 
