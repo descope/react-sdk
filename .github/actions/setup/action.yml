@@ -28,3 +28,5 @@ runs:
     - name: Install Dependencies 🪛
       shell: bash
       run: npm i
+      env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
