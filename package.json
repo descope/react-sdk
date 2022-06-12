@@ -1,6 +1,6 @@
 {
   "name": "web-react-sdk",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "main": "dist/Descope.js",
   "types": "dist/Descope.d.ts",
   "description": "Descope React SDK",
