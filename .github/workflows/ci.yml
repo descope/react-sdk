@@ -1,0 +1,59 @@
+name: 🎛️ CI
+
+on: [push]
+
+env:
+  NODE_VERSION: 16.14
+
+jobs:
+  build:
+    name: 👷 Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node_version: ${{ env.NODE_VERSION }}
+      - name: Building
+        run: yarn build
+
+  lint:
+    name: 🪥 Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node_version: ${{ env.NODE_VERSION }}
+      - name: Linting
+        run: echo no lint
+  testing:
+    name: 👔 Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node_version: ${{ env.NODE_VERSION }}
+      - name: Testing
+        run: echo no tests
+
+  license-validation:
+    name: 🪪 License Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node_version: ${{ env.NODE_VERSION }}
+      - name: License validation
+        shell: bash
+        run: echo no validation

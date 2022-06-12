@@ -1,0 +1,35 @@
+name: 📢 publish
+
+on:
+  create:
+    tags:
+      - 'release/**'
+
+env:
+  NODE_VERSION: 16.14
+
+jobs:
+  publish:
+    name: 📢 Publish
+    permissions:
+      packages: write
+      contents: read
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Install dependencies
+        run: npm i
+        env:
+          CI: true
+
+      - name: Publish to GitHub Package Registry
+        run: npm publish
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
