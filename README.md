@@ -1,4 +1,4 @@
-# web-react-sdk
+# @descope/web-react-sdk
 This library lets you consume your login pages created by Descope console-app in your application
 Under the hood, it uses [web-react-sdk1](https://github.com/descope/web-js-sdk)
 
