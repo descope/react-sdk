@@ -71,6 +71,7 @@
     "start": "rollup -c rollup.config.app.js -w",
     "build": "rollup -c",
     "test": "jest",
+    "lint": "eslint ./src",
     "prepublishOnly": "npm run build"
   }
 }

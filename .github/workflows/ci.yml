@@ -50,7 +50,7 @@ jobs:
       # `npm rebuild` will run all those post-install scripts for us.
       - run: npm rebuild && npm run prepare --if-present
       - name: Linting
-        run: echo no lint
+        run: npm run lint
 
   testing:
     name: 👔 Test
@@ -72,7 +72,14 @@ jobs:
       # `npm rebuild` will run all those post-install scripts for us.
       - run: npm rebuild && npm run prepare --if-present
       - name: Testing
-        run: echo no tests
+        run: npm run test
+      - name: Coverage check
+        uses: devmasx/coverage-check-action@v1.2.0
+        with:
+          type: lcov
+          min_coverage: 95
+          result_path: coverage/lcov.info
+          token: ${{ github.token }}
 
   license-validation:
     name: 🪪 License Validation
