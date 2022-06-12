@@ -30,7 +30,6 @@ runs:
 
     - name: Install Dependencies 🪛
       shell: bash
-    - name: Install dependencies
       # Skip post-install scripts here, as a malicious
       # script could steal NODE_AUTH_TOKEN.    
       run: npm ci --ignore-scripts
