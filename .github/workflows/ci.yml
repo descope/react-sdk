@@ -16,8 +16,11 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Building
         run: yarn build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   lint:
     name: 🪥 Lint
@@ -29,8 +32,11 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Linting
         run: echo no lint
+
   testing:
     name: 👔 Test
     runs-on: ubuntu-latest
@@ -41,6 +47,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ env.NODE_VERSION }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Testing
         run: echo no tests
 
