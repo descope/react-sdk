@@ -37,4 +37,7 @@ runs:
         CI: true
         # `npm rebuild` will run all those post-install scripts for us.
     - run: npm rebuild && npm run prepare --if-present
+      shell: bash
+      env:
+        CI: true
       
