@@ -5,6 +5,7 @@ import React, {
   useEffect,
 } from 'react';
 import DescopeWc from '@descope/web-js-sdk';
+import '@descope/web-js-sdk'
 
 type CustomEvents<K extends string> = {
   [key in K]: (event: CustomEvent) => void;
