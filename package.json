@@ -13,7 +13,7 @@
     "dist"
   ],
   "dependencies": {
-    "@descope/web-js-sdk": "0.0.12"
+    "@descope/web-js-sdk": "0.0.14"
   },
   "devDependencies": {
     "@open-wc/rollup-plugin-html": "^1.2.5",

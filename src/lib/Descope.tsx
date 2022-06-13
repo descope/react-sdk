@@ -1,32 +1,11 @@
 import React, {
   useImperativeHandle,
-  DOMAttributes,
   useRef,
   useEffect,
 } from 'react';
-import DescopeWc from '@descope/web-js-sdk';
 import '@descope/web-js-sdk'
+import { DescopeCustomElement } from './types';
 
-type CustomEvents<K extends string> = {
-  [key in K]: (event: CustomEvent) => void;
-};
-type CustomElement<T, K extends string = ''> = Partial<
-  T &
-    DOMAttributes<T> & {
-      children: React.ReactChild;
-      ref: React.Ref<HTMLElement>;
-    } & CustomEvents<`on${K}`>
->;
-
-type DescopeCustomElement = CustomElement<DescopeWc, 'success' | 'error'>;
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      ['descope-wc']: DescopeCustomElement;
-    }
-  }
-}
 
 interface PropsType {
   projectId: string;
