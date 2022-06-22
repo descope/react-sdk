@@ -1,5 +1,5 @@
 {
-  "name": "@descope/web-react-sdk",
+  "name": "@descope/react-sdk",
   "version": "0.0.28",
   "main": "dist/Descope.js",
   "types": "dist/Descope.d.ts",
@@ -7,7 +7,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/descope/web-react-sdk.git"
+    "url": "https://github.com/descope/react-sdk.git"
   },
   "files": [
     "dist"
