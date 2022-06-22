@@ -15,9 +15,7 @@ export default {
       declaration: false,
       declarationDir: "build"
     }),
-    commonjs({
-      include: /node_modules/
-    }),
+    commonjs(),
     replace({
       preventAssignment: true,
       'process.env.NODE_ENV': JSON.stringify('development'),
