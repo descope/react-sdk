@@ -3,7 +3,7 @@ name: 👊 Bump Version & Release
 on:
   push:
     branches:
-      - init
+      - main
 
 jobs:
   bump-version:
