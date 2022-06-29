@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import Descope from '../src/lib/Descope';
 
-jest.mock('@descope/web-js-sdk', () => {});
+jest.mock('@descope/web-component', () => {});
 
 describe('Descope', () => {
     it('should render the WC with the correct props', () => {
