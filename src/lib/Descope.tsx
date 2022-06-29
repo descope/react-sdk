@@ -3,7 +3,7 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
-import '@descope/web-js-sdk'
+import '@descope/web-component'
 import { DescopeCustomElement } from './types';
 
 
