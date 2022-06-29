@@ -1,6 +1,6 @@
 {
   "name": "@descope/react-sdk",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "main": "dist/Descope.js",
   "types": "dist/Descope.d.ts",
   "description": "Descope React SDK",
