@@ -1,5 +1,5 @@
 import React, { DOMAttributes } from 'react';
-import DescopeWc from '@descope/web-js-sdk';
+import DescopeWc from '@descope/web-component';
 
 declare global {
 	namespace JSX {
