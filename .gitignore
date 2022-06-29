@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+
+# production
+/dist
+/build
+
+npm-debug.log*
+
+# jest output
+coverage
+
+# Mac OS X files
+.DS_Store
+
+# IDE files
+.idea/
+.vscode/
+.history/
+*.vsix
+.ionide
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+THIRD_PARTY_LICENSE
+
+__debug_bin

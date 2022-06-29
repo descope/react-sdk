@@ -1,0 +1,115 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"airbnb",
+		"airbnb-typescript",
+		"plugin:import/typescript",
+		"prettier",
+		"plugin:testing-library/react",
+		"plugin:jest-dom/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"ignorePatterns": [
+		".eslintrc",
+		"jest.config.js",
+		"babel.config.js",
+		"build/*",
+		"dist/*",
+		"webpack.config.js",
+		"bundle/*",
+		"coverage/*",
+		"testUtils/*"
+	],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"project": "./tsconfig.json"
+	},
+	"plugins": [
+		"react",
+		"@typescript-eslint",
+		"prettier",
+		"testing-library",
+		"import",
+		"prefer-arrow",
+		"jest-dom",
+		"jest",
+		"jest-formatting",
+		"no-only-tests"
+	],
+	"settings": {
+		"import/parsers": {
+			"@typescript-eslint/parser": [".ts", ".tsx"]
+		},
+		"import/resolver": {
+			"typescript": {
+				"alwaysTryTypes": true
+			}
+		}
+	},
+	"rules": {
+		"no-tabs": ["error", { "allowIndentationTabs": true }],
+		"@typescript-eslint/indent": ["off"],
+		"react/jsx-indent": [2, "tab"],
+		"quotes": [
+			"error",
+			"single",
+			{ "avoidEscape": true, "allowTemplateLiterals": true }
+		],
+		"@typescript-eslint/quotes": [
+			"error",
+			"single",
+			{ "avoidEscape": true, "allowTemplateLiterals": true }
+		],
+		"@typescript-eslint/comma-dangle": ["off"],
+		"comma-dangle": ["off"],
+		"react/function-component-definition": [
+			2,
+			{
+				"namedComponents": "arrow-function",
+				"unnamedComponents": "arrow-function"
+			}
+		],
+		"prefer-arrow/prefer-arrow-functions": [
+			2,
+			{
+				"disallowPrototype": true,
+				"singleReturnOnly": false,
+				"classPropertiesAllowed": false
+			}
+		],
+		"no-console": 2,
+		"no-only-tests/no-only-tests": 2,
+		"no-warning-comments": 2,
+		"import/no-unresolved": 2,
+		"import/named": 2,
+		"import/no-relative-packages": 2,
+		"import/no-cycle": 2,
+		"import/newline-after-import": 2,
+		"import/no-namespace": 2,
+		"import/no-duplicates": 2,
+		"import/first": 2,
+		"import/exports-last": 2,
+		"import/no-absolute-path": 2,
+		"import/no-dynamic-require": 2,
+		"import/no-self-import": 2,
+		"import/no-useless-path-segments": 2,
+		"import/no-extraneous-dependencies": [
+			2,
+			{
+				"devDependencies": [
+					"**/*.test.*",
+					"**/*.spec.*",
+					"**/testUtils/**",
+					"jest.config.ts"
+				]
+			}
+		]
+	}
+}
