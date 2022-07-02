@@ -41,7 +41,7 @@
     "@babel/core": "7.18.2",
     "@testing-library/react": "13.3.0",
     "@babel/preset-typescript": "7.17.12",
-    "@testing-library/user-event": "14.2.0",
+    "@testing-library/user-event": "14.2.1",
     "eslint": "8.17.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.0.0",
