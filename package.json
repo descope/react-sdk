@@ -34,7 +34,7 @@
     "react": "18.1.0",
     "jest": "^27.3.1",
     "ts-jest": "^27.0.7",
-    "ts-node": "10.8.1",
+    "ts-node": "10.9.1",
     "babel-jest": "27.5.1",
     "@babel/preset-env": "7.18.9",
     "@babel/preset-react": "7.18.6",
