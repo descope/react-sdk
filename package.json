@@ -13,7 +13,7 @@
     "dist"
   ],
   "dependencies": {
-    "@descope/web-component": "0.0.17"
+    "@descope/web-component": "https://npm.pkg.github.com/download/@descope/web-component/0.0.17/d0cc3ede78f1fc6afd383ecf38c130d4835ac09e05285053c647671ce3465db8"
   },
   "devDependencies": {
     "@open-wc/rollup-plugin-html": "^1.2.5",
