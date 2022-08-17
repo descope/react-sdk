@@ -27,8 +27,9 @@ const App = () => {
 					onError={console.log}
                     // eslint-disable-next-line no-console
 					onSuccess={console.log}
-					projectId="demo1"
-					flowId={flowId}
+					projectId="P2D7Y6k9RmeA28cSWODM2DS51xCj"
+					flowId="otp.json"
+					baseUrl="http://localhost:8000"
 				/>
 
 				<button

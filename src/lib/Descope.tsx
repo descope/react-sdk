@@ -32,7 +32,7 @@ const Descope = React.forwardRef<HTMLElement, PropsType>(
       };
     }, [innerRef, onError, onSuccess]);
 
-    return <descope-wc project={projectId} flow={flowId} base-url={baseUrl} ref={innerRef} />;
+    return <descope-wc project-id={projectId} flow-id={flowId} base-url={baseUrl} ref={innerRef} />;
   }
 );
 
