@@ -3,7 +3,7 @@ name: 👊 Bump Version & Release
 on:
   push:
     branches:
-      - main
+      - private-web-component
 
 jobs:
   bump-version:
