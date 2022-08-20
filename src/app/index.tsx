@@ -25,7 +25,7 @@ const App = () => {
 				<Descope
 					// eslint-disable-next-line no-console
 					onError={console.log}
-                    // eslint-disable-next-line no-console
+					// eslint-disable-next-line no-console
 					onSuccess={console.log}
 					projectId="P2D7Y6k9RmeA28cSWODM2DS51xCj"
 					flowId="otp.json"
@@ -33,7 +33,7 @@ const App = () => {
 				/>
 
 				<button
-                    type="button"
+					type="button"
 					onClick={() =>
 						setFlowId((id) => (id === 'login1' ? 'signup1' : 'login1'))
 					}
