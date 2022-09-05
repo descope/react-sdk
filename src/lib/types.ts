@@ -25,3 +25,12 @@ export type DescopeCustomElement = CustomElement<
 	DescopeWc,
 	'success' | 'error'
 >;
+
+export interface IAuthContext {
+	authenticated: boolean;
+  user: any;
+	projectId: string;
+	baseUrl?: string;
+	setUser: React.Dispatch<React.SetStateAction<Object>>;
+	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
