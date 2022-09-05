@@ -25,7 +25,7 @@ const App = () => {
 				<Descope
 					// eslint-disable-next-line no-console
 					onError={console.log}
-                    // eslint-disable-next-line no-console
+					// eslint-disable-next-line no-console
 					onSuccess={console.log}
 					projectId="demo1"
 					flowId={flowId}

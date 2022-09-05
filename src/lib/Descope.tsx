@@ -10,12 +10,13 @@ import { DescopeCustomElement } from './types';
 interface PropsType {
   projectId: string;
   flowId: string;
+  baseUrl?: string;
   onSuccess?: DescopeCustomElement['onsuccess'];
   onError?: DescopeCustomElement['onerror'];
 }
 
 const Descope = React.forwardRef<HTMLElement, PropsType>(
-  ({ projectId, flowId, onSuccess, onError }, ref) => {
+  ({ projectId, flowId, baseUrl, onSuccess, onError }, ref) => {
     const innerRef = useRef<HTMLInputElement>();
 
     useImperativeHandle(ref, () => innerRef.current);
@@ -31,13 +32,14 @@ const Descope = React.forwardRef<HTMLElement, PropsType>(
       };
     }, [innerRef, onError, onSuccess]);
 
-    return <descope-wc project={projectId} flow={flowId} ref={innerRef} />;
+    return <descope-wc project-id={projectId} flow-id={flowId} base-url={baseUrl} ref={innerRef} />;
   }
 );
 
 Descope.defaultProps = {
   onError: undefined,
   onSuccess: undefined,
+  baseUrl: undefined
 }
 
 export default Descope
