@@ -10,13 +10,12 @@ import { AuthContext } from '../hooks/useAuth';
 
 interface PropsType {
   flowId: string;
-  baseUrl?: string;
   onSuccess?: DescopeCustomElement['onsuccess'];
   onError?: DescopeCustomElement['onerror'];
 }
 
 const Descope = React.forwardRef<HTMLElement, PropsType>(
-  ({ projectId, flowId, baseUrl, onSuccess, onError }, ref) => {
+  ({ flowId, onSuccess, onError }, ref) => {
     const innerRef = useRef<HTMLInputElement>();
 
     useImperativeHandle(ref, () => innerRef.current);
@@ -41,8 +40,7 @@ const Descope = React.forwardRef<HTMLElement, PropsType>(
 
 Descope.defaultProps = {
   onError: undefined,
-  onSuccess: undefined,
-  baseUrl: undefined
+  onSuccess: undefined
 }
 
 export default Descope
