@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createRoot } from 'react-dom/client';
 import Descope from '../lib/Descope';
 
 const App = () => {
-	const [flowId, setFlowId] = useState('login1');
+	const [showFlow, setShowFlow] = useState(false);
+	const [message, setMessage] = useState('');
+	const onSuccess = useCallback(
+		(res) => {
+			// eslint-disable-next-line no-console
+			console.log(res);
+			setMessage('Flow Succeed');
+			setShowFlow(false);
+		},
+		[setMessage, setShowFlow]
+	);
 
+	const onError = useCallback(
+		(res) => {
+			// eslint-disable-next-line no-console
+			console.log(res);
+			setMessage('Flow Failed');
+			setShowFlow(false);
+		},
+		[setMessage, setShowFlow]
+	);
 	return (
 		<div style={{ height: '100vh', position: 'relative' }}>
 			<div
@@ -22,33 +41,31 @@ const App = () => {
 					transform: 'translateY(-50%)'
 				}}
 			>
-				<Descope
-					// eslint-disable-next-line no-console
-					onError={console.log}
-                    // eslint-disable-next-line no-console
-					onSuccess={console.log}
-					projectId="demo1"
-					flowId={flowId}
-				/>
-
-				<button
-                    type="button"
-					onClick={() =>
-						setFlowId((id) => (id === 'login1' ? 'signup1' : 'login1'))
-					}
-					style={{
-						display: 'block',
-						margin: 'auto',
-						background: 'none',
-						border: 'none',
-						color: 'blue',
-						padding: 5
-					}}
-				>
-					{flowId === 'login1'
-						? "Don't have an account?"
-						: 'Already have an account'}
-				</button>
+				{showFlow && (
+					<Descope
+						projectId="<your-project-id>"
+						flowId="<flow-id>"
+						onSuccess={onSuccess}
+						onError={onError}
+					/>
+				)}
+				{message && <div>{message}</div>}
+				{!message && !showFlow && (
+					<button
+						type="button"
+						onClick={() => setShowFlow(true)}
+						style={{
+							display: 'block',
+							margin: 'auto',
+							background: 'none',
+							border: 'none',
+							color: 'blue',
+							padding: 5
+						}}
+					>
+						Start Flow
+					</button>
+				)}
 			</div>
 		</div>
 	);

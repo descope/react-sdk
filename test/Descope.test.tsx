@@ -9,8 +9,8 @@ describe('Descope', () => {
     it('should render the WC with the correct props', () => {
         render(<Descope projectId="proj1" flowId="flow1"/>);
         
-        expect(document.querySelector('descope-wc')).toHaveAttribute('project', 'proj1')
-        expect(document.querySelector('descope-wc')).toHaveAttribute('flow', 'flow1')
+        expect(document.querySelector('descope-wc')).toHaveAttribute('project-id', 'proj1')
+        expect(document.querySelector('descope-wc')).toHaveAttribute('flow-id', 'flow1')
     })
 
     it('should register to the error event when received an onError cb', () => {
