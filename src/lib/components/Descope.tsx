@@ -2,6 +2,7 @@ import React, {
   useImperativeHandle,
   useRef,
   useEffect,
+  useCallback,
 } from 'react';
 import '@descope/web-component'
 import { DescopeCustomElement } from '../types';
@@ -20,17 +21,24 @@ const Descope = React.forwardRef<HTMLElement, PropsType>(
 
     useImperativeHandle(ref, () => innerRef.current);
 
-    const { projectId, baseUrl } = React.useContext(AuthContext);
+    const { projectId, baseUrl, setAuthenticated, setUser } = React.useContext(AuthContext);
 
+    const handleSuccess = useCallback((e: CustomEvent) => {
+      setUser(e?.detail?.user);
+      setAuthenticated(true);
+      if (onSuccess) {
+        onSuccess(e);
+      }
+    }, [])
 
     useEffect(() => {
       const ele = innerRef.current;
       if(onError) ele?.addEventListener('error', onError);
-      if(onSuccess) ele?.addEventListener('success', onSuccess);
+      ele?.addEventListener('success', handleSuccess);
 
       return () => {
         if(onError) ele?.removeEventListener('error', onError);
-        if(onSuccess) ele?.removeEventListener('success', onSuccess);
+        ele?.removeEventListener('success', handleSuccess);
       };
     }, [innerRef, onError, onSuccess]);
 
