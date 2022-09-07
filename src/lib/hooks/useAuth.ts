@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { IAuthContext } from '../types';
 
 export const AuthContext = React.createContext<IAuthContext>({
@@ -12,10 +12,10 @@ export const AuthContext = React.createContext<IAuthContext>({
 export const useAuth = () => {
 	const { authenticated, user, projectId, baseUrl } = React.useContext(AuthContext);
 
-	return {
+	return useMemo(() => ({
     projectId, 
     baseUrl,
 		authenticated,
 		user
-	}
+	}), [projectId, baseUrl, authenticated, user]);
 }

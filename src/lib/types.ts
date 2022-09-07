@@ -26,11 +26,37 @@ export type DescopeCustomElement = CustomElement<
 	'success' | 'error'
 >;
 
+export enum UserStatus {
+	enabled = 'enabled',
+	disabled = 'disabled',
+	invited = 'invited',
+	unknown = 'unknown'
+}
+
+export interface IExternalID {
+	id: string;
+	type?: string;
+}
+
+export interface User {
+	externalIDs?: IExternalID[];
+	displayName?: string;
+	project?: string;
+	logoutTime?: number;
+	createTime?: number;
+	email?: string;
+	phoneNumber?: string;
+	status?: UserStatus;
+	verifiedEmail?: boolean;
+	verifiedPhone?: boolean;
+	tenants?: string[];
+}
+
 export interface IAuthContext {
 	authenticated: boolean;
-  user: any;
+  user: User;
 	projectId: string;
 	baseUrl?: string;
-	setUser: React.Dispatch<React.SetStateAction<Object>>;
+	setUser: React.Dispatch<React.SetStateAction<User>>;
 	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
