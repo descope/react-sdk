@@ -1,8 +1,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createRoot } from 'react-dom/client';
-import { AuthProvider } from '../../dist';
-
+import AuthProvider from '../lib/components/AuthProvider';
 import App from './App';
 
 const container = document.getElementById('root');
