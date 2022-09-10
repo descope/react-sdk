@@ -6,7 +6,7 @@ import Descope from '../../src/lib/components/Descope';
 
 jest.mock('@descope/web-component', () => {});
 
-function renderWithProvider(ui: React.ReactElement, projectId: string = "1", baseUrl?: string) {
+function renderWithProvider(ui: React.ReactElement, projectId: string = "project1", baseUrl?: string) {
     render(
         <AuthProvider projectId={projectId} baseUrl={baseUrl}> 
             {ui}
@@ -34,7 +34,7 @@ describe('Descope', () => {
 
 	it('should register to the error event when received an onError cb', () => {
 		const onError = jest.fn();
-        renderWithProvider(<Descope flowId="" onError={onError} />);
+		renderWithProvider(<Descope flowId="flow-1" onError={onError} />);
 		fireEvent(document.querySelector('descope-wc'), new CustomEvent('error'));
 
 		expect(onError).toHaveBeenCalled();
@@ -42,7 +42,7 @@ describe('Descope', () => {
 
 	it('should register to the success event when received an onSuccess cb', () => {
 		const onSuccess = jest.fn();
-		renderWithProvider(<Descope flowId="" onSuccess={onSuccess} />);
+		renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
 		fireEvent(document.querySelector('descope-wc'), new CustomEvent('success', { detail: { user: { name: 'nir' }}}));
 
 		expect(onSuccess).toHaveBeenCalled();
@@ -50,7 +50,7 @@ describe('Descope', () => {
 
 	it('should pass the ref to the wc element', () => {
 		const ref = jest.fn();
-        renderWithProvider(<Descope flowId="" ref={ref} />);
+		renderWithProvider(<Descope flowId="flow-1" ref={ref} />);
 		expect(ref).toHaveBeenCalledWith(document.querySelector('descope-wc'));
 	});
 });

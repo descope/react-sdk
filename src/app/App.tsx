@@ -1,10 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { Descope, useAuth } from '../../dist';
+import Descope from '../lib/components/Descope';
+import useAuth from '../lib/hooks/useAuth';
 
 const getUserDisplayName = (user) =>
 	user?.name || user?.externalIds?.[0].id || '';
 
-const App = () => {
+const App = ({ flowId }) => {
 	const { authenticated, user } = useAuth();
 
 	const [showFlow, setShowFlow] = useState(false);
@@ -12,14 +13,13 @@ const App = () => {
 
 	
 	const onStart = useCallback(() => {
+		console.log('onstart')
 		setShowFlow(true);
 		setErrorMessage('');
 	}, [setShowFlow, setErrorMessage]);
 
 	const onSuccess = useCallback(
-		(res) => {
-			// eslint-disable-next-line no-console
-			console.log(res);
+		() => {
 			setShowFlow(false);
 		},
 		[setShowFlow, setErrorMessage]
@@ -27,14 +27,13 @@ const App = () => {
 
 	const onError = useCallback(
 		(res) => {
-			// eslint-disable-next-line no-console
-			console.log(res);
 			setShowFlow(false);
-			setErrorMessage('Something went Wrong');
+			setErrorMessage('Something went wrong');
 		},
 		[setShowFlow, setErrorMessage]
 	);
 
+	console.log('user', user)
 	return (
 		<div style={{ height: '100vh', position: 'relative' }}>
 			<div
@@ -51,9 +50,10 @@ const App = () => {
 					transform: 'translateY(-50%)'
 				}}
 			>
-				{authenticated && <div> Hello {getUserDisplayName(user)}</div>}
+				{authenticated && <div className="username"> Hello {getUserDisplayName(user)}</div>}
 				{errorMessage && (
 					<div
+						className="error"
 						style={{
 							margin: 'auto',
 							color: 'red'
@@ -64,7 +64,7 @@ const App = () => {
 				)}
 				{showFlow && (
 					<Descope
-						flowId="<flow-id>"
+						flowId={flowId}
 						onSuccess={onSuccess}
 						onError={onError}
 					/>

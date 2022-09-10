@@ -24,23 +24,25 @@ const Descope = React.forwardRef<HTMLElement, PropsType>(
     const { projectId, baseUrl, setAuthenticated, setUser } = React.useContext(AuthContext);
 
     const handleSuccess = useCallback((e: CustomEvent) => {
+      console.log('handleSuccess', JSON.stringify(e?.detail?.user));
       setUser(e?.detail?.user);
       setAuthenticated(true);
       if (onSuccess) {
         onSuccess(e);
       }
-    }, [])
+    }, [setUser, setAuthenticated, onSuccess]);
 
     useEffect(() => {
       const ele = innerRef.current;
-      if(onError) ele?.addEventListener('error', onError);
       ele?.addEventListener('success', handleSuccess);
+      if(onError) ele?.addEventListener('error', onError);
 
       return () => {
         if(onError) ele?.removeEventListener('error', onError);
+
         ele?.removeEventListener('success', handleSuccess);
       };
-    }, [innerRef, onError, onSuccess]);
+    }, [innerRef, onError, handleSuccess]);
 
     return <descope-wc project-id={projectId} flow-id={flowId} base-url={baseUrl} ref={innerRef} />;
   }
