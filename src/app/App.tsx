@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import Descope from '../lib/components/Descope';
 import useAuth from '../lib/hooks/useAuth';
 
 const getUserDisplayName = (user) =>
 	user?.name || user?.externalIds?.[0].id || '';
 
-const App = ({ flowId }) => {
+	
+const App:FC<{ flowId: string }> = ({ flowId }) => {
 	const { authenticated, user } = useAuth();
 
 	const [showFlow, setShowFlow] = useState(false);
@@ -13,7 +14,6 @@ const App = ({ flowId }) => {
 
 	
 	const onStart = useCallback(() => {
-		console.log('onstart')
 		setShowFlow(true);
 		setErrorMessage('');
 	}, [setShowFlow, setErrorMessage]);
@@ -26,14 +26,13 @@ const App = ({ flowId }) => {
 	);
 
 	const onError = useCallback(
-		(res) => {
+		() => {
 			setShowFlow(false);
 			setErrorMessage('Something went wrong');
 		},
 		[setShowFlow, setErrorMessage]
 	);
 
-	console.log('user', user)
 	return (
 		<div style={{ height: '100vh', position: 'relative' }}>
 			<div

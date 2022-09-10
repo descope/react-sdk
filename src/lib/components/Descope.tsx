@@ -24,7 +24,6 @@ const Descope = React.forwardRef<HTMLElement, PropsType>(
     const { projectId, baseUrl, setAuthenticated, setUser } = React.useContext(AuthContext);
 
     const handleSuccess = useCallback((e: CustomEvent) => {
-      console.log('handleSuccess', JSON.stringify(e?.detail?.user));
       setUser(e?.detail?.user);
       setAuthenticated(true);
       if (onSuccess) {
