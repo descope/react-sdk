@@ -1,15 +1,7 @@
 import React, { useMemo } from 'react';
-import { IAuthContext } from '../types';
+import AuthContext from './authContext';
 
-export const AuthContext = React.createContext<IAuthContext>({
-	user: {},
-	authenticated: false,
-	projectId: '',
-	setUser: () => {},
-	setAuthenticated: () => {}
-});
-
-export const useAuth = () => {
+const useAuth = () => {
 	const { authenticated, user, projectId, baseUrl } = React.useContext(AuthContext);
 
 	return useMemo(() => ({
@@ -19,3 +11,5 @@ export const useAuth = () => {
 		user
 	}), [projectId, baseUrl, authenticated, user]);
 }
+
+export default useAuth;

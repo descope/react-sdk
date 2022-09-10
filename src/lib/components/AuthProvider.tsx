@@ -1,11 +1,11 @@
 import React, { FC, useMemo, useState } from 'react';
-import { AuthContext } from '../hooks/useAuth';
+import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
 
 interface IAuthProviderProps {
 	projectId: string;
 	baseUrl?: string;
-	children?: any;
+	children?: JSX.Element;
 }
 
 const AuthProvider: FC<IAuthProviderProps> = ({
@@ -16,23 +16,18 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	const [authenticated, setAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
 
-	return (
-		<AuthContext.Provider
-			value={useMemo<IAuthContext>(
-				() => ({
-					user,
-					authenticated,
-					projectId,
-					baseUrl,
-					setUser,
-					setAuthenticated
-				}),
-				[authenticated, user, projectId, baseUrl]
-			)}
-		>
-			{children}
-		</AuthContext.Provider>
+	const value = useMemo<IAuthContext>(
+		() => ({
+			user,
+			authenticated,
+			projectId,
+			baseUrl,
+			setUser,
+			setAuthenticated
+		}),
+		[authenticated, user, projectId, baseUrl]
 	);
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 AuthProvider.defaultProps = {

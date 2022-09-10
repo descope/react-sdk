@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import '@descope/web-component'
 import { DescopeCustomElement } from '../types';
-import { AuthContext } from '../hooks/useAuth';
+import AuthContext from '../hooks/authContext';
 
 
 interface PropsType {

@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, renderHook } from '@testing-library/react';
 import React from 'react';
 import AuthProvider from '../../src/lib/components/AuthProvider';
 import Descope from '../../src/lib/components/Descope';
@@ -42,8 +42,8 @@ describe('Descope', () => {
 
 	it('should register to the success event when received an onSuccess cb', () => {
 		const onSuccess = jest.fn();
-        renderWithProvider(<Descope flowId="" onSuccess={onSuccess} />);
-		fireEvent(document.querySelector('descope-wc'), new CustomEvent('success'));
+		renderWithProvider(<Descope flowId="" onSuccess={onSuccess} />);
+		fireEvent(document.querySelector('descope-wc'), new CustomEvent('success', { detail: { user: { name: 'nir' }}}));
 
 		expect(onSuccess).toHaveBeenCalled();
 	});

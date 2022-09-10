@@ -1,19 +1,28 @@
 import React, { useState, useCallback } from 'react';
-import { Descope, useAuth } from '../lib';
+import { Descope, useAuth } from '../../dist';
 
 const getUserDisplayName = (user) =>
-	user?.displayName || user?.externalIDs?.[0].id || '';
+	user?.name || user?.externalIds?.[0].id || '';
 
 const App = () => {
-	const [showFlow, setShowFlow] = useState(false);
 	const { authenticated, user } = useAuth();
+
+	const [showFlow, setShowFlow] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
+
+	
+	const onStart = useCallback(() => {
+		setShowFlow(true);
+		setErrorMessage('');
+	}, [setShowFlow, setErrorMessage]);
+
 	const onSuccess = useCallback(
 		(res) => {
 			// eslint-disable-next-line no-console
 			console.log(res);
 			setShowFlow(false);
 		},
-		[setShowFlow]
+		[setShowFlow, setErrorMessage]
 	);
 
 	const onError = useCallback(
@@ -21,8 +30,9 @@ const App = () => {
 			// eslint-disable-next-line no-console
 			console.log(res);
 			setShowFlow(false);
+			setErrorMessage('Something went Wrong');
 		},
-		[setShowFlow]
+		[setShowFlow, setErrorMessage]
 	);
 
 	return (
@@ -42,13 +52,27 @@ const App = () => {
 				}}
 			>
 				{authenticated && <div> Hello {getUserDisplayName(user)}</div>}
+				{errorMessage && (
+					<div
+						style={{
+							margin: 'auto',
+							color: 'red'
+						}}
+					>
+						{errorMessage}
+					</div>
+				)}
 				{showFlow && (
-					<Descope flowId="otp.json" onSuccess={onSuccess} onError={onError} />
+					<Descope
+						flowId="<flow-id>"
+						onSuccess={onSuccess}
+						onError={onError}
+					/>
 				)}
 				{!showFlow && (
 					<button
 						type="button"
-						onClick={() => setShowFlow(true)}
+						onClick={onStart}
 						style={{
 							display: 'block',
 							margin: 'auto',
