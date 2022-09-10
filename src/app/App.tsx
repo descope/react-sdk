@@ -1,6 +1,5 @@
 import React, { FC, useState, useCallback } from 'react';
-import Descope from '../lib/components/Descope';
-import useAuth from '../lib/hooks/useAuth';
+import { Descope, useAuth } from '../lib';
 
 const getUserDisplayName = (user) =>
 	user?.name || user?.externalIds?.[0].id || '';

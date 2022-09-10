@@ -2,7 +2,7 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import App from '../../src/app/App';
-import AuthProvider from '../../src/lib/components/AuthProvider';
+import { AuthProvider } from '../../src/lib';
 
 jest.mock('@descope/web-component', () => {});
 
