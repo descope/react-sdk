@@ -15,7 +15,7 @@ describe('useAuth', () => {
 		}).toThrowError();
 	});
 
-	it('should render t', () => {
+	it('should get default values from provider', () => {
 		const wrapper = ({ children }) => {
 			return (
 				<AuthProvider projectId="project1">{children}</AuthProvider>
