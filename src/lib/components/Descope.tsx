@@ -2,35 +2,46 @@ import React, {
   useImperativeHandle,
   useRef,
   useEffect,
+  useCallback,
 } from 'react';
 import '@descope/web-component'
-import { DescopeCustomElement } from './types';
+import { DescopeCustomElement } from '../types';
+import AuthContext from '../hooks/authContext';
 
 
 interface PropsType {
-  projectId: string;
   flowId: string;
-  baseUrl?: string;
   onSuccess?: DescopeCustomElement['onsuccess'];
   onError?: DescopeCustomElement['onerror'];
 }
 
 const Descope = React.forwardRef<HTMLElement, PropsType>(
-  ({ projectId, flowId, baseUrl, onSuccess, onError }, ref) => {
+  ({ flowId, onSuccess, onError }, ref) => {
     const innerRef = useRef<HTMLInputElement>();
 
     useImperativeHandle(ref, () => innerRef.current);
 
+    const { projectId, baseUrl, setAuthenticated, setUser } = React.useContext(AuthContext);
+
+    const handleSuccess = useCallback((e: CustomEvent) => {
+      setUser(e?.detail?.user);
+      setAuthenticated(true);
+      if (onSuccess) {
+        onSuccess(e);
+      }
+    }, [setUser, setAuthenticated, onSuccess]);
+
     useEffect(() => {
       const ele = innerRef.current;
+      ele?.addEventListener('success', handleSuccess);
       if(onError) ele?.addEventListener('error', onError);
-      if(onSuccess) ele?.addEventListener('success', onSuccess);
 
       return () => {
         if(onError) ele?.removeEventListener('error', onError);
-        if(onSuccess) ele?.removeEventListener('success', onSuccess);
+
+        ele?.removeEventListener('success', handleSuccess);
       };
-    }, [innerRef, onError, onSuccess]);
+    }, [innerRef, onError, handleSuccess]);
 
     return <descope-wc project-id={projectId} flow-id={flowId} base-url={baseUrl} ref={innerRef} />;
   }
@@ -38,8 +49,7 @@ const Descope = React.forwardRef<HTMLElement, PropsType>(
 
 Descope.defaultProps = {
   onError: undefined,
-  onSuccess: undefined,
-  baseUrl: undefined
+  onSuccess: undefined
 }
 
 export default Descope

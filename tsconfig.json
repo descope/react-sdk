@@ -12,7 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationDir": "dist/dts",
     "jsx": "react",
     "typeRoots": [
       "./node_modules/@types",
