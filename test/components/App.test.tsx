@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
 import App from '../../src/app/App';
 import { AuthProvider } from '../../src/lib';
@@ -18,11 +18,13 @@ describe('App', () => {
 
 		// success and make sure user 
 		fireEvent(document.querySelector('descope-wc'), new CustomEvent('success', {
-			detail: { user: { name: 'user1' }
-		}}));
+			detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
+		}));
 
 		const username = document.querySelector('.username');
 		expect(username.textContent).toContain('user1');
+
+		expect(document.cookie).toContain('DS=session1');
 	});
 
 	it('should show error message on error', () => {

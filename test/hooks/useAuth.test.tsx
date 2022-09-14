@@ -24,5 +24,6 @@ describe('useAuth', () => {
 		const { result } = renderHook(() => useAuth(), { wrapper });
 		expect(result.current.authenticated).toBeFalsy();
 		expect(result.current.user).toEqual({});
+		expect(result.current.sessionToken).toEqual('');
 	});
 });

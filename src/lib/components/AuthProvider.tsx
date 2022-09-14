@@ -15,15 +15,18 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 }) => {
 	const [authenticated, setAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
+	const [sessionToken, setSessionToken] = useState('');
 
 	const value = useMemo<IAuthContext>(
 		() => ({
-			user,
-			authenticated,
 			projectId,
 			baseUrl,
+			user,
+			authenticated,
+			sessionToken,
 			setUser,
-			setAuthenticated
+			setAuthenticated,
+			setSessionToken
 		}),
 		[authenticated, user, projectId, baseUrl]
 	);

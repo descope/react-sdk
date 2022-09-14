@@ -43,7 +43,10 @@ describe('Descope', () => {
 	it('should register to the success event when received an onSuccess cb', () => {
 		const onSuccess = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
-		fireEvent(document.querySelector('descope-wc'), new CustomEvent('success', { detail: { user: { name: 'nir' }}}));
+		fireEvent(
+			document.querySelector('descope-wc'),
+			new CustomEvent('success', { detail: { user: { name: 'user1' }, sessionJwt: 'session1' }})
+		);
 
 		expect(onSuccess).toHaveBeenCalled();
 	});
