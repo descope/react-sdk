@@ -18,8 +18,8 @@ describe('App', () => {
 
 		// success and make sure user 
 		fireEvent(document.querySelector('descope-wc'), new CustomEvent('success', {
-			detail: { user: { name: 'user1' }
-		}}));
+			detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
+		}));
 
 		const username = document.querySelector('.username');
 		expect(username.textContent).toContain('user1');
