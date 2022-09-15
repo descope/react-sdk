@@ -1,20 +1,11 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import { Descope, useAuth } from '../lib';
 
 const getUserDisplayName = (user) =>
 	user?.name || user?.externalIds?.[0].id || '';
 
-const SESSION_COOKIE_NAME = 'DS';
-
-const isSessionCookieExists = () =>
-	!!document.cookie && document.cookie.includes(`${SESSION_COOKIE_NAME}=`);
-
-const setSessionCookie = (sessionToken) => {
-	document.cookie = `${SESSION_COOKIE_NAME}=${sessionToken};`;
-} 
-
 const App:FC<{ flowId: string }> = ({ flowId }) => {
-	const { authenticated, user, sessionToken } = useAuth();
+	const { authenticated, user } = useAuth();
 
 	const [showFlow, setShowFlow] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
@@ -39,12 +30,6 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 		},
 		[setShowFlow, setErrorMessage]
 	);
-
-	useEffect(() => {
-		if (sessionToken && !isSessionCookieExists()) {
-			setSessionCookie(sessionToken);
-		}
-	}, [sessionToken])
 
 	return (
 		<div style={{ height: '100vh', position: 'relative' }}>
