@@ -45,6 +45,8 @@ const App = () => {
 }
 ```
 
+##### Provide flow id
+
 ```js
 import { Descope } from '@descope/react-sdk'
 
