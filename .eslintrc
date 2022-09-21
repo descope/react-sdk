@@ -69,6 +69,7 @@
 		],
 		"@typescript-eslint/comma-dangle": ["off"],
 		"comma-dangle": ["off"],
+		"react/jsx-props-no-spreading": ["off"],
 		"react/function-component-definition": [
 			2,
 			{

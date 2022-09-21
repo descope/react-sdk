@@ -26,7 +26,7 @@ describe('Descope', () => {
 			'flow-id',
 			'flow1'
 		);
-        expect(document.querySelector('descope-wc')).toHaveAttribute(
+		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'base-url',
 			'url1'
 		);

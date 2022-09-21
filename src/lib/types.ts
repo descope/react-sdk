@@ -1,5 +1,5 @@
-import React, { DOMAttributes } from 'react';
 import DescopeWc from '@descope/web-component';
+import React, { DOMAttributes } from 'react';
 
 declare global {
 	namespace JSX {
@@ -62,3 +62,11 @@ export interface IAuthContext {
 	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 	setSessionToken: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface DescopeProps {
+  flowId: string;
+  onSuccess?: DescopeCustomElement['onsuccess'];
+  onError?: DescopeCustomElement['onerror'];
+}
+
+export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;

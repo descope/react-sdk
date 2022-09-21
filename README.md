@@ -24,6 +24,26 @@ const AppRoot = () => {
 }
 ```
 #### Use Descope to render specific flow
+You can use default flows or provide flow id directly to the Descope component
+
+##### Default flows
+
+```js
+// you can choose flow to run from the following
+// import { SignIn } from '@descope/react-sdk'
+// import { SignUp } from '@descope/react-sdk'
+import { SignUpOrIn } from '@descope/react-sdk'
+
+const App = () => {
+    return (
+        {...}
+        <SignUpOrIn 
+            onSuccess={(e) => console.log('Logged in!')}
+            onError={(e) => console.log('Could not logged in!')}
+        />
+    )
+}
+```
 
 ```js
 import { Descope } from '@descope/react-sdk'
@@ -35,10 +55,19 @@ const App = () => {
             flowId="myFlowId" 
             onSuccess={(e) => console.log('Logged in!')}
             onError={(e) => console.log('Could not logged in!')}
-        >
+        />
     )
 }
 ```
 
-TODO:
-- decide about the callbacks event data & structure
+## Contributing to this project
+In order to use this repo locally
+ - Clone this repository
+ - Navigate to repository directory
+ - Run `npm i`
+ - Edit `src/app/index.tsx` in the following way
+      - Set `projectId` prop - replace `<project-id>` with your project id
+      - Set `flowId` prop - Replace  `<flow-id>` (for example - `sign-up-or-in`)
+      - Optional - set a different `baseUrl` (for example - `http://localhost:8000`)    
+ - Run `npm run start`
+ - Go to `http://localhost:3000/` and start flow
