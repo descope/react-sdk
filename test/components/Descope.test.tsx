@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
-import { render, fireEvent, renderHook } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import AuthProvider from '../../src/lib/components/AuthProvider';
 import Descope from '../../src/lib/components/Descope';
@@ -26,7 +26,7 @@ describe('Descope', () => {
 			'flow-id',
 			'flow1'
 		);
-        expect(document.querySelector('descope-wc')).toHaveAttribute(
+		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'base-url',
 			'url1'
 		);

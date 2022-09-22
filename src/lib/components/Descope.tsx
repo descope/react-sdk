@@ -1,21 +1,13 @@
+import '@descope/web-component';
 import React, {
-  useImperativeHandle,
-  useRef,
-  useEffect,
-  useCallback,
+  useCallback, useEffect, useImperativeHandle,
+  useRef
 } from 'react';
-import '@descope/web-component'
-import { DescopeCustomElement } from '../types';
 import AuthContext from '../hooks/authContext';
+import { DescopeProps } from '../types';
 
 
-interface PropsType {
-  flowId: string;
-  onSuccess?: DescopeCustomElement['onsuccess'];
-  onError?: DescopeCustomElement['onerror'];
-}
-
-const Descope = React.forwardRef<HTMLElement, PropsType>(
+const Descope = React.forwardRef<HTMLElement, DescopeProps>(
   ({ flowId, onSuccess, onError }, ref) => {
     const innerRef = useRef<HTMLInputElement>();
 

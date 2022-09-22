@@ -9,9 +9,9 @@ const root = createRoot(container!);
 
 root.render(
 	<AuthProvider
-		projectId="P2EcjlWLkeKENJlOlYXEIKnOAcTJ"
-		baseUrl="https://api.sandbox.descope.com"
+		projectId="project-id>"
+		baseUrl="http://localhost:8000"
 	>
-		<App flowId="F2Ecjm4ZHwPdCTGIz5mQ2r4X0Zln" />
+		<App flowId="<flow-id>" />
 	</AuthProvider>
 );
