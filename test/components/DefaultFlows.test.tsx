@@ -1,4 +1,3 @@
-/* eslint-disable testing-library/no-node-access */
 import { render } from '@testing-library/react';
 import React from 'react';
 import { SignInFlow, SignUpFlow, SignUpOrInFlow } from '../../src/lib';
@@ -36,7 +35,7 @@ describe('Default Flows', () => {
 		);
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'flow-id',
-			'sign-in'
+			'sign-up'
 		);
 	});
 
@@ -48,7 +47,7 @@ describe('Default Flows', () => {
 		);
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'flow-id',
-			'sign-in'
+			'sign-up-or-in'
 		);
 	});
 });

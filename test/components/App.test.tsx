@@ -1,5 +1,4 @@
-/* eslint-disable testing-library/no-node-access */
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import App from '../../src/app/App';
 import { AuthProvider } from '../../src/lib';
