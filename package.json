@@ -13,7 +13,7 @@
     "dist"
   ],
   "dependencies": {
-    "@descope/web-component": "^0.0.26-alpha.8"
+    "@descope/web-component": "^0.0.26-alpha.9"
   },
   "devDependencies": {
     "@babel/core": "7.18.9",
