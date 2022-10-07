@@ -5,9 +5,8 @@ const getUserDisplayName = (user) =>
 	user?.name || user?.externalIds?.[0].id || '';
 
 const App:FC<{ flowId: string }> = ({ flowId }) => {
-	const { user, logout } = useAuth();
+	const { authenticated, user, logout } = useAuth();
 
-	const authenticated = true;
 	const [showFlow, setShowFlow] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 
@@ -98,6 +97,7 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 							margin: 'auto',
 							background: 'none',
 							border: 'none',
+							color: 'blue',
 							padding: 5
 						}}
 					>
