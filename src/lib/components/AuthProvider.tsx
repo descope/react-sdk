@@ -18,7 +18,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	const [authenticated, setAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
 	const [sessionToken, setSessionToken] = useState('');
-	const sdk = useMemo(() => createSdk({ projectId, baseUrl }), [projectId]);
+	const sdk = useMemo(() => createSdk({ projectId, baseUrl }), [projectId, baseUrl]);
 
 	const value = useMemo<IAuthContext>(
 		() => ({
