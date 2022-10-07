@@ -5,6 +5,13 @@ import AuthProvider from '../../src/lib/components/AuthProvider';
 
 jest.mock('@descope/web-component', () => {});
 
+jest.mock('@descope/web-js-sdk', () => {
+	const sdk = {
+		logout: jest.fn().mockName('logout')
+	};
+	return () => sdk;
+});
+
 function renderWithProvider(ui: React.ReactElement, projectId: string) {
 	render(
 			<AuthProvider projectId={projectId}> 
