@@ -6,15 +6,13 @@ const useAuth = () => {
 	if (!ctx) {
 		throw Error('You can only use useAuth in the context of <AuthProvider />');
 	}
-	const { projectId, baseUrl, authenticated, user, sessionToken } = ctx;
+	const { authenticated, user, sessionToken } = ctx;
 
 	return useMemo(() => ({
-    projectId, 
-    baseUrl,
 		authenticated,
 		user,
 		sessionToken
-	}), [projectId, baseUrl, authenticated, user, sessionToken]);
+	}), [authenticated, user, sessionToken]);
 }
 
 export default useAuth;
