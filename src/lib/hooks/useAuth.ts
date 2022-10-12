@@ -13,7 +13,7 @@ const useAuth = (): IAuth => {
 		authenticated,
 		user,
 		sessionToken,
-		logout: sdk?.logout
+		logout: sdk.logout
 	}), [authenticated, user, sessionToken, sdk]);
 }
 
