@@ -13,7 +13,7 @@ declare global {
 	}
 }
 
-type Sdk = ReturnType<typeof createSdk>;
+export type Sdk = ReturnType<typeof createSdk>;
 
 export type CustomEvents<K extends string> = {
 	[key in K]: (event: CustomEvent) => void;
@@ -71,7 +71,7 @@ export interface IAuthContext {
 	authenticated: boolean;
   user?: User;
 	sessionToken?: string;
-	sdk: Sdk;
+	sdk?: Sdk;
 	setUser: React.Dispatch<React.SetStateAction<User>>;
 	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 	setSessionToken: React.Dispatch<React.SetStateAction<string>>;

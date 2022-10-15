@@ -9,9 +9,8 @@ const root = createRoot(container!);
 
 root.render(
 	<AuthProvider
-		projectId="<project-id>"
-		baseUrl="http://localhost:8000"
+		projectId="P2FxzK5spgYnH4HUWtBzFfB72V51"
 	>
-		<App flowId="<flow-id>" />
+		<App flowId="sign-up-or-in" />
 	</AuthProvider>
 );

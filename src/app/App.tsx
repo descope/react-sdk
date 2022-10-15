@@ -70,7 +70,7 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 						onError={onError}
 					/>
 				)}
-				{!showFlow && (
+				{!showFlow && !authenticated && (
 					<button
 						type="button"
 						className="start-button"

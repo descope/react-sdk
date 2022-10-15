@@ -17,6 +17,11 @@ jest.spyOn(console, 'error').mockImplementation(() => {});
 
 const { logout } = createSdk({ projectId: '' });
 
+const authProviderWrapper = (projectId: string) => 	({ children }) => {
+	return (
+		<AuthProvider projectId={projectId}>{children}</AuthProvider>
+	);
+};
 describe('useAuth', () => {
 	it('should throw error when used without provider', () => {
 		expect(() => {
@@ -24,13 +29,15 @@ describe('useAuth', () => {
 		}).toThrowError();
 	});
 
+	it('should throw error when used before sdk initialization', () => {
+		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('') });
+		expect(() => {
+			renderHook(() => useAuth());
+		}).toThrowError();
+	});
+
 	it('should get default values from provider', () => {
-		const wrapper = ({ children }) => {
-			return (
-				<AuthProvider projectId="project1">{children}</AuthProvider>
-			);
-		};
-		const { result } = renderHook(() => useAuth(), { wrapper });
+		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('project1') });
 		expect(result.current.authenticated).toBeFalsy();
 		expect(result.current.user).toEqual({});
 		expect(result.current.sessionToken).toEqual('');
