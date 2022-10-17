@@ -62,7 +62,11 @@ const App = () => {
 }
 ```
 
-#### use `useAuth` hook in your components to implement specific logic according to authentication state
+#### Use the `useAuth` hook in your components in order to access authentication state and utilities
+This can be helpful to implement application-specific logic. Examples: 
+ - Render different components if current session is authenticated
+ - Render user's content 
+ - Logout button
 ```js
 import { useAuth } from '@descope/react-sdk'
 
@@ -94,7 +98,7 @@ When developing a full-stack application, it is common to have private server AP
 ![session-token-validation-diagram](https://docs.descope.com/static/SessionValidation-cf7b2d5d26594f96421d894273a713d8.png)
 
 
-Note: Descope also provides server-side SDKs in various languages (NodeJS, Go, Python, etc). Descope's server SDKs have out-of-the-box session validation API that supports the options described bellow.
+Note: Descope also provides server-side SDKs in various languages (NodeJS, Go, Python, etc). Descope's server SDKs have out-of-the-box session validation API that supports the options described bellow. To read more about session validation, Read [this section](https://docs.descope.com/guides/gettingstarted/#session-validation) in Descope documentation.
 
 The mechanism to pass session token depends on the Descope project's "Token response method" configuration.
 ##### 1. Manage in cookies
@@ -116,7 +120,7 @@ const App = () => {
   
     const onClick = useCallback(() => {     
         fetch('https://localhost:3002/api/some-path' {
-            method: 'POST',
+            method: 'GET',
             headers: { Authorization: `Bearer ${sessionToken}` }
         })
     },[sessionToken])
