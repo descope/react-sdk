@@ -1,6 +1,11 @@
+// '@descope/web-js-sdk' is a dependency of '@descope/web-component'
+// and we want to use the same version that is used there
+// eslint-disable-next-line import/no-extraneous-dependencies
+import createSdk from '@descope/web-js-sdk';
 import React, { FC, useMemo, useState } from 'react';
 import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
+
 
 interface IAuthProviderProps {
 	projectId: string;
@@ -16,9 +21,11 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	const [authenticated, setAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
 	const [sessionToken, setSessionToken] = useState('');
+	const sdk = useMemo(() => projectId ? createSdk({ projectId, baseUrl }) : null, [projectId, baseUrl]);
 
 	const value = useMemo<IAuthContext>(
 		() => ({
+			sdk,
 			projectId,
 			baseUrl,
 			user,
