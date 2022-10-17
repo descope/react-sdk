@@ -6,6 +6,13 @@ import Descope from '../../src/lib/components/Descope';
 
 jest.mock('@descope/web-component', () => {});
 
+jest.mock('@descope/web-js-sdk', () => {
+	const sdk = {
+		logout: jest.fn().mockName('logout')
+	};
+	return () => sdk;
+});
+
 function renderWithProvider(ui: React.ReactElement, projectId: string = "project1", baseUrl?: string) {
     render(
         <AuthProvider projectId={projectId} baseUrl={baseUrl}> 

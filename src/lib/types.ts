@@ -1,4 +1,8 @@
 import DescopeWc from '@descope/web-component';
+// '@descope/web-js-sdk' is a dependency of '@descope/web-component'
+// and we want to use the same version that is used there
+// eslint-disable-next-line import/no-extraneous-dependencies
+import createSdk from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
 
 declare global {
@@ -8,6 +12,8 @@ declare global {
 		}
 	}
 }
+
+export type Sdk = ReturnType<typeof createSdk>;
 
 export type CustomEvents<K extends string> = {
 	[key in K]: (event: CustomEvent) => void;
@@ -52,12 +58,20 @@ export interface User {
 	tenants?: string[];
 }
 
+export interface IAuth {
+	authenticated: boolean;
+  user?: User;
+	sessionToken?: string;
+	logout: Sdk['logout'];
+}
+
 export interface IAuthContext {
 	projectId: string;
 	baseUrl?: string;
 	authenticated: boolean;
   user?: User;
 	sessionToken?: string;
+	sdk?: Sdk;
 	setUser: React.Dispatch<React.SetStateAction<User>>;
 	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 	setSessionToken: React.Dispatch<React.SetStateAction<string>>;

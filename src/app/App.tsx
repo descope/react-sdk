@@ -1,11 +1,11 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Descope, useAuth } from '../lib';
 
 const getUserDisplayName = (user) =>
 	user?.name || user?.externalIds?.[0].id || '';
 
 const App:FC<{ flowId: string }> = ({ flowId }) => {
-	const { authenticated, user } = useAuth();
+	const { authenticated, user, logout } = useAuth();
 
 	const [showFlow, setShowFlow] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
@@ -30,6 +30,10 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 		},
 		[setShowFlow, setErrorMessage]
 	);
+
+	const onLogout = useCallback(() => {
+		logout();
+	}, [logout])
 
 	return (
 		<div style={{ height: '100vh', position: 'relative' }}>
@@ -66,9 +70,10 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 						onError={onError}
 					/>
 				)}
-				{!showFlow && (
+				{!showFlow && !authenticated && (
 					<button
 						type="button"
+						className="start-button"
 						onClick={onStart}
 						style={{
 							display: 'block',
@@ -80,6 +85,23 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 						}}
 					>
 						Start Flow
+					</button>
+				)}
+				{authenticated && (
+					<button
+						type="button"
+						className="logout-button"
+						onClick={onLogout}
+						style={{
+							display: 'block',
+							margin: 'auto',
+							background: 'none',
+							border: 'none',
+							color: 'blue',
+							padding: 5
+						}}
+					>
+						Logout
 					</button>
 				)}
 			</div>
