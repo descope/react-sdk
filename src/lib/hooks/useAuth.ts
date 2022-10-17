@@ -14,13 +14,21 @@ const useAuth = (): IAuth => {
 			throw Error(`You can only use 'logout' after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`);
 		}
 		return sdk.logout(...args);
+	}, [sdk]);
+
+	const me = useCallback((...args: Parameters<Sdk['me']>) => {
+		if (!sdk) {
+			throw Error(`You can only use 'me' after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`);
+		}
+		return sdk.me(...args);
 	}, [sdk])
 
 	return useMemo(() => ({
 		authenticated,
 		user,
 		sessionToken,
-		logout
+		logout,
+		me
 	}), [authenticated, user, sessionToken, sdk]);
 }
 

@@ -29,12 +29,22 @@ describe('useAuth', () => {
 		}).toThrowError();
 	});
 
-	it('should throw error when used before sdk initialization', () => {
+	it('should throw error when using "logout" before sdk initialization', () => {
 		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('') });
+
 		expect(() => {
-			renderHook(() => useAuth());
+			result.current.logout();
 		}).toThrowError();
 	});
+
+	it('should throw error when using "me" before sdk initialization', () => {
+		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('') });
+
+		expect(() => {
+			result.current.me();
+		}).toThrowError();
+	});
+
 
 	it('should get default values from provider', () => {
 		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('project1') });
