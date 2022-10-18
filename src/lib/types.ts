@@ -63,6 +63,7 @@ export interface IAuth {
   user?: User;
 	sessionToken?: string;
 	logout: Sdk['logout'];
+	me: Sdk['me'];
 }
 
 export interface IAuthContext {
