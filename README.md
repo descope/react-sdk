@@ -24,20 +24,20 @@ const AppRoot = () => {
 }
 ```
 #### Use Descope to render specific flow
-You can use default flows or provide flow id directly to the Descope component
+You can use **default flows** or **provide flow id** directly to the Descope component
 
-##### Default flows
+##### 1. Default flows
 
 ```js
+import { SignInFlow } from '@descope/react-sdk'
 // you can choose flow to run from the following
-// import { SignIn } from '@descope/react-sdk'
-// import { SignUp } from '@descope/react-sdk'
-import { SignUpOrIn } from '@descope/react-sdk'
+// import { SignUpFlow } from '@descope/react-sdk'
+// import { SignUpOrInFlow } from '@descope/react-sdk'
 
 const App = () => {
     return (
         {...}
-        <SignUpOrIn 
+        <SignInFlow 
             onSuccess={(e) => console.log('Logged in!')}
             onError={(e) => console.log('Could not logged in!')}
         />
@@ -45,7 +45,7 @@ const App = () => {
 }
 ```
 
-##### Provide flow id
+##### 2. Provide flow id
 
 ```js
 import { Descope } from '@descope/react-sdk'
@@ -58,6 +58,78 @@ const App = () => {
             onSuccess={(e) => console.log('Logged in!')}
             onError={(e) => console.log('Could not logged in!')}
         />
+    )
+}
+```
+
+#### Use the `useAuth` hook in your components in order to access authentication state and utilities
+This can be helpful to implement application-specific logic. Examples: 
+ - Render different components if current session is authenticated
+ - Render user's content 
+ - Logout button
+```js
+import { useAuth } from '@descope/react-sdk'
+
+const App = () => {
+    // NOTE - `useAuth` should be used inside `AuthProvider` context, 
+    // and will throw an exception if this requirement is not met
+    const { authenticated, user, logout } = useAuth()
+    return (
+        {...}
+        {
+            // render different components if current session is authenticated 
+            authenticated && <MyPrivateComponent />
+        }
+        {
+            // render user's content 
+            authenticated && <div>Hello ${user.name}</div>
+        }
+        {
+            // logout button
+            authenticated && <button onClick={logout}>Logout</div>
+        }
+    )
+}
+```
+
+#### Session token server validation (pass session token to server API) 
+When developing a full-stack application, it is common to have private server API which requires a valid session token:
+
+![session-token-validation-diagram](https://docs.descope.com/static/SessionValidation-cf7b2d5d26594f96421d894273a713d8.png)
+
+
+Note: Descope also provides server-side SDKs in various languages (NodeJS, Go, Python, etc). Descope's server SDKs have out-of-the-box session validation API that supports the options described bellow. To read more about session validation, Read [this section](https://docs.descope.com/guides/gettingstarted/#session-validation) in Descope documentation.
+
+The mechanism to pass session token depends on the Descope project's "Token response method" configuration.
+##### 1. Manage in cookies
+ - Descope sets session token as cookie, which automatically sent each server api request. This option is more secure and is the recommended method for managing tokens, but for this option to work well with the browser - you must also configure a CNAME record for the custom domain listed, which will give a unified log in experience and securely restrict access to the session tokens that are stored in the cookies.
+
+ When this option is configured, the browser will automatically add the session token cookie to the server in every request.
+
+##### 2. Manage in response body
+ - Descope API returns session token in body. In this option, The React application should pass session cookie (`const { sessionToken } = useAuth()`) as Authorization header. This option never requires a custom domain, and is recommended for testing or while working in a sandbox environment.
+
+An example for using session token,
+
+```js
+import { useAuth } from '@descope/react-sdk'
+import { useCallback } from 'react'
+
+const App = () => {
+    const { sessionToken } = useAuth()
+  
+    const onClick = useCallback(() => {     
+        fetch('https://localhost:3002/api/some-path' {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${sessionToken}` }
+        })
+    },[sessionToken])
+    return (
+        {...}
+        {
+            // button that triggers an API that may use session token
+            <button onClick={onClick}>Click Me</div>
+        }
     )
 }
 ```
