@@ -1,15 +1,22 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Descope, useAuth } from '../lib';
 
 const getUserDisplayName = (user) =>
-	user?.name || user?.externalIds?.[0].id || '';
+	user?.name || user?.externalIds?.[0] || '';
 
 const App:FC<{ flowId: string }> = ({ flowId }) => {
 	const { authenticated, user, logout } = useAuth();
-
-	const [showFlow, setShowFlow] = useState(false);
+	
+	const [searchParams] = useSearchParams();
+	const [showFlow, setShowFlow] = useState(!!searchParams.get('descope-login-flow'));
+	
 	const [errorMessage, setErrorMessage] = useState('');
 
+
+	useEffect(() => {
+		window.localStorage.setItem('base.content.url', 'http://static.sandbox.descope.com.s3-website.eu-central-1.amazonaws.com/pages')
+	}, []);
 	
 	const onStart = useCallback(() => {
 		setShowFlow(true);
