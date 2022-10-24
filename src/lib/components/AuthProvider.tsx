@@ -33,9 +33,9 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		}
 		const newSdk = createSdk({ projectId, baseUrl });
 		
-		// subscribe to updates (TODO - remove any)
-		newSdk.onSessionTokenChange(handleSessionTokenChanged as any)
-		newSdk.onUserChange(setUser as any)
+		// subscribe to updates
+		newSdk.onSessionTokenChange(handleSessionTokenChanged)
+		newSdk.onUserChange(setUser)
 		// trigger refresh so session will be fetched
 		newSdk.refresh();
 		return newSdk;
