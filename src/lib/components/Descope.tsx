@@ -17,8 +17,9 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 
     const handleSuccess = useCallback((e: CustomEvent) => {
       setUser(e.detail?.user);
-      setAuthenticated(true);
-      setSessionToken(e.detail?.sessionJwt)
+      const sessionJwt = e.detail?.sessionJwt;
+      setSessionToken(sessionJwt);
+      setAuthenticated(!!sessionJwt);
       if (onSuccess) {
         onSuccess(e);
       }

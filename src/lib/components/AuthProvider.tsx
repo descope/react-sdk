@@ -2,7 +2,7 @@
 // and we want to use the same version that is used there
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
 
@@ -21,7 +21,25 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	const [authenticated, setAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
 	const [sessionToken, setSessionToken] = useState('');
-	const sdk = useMemo(() => projectId ? createSdk({ projectId, baseUrl }) : null, [projectId, baseUrl]);
+
+	const handleSessionTokenChanged = useCallback((newToken: string) => {
+		setSessionToken(newToken);
+		setAuthenticated(!!newToken)
+	}, [setSessionToken, setAuthenticated]);
+
+	const sdk = useMemo(() => {
+		if (!projectId) {
+			return null;
+		}
+		const newSdk = createSdk({ projectId, baseUrl });
+		
+		// subscribe to updates (TODO - remove any)
+		newSdk.onSessionTokenChange(handleSessionTokenChanged as any)
+		newSdk.onUserChange(setUser as any)
+		// trigger refresh so session will be fetched
+		newSdk.refresh();
+		return newSdk;
+	}, [projectId, baseUrl]);
 
 	const value = useMemo<IAuthContext>(
 		() => ({
