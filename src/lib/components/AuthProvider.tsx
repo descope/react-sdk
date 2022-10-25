@@ -2,7 +2,7 @@
 // and we want to use the same version that is used there
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
 
@@ -21,10 +21,6 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	const [user, setUser] = useState({});
 	const [sessionToken, setSessionToken] = useState('');
 
-	const handleSessionTokenChanged = useCallback((newToken: string) => {
-		setSessionToken(newToken);
-	}, [setSessionToken]);
-
 	const sdk = useMemo(() => {
 		if (!projectId) {
 			return undefined;
@@ -37,7 +33,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			return undefined;
 		}
 
-		const unsubscribeSessionToken = sdk.onSessionTokenChange(handleSessionTokenChanged);
+		const unsubscribeSessionToken = sdk.onSessionTokenChange(setSessionToken);
 		const unsubscribeUser = sdk.onUserChange(setUser);
 		return () => {
 			unsubscribeSessionToken?.();
