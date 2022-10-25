@@ -13,17 +13,16 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 
     useImperativeHandle(ref, () => innerRef.current);
 
-    const { projectId, baseUrl, setAuthenticated, setUser, setSessionToken } = React.useContext(AuthContext);
+    const { projectId, baseUrl, setUser, setSessionToken } = React.useContext(AuthContext);
 
     const handleSuccess = useCallback((e: CustomEvent) => {
       setUser(e.detail?.user);
       const sessionJwt = e.detail?.sessionJwt;
       setSessionToken(sessionJwt);
-      setAuthenticated(!!sessionJwt);
       if (onSuccess) {
         onSuccess(e);
       }
-    }, [setUser, setAuthenticated, onSuccess]);
+    }, [setUser, setSessionToken, onSuccess]);
 
     useEffect(() => {
       const ele = innerRef.current;

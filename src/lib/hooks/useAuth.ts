@@ -7,7 +7,7 @@ const useAuth = (): IAuth => {
 	if (!ctx) {
 		throw Error(`You can only use 'useAuth' in the context of <AuthProvider />`);
 	}
-	const { authenticated, user, sessionToken, sdk } = ctx;
+	const { user, sessionToken, sdk } = ctx;
 
 	const logout = useCallback((...args: Parameters<Sdk['logout']>) => {
 		if (!sdk) {
@@ -24,12 +24,12 @@ const useAuth = (): IAuth => {
 	}, [sdk])
 
 	return useMemo(() => ({
-		authenticated,
+		authenticated: !!sessionToken,
 		user,
 		sessionToken,
 		logout,
 		me
-	}), [authenticated, user, sessionToken, sdk]);
+	}), [user, sessionToken, sdk]);
 }
 
 export default useAuth;

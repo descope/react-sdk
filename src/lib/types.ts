@@ -69,12 +69,10 @@ export interface IAuth {
 export interface IAuthContext {
 	projectId: string;
 	baseUrl?: string;
-	authenticated: boolean;
   user?: User;
 	sessionToken?: string;
 	sdk?: Sdk;
 	setUser: React.Dispatch<React.SetStateAction<User>>;
-	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 	setSessionToken: React.Dispatch<React.SetStateAction<string>>;
 }
 
