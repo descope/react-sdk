@@ -38,7 +38,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		}
 
 		const unsubscribeSessionToken = sdk.onSessionTokenChange(handleSessionTokenChanged);
-		const unsubscribeUser = sdk.onSessionTokenChange(handleSessionTokenChanged);
+		const unsubscribeUser = sdk.onUserChange(setUser);
 		return () => {
 			unsubscribeSessionToken?.();
 			unsubscribeUser?.();
