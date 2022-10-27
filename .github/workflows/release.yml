@@ -16,8 +16,17 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.ref }}
+
       - name: cat package.json
         run: cat ./package.json
+
+      - name: Get token
+        id: get_token
+        uses: tibdex/github-app-token@v1
+        with:
+          private_key: ${{ secrets.APP_PEM }}
+          app_id: ${{ secrets.APP_ID }}
+      
       - name: Automated Version Bump
         id: version-bump
         uses: phips28/gh-action-bump-version@master
@@ -26,7 +35,7 @@ jobs:
           default: prerelease
           preid: 'alpha'
         env:
-          GITHUB_TOKEN: ${{ secrets.CI_READ_COMMON }}
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
       - name: cat package.json
         run: cat ./package.json
       - name: Output Step
