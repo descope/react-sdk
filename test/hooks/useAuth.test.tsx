@@ -7,7 +7,9 @@ import useAuth from '../../src/lib/hooks/useAuth';
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
-		logout: jest.fn().mockName('logout')
+		logout: jest.fn().mockName('logout'),
+		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
+		onUserChange:jest.fn().mockName('onUserChange')
 	};
 	return () => sdk;
 });
@@ -44,7 +46,6 @@ describe('useAuth', () => {
 			result.current.me();
 		}).toThrowError();
 	});
-
 
 	it('should get default values from provider', () => {
 		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('project1') });

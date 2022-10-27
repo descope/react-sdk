@@ -8,7 +8,9 @@ jest.mock('@descope/web-component', () => {});
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
-		logout: jest.fn().mockName('logout')
+		logout: jest.fn().mockName('logout'),
+		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
+		onUserChange: jest.fn().mockName('onUserChange')
 	};
 	return () => sdk;
 });
