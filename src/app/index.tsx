@@ -8,9 +8,7 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 
 root.render(
-	<AuthProvider
-		projectId="<project-id>"
-	>
+	<AuthProvider projectId="<project-id>">
 		<App flowId="<flow-id>" />
 	</AuthProvider>
 );

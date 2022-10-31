@@ -6,6 +6,7 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
 
+declare const BUILD_VERSION: string;
 
 interface IAuthProviderProps {
 	projectId: string;
@@ -25,7 +26,21 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		if (!projectId) {
 			return undefined;
 		}
-		return createSdk({ projectId, baseUrl });
+		return createSdk({
+			projectId,
+			baseUrl,
+			hooks: {
+				beforeRequest: (config) => {
+					const conf = config;
+					conf.headers = {
+						...conf.headers,
+						'x-descope-sdk-name': 'react',
+						'x-descope-sdk-version': BUILD_VERSION
+					};
+					return conf;
+				}
+			}
+		});
 	}, [projectId, baseUrl]);
 
 	useEffect(() => {
@@ -38,8 +53,8 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		return () => {
 			unsubscribeSessionToken?.();
 			unsubscribeUser?.();
-		}
-	}, [sdk])
+		};
+	}, [sdk]);
 
 	const value = useMemo<IAuthContext>(
 		() => ({

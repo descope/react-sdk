@@ -13,7 +13,8 @@ module.exports = {
 	globals: {
 		'ts-jest': {
 			tsconfig: 'tsconfig.json'
-		}
+		},
+		BUILD_VERSION: 'one.two.three'
 	},
 
 	preset: 'ts-jest',
@@ -24,11 +25,7 @@ module.exports = {
 	testTimeout: 2000,
 
 	transform: {
-		"\\.[jt]sx?$": "babel-jest"
-
+		'\\.[jt]sx?$': 'babel-jest'
 	},
-	"roots": [
-		"src",
-		"test"
-	]
+	roots: ['src', 'test']
 };
