@@ -24,11 +24,7 @@ module.exports = {
 	testTimeout: 2000,
 
 	transform: {
-		"\\.[jt]sx?$": "babel-jest"
-
+		'\\.[jt]sx?$': 'babel-jest'
 	},
-	"roots": [
-		"src",
-		"test"
-	]
+	roots: ['src', 'test']
 };

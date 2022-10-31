@@ -6,7 +6,6 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
 
-
 interface IAuthProviderProps {
 	projectId: string;
 	baseUrl?: string;
@@ -38,8 +37,8 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		return () => {
 			unsubscribeSessionToken?.();
 			unsubscribeUser?.();
-		}
-	}, [sdk])
+		};
+	}, [sdk]);
 
 	const value = useMemo<IAuthContext>(
 		() => ({

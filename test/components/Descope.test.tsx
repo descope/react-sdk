@@ -15,17 +15,21 @@ jest.mock('@descope/web-js-sdk', () => {
 	return () => sdk;
 });
 
-function renderWithProvider(ui: React.ReactElement, projectId: string = "project1", baseUrl?: string) {
-    render(
-        <AuthProvider projectId={projectId} baseUrl={baseUrl}> 
-            {ui}
-        </AuthProvider>
-    );
-}
+const renderWithProvider = (
+	ui: React.ReactElement,
+	projectId: string = 'project1',
+	baseUrl?: string
+) => {
+	render(
+		<AuthProvider projectId={projectId} baseUrl={baseUrl}>
+			{ui}
+		</AuthProvider>
+	);
+};
 
 describe('Descope', () => {
 	it('should render the WC with the correct props', () => {
-		renderWithProvider(<Descope flowId="flow1" />, "proj1", "url1");
+		renderWithProvider(<Descope flowId="flow1" />, 'proj1', 'url1');
 
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
@@ -54,7 +58,9 @@ describe('Descope', () => {
 		renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
 		fireEvent(
 			document.querySelector('descope-wc'),
-			new CustomEvent('success', { detail: { user: { name: 'user1' }, sessionJwt: 'session1' }})
+			new CustomEvent('success', {
+				detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
+			})
 		);
 
 		expect(onSuccess).toHaveBeenCalled();
