@@ -13,7 +13,8 @@ module.exports = {
 	globals: {
 		'ts-jest': {
 			tsconfig: 'tsconfig.json'
-		}
+		},
+		BUILD_VERSION: 'one.two.three'
 	},
 
 	preset: 'ts-jest',

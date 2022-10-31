@@ -1,4 +1,6 @@
 /* eslint-disable testing-library/no-node-access */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import createSdk from '@descope/web-js-sdk';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import AuthProvider from '../../src/lib/components/AuthProvider';
@@ -6,14 +8,13 @@ import Descope from '../../src/lib/components/Descope';
 
 jest.mock('@descope/web-component', () => {});
 
-jest.mock('@descope/web-js-sdk', () => {
-	const sdk = {
+jest.mock('@descope/web-js-sdk', () =>
+	jest.fn(() => ({
 		logout: jest.fn().mockName('logout'),
 		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
 		onUserChange: jest.fn().mockName('onUserChange')
-	};
-	return () => sdk;
-});
+	}))
+);
 
 const renderWithProvider = (
 	ui: React.ReactElement,
@@ -70,5 +71,22 @@ describe('Descope', () => {
 		const ref = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" ref={ref} />);
 		expect(ref).toHaveBeenCalledWith(document.querySelector('descope-wc'));
+	});
+
+	it('should add descope headers to request', () => {
+		const ref = jest.fn();
+		renderWithProvider(<Descope flowId="flow-1" ref={ref} />);
+		const returnedConf = (
+			createSdk as jest.Mock
+		).mock.calls[0][0].hooks.beforeRequest({
+			headers: { test: '123' }
+		});
+		expect(returnedConf).toEqual({
+			headers: {
+				test: '123',
+				'x-descope-sdk-name': 'react',
+				'x-descope-sdk-version': 'one.two.three'
+			}
+		});
 	});
 });
