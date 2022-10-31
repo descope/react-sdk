@@ -31,7 +31,7 @@ runs:
     - name: Install Dependencies 🪛
       shell: bash
       # Skip post-install scripts here, as a malicious
-      # script could steal NODE_AUTH_TOKEN.    
+      # script could steal NODE_AUTH_TOKEN.
       run: npm ci --ignore-scripts
       env:
         CI: true
@@ -40,4 +40,3 @@ runs:
       shell: bash
       env:
         CI: true
-      

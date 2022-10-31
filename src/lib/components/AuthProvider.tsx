@@ -6,7 +6,6 @@ import React, { FC, useMemo, useState } from 'react';
 import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
 
-
 interface IAuthProviderProps {
 	projectId: string;
 	baseUrl?: string;
@@ -21,7 +20,10 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	const [authenticated, setAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
 	const [sessionToken, setSessionToken] = useState('');
-	const sdk = useMemo(() => projectId ? createSdk({ projectId, baseUrl }) : null, [projectId, baseUrl]);
+	const sdk = useMemo(
+		() => (projectId ? createSdk({ projectId, baseUrl }) : null),
+		[projectId, baseUrl]
+	);
 
 	const value = useMemo<IAuthContext>(
 		() => ({

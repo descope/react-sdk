@@ -60,7 +60,7 @@ export interface User {
 
 export interface IAuth {
 	authenticated: boolean;
-  user?: User;
+	user?: User;
 	sessionToken?: string;
 	logout: Sdk['logout'];
 	me: Sdk['me'];
@@ -70,7 +70,7 @@ export interface IAuthContext {
 	projectId: string;
 	baseUrl?: string;
 	authenticated: boolean;
-  user?: User;
+	user?: User;
 	sessionToken?: string;
 	sdk?: Sdk;
 	setUser: React.Dispatch<React.SetStateAction<User>>;
@@ -79,9 +79,9 @@ export interface IAuthContext {
 }
 
 export interface DescopeProps {
-  flowId: string;
-  onSuccess?: DescopeCustomElement['onsuccess'];
-  onError?: DescopeCustomElement['onerror'];
+	flowId: string;
+	onSuccess?: DescopeCustomElement['onsuccess'];
+	onError?: DescopeCustomElement['onerror'];
 }
 
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;

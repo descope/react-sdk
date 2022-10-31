@@ -1,5 +1,5 @@
 import React from 'react';
-/* eslint-disable testing-library/no-node-access */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
 import { renderHook } from '@testing-library/react';
 import { AuthProvider } from '../../src/lib';
@@ -17,11 +17,10 @@ jest.spyOn(console, 'error').mockImplementation(() => {});
 
 const { logout } = createSdk({ projectId: '' });
 
-const authProviderWrapper = (projectId: string) => 	({ children }) => {
-	return (
-		<AuthProvider projectId={projectId}>{children}</AuthProvider>
-	);
-};
+const authProviderWrapper =
+	(projectId: string) =>
+	({ children }: { children: any }) =>
+		<AuthProvider projectId={projectId}>{children}</AuthProvider>;
 describe('useAuth', () => {
 	it('should throw error when used without provider', () => {
 		expect(() => {
@@ -30,7 +29,9 @@ describe('useAuth', () => {
 	});
 
 	it('should throw error when using "logout" before sdk initialization', () => {
-		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('') });
+		const { result } = renderHook(() => useAuth(), {
+			wrapper: authProviderWrapper('')
+		});
 
 		expect(() => {
 			result.current.logout();
@@ -38,16 +39,19 @@ describe('useAuth', () => {
 	});
 
 	it('should throw error when using "me" before sdk initialization', () => {
-		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('') });
+		const { result } = renderHook(() => useAuth(), {
+			wrapper: authProviderWrapper('')
+		});
 
 		expect(() => {
 			result.current.me();
 		}).toThrowError();
 	});
 
-
 	it('should get default values from provider', () => {
-		const { result } = renderHook(() => useAuth(), { wrapper: authProviderWrapper('project1') });
+		const { result } = renderHook(() => useAuth(), {
+			wrapper: authProviderWrapper('project1')
+		});
 		expect(result.current.authenticated).toBeFalsy();
 		expect(result.current.user).toEqual({});
 		expect(result.current.sessionToken).toEqual('');

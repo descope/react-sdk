@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import { render } from '@testing-library/react';
 import React from 'react';
 import { SignInFlow, SignUpFlow, SignUpOrInFlow } from '../../src/lib';
@@ -12,18 +13,13 @@ jest.mock('@descope/web-js-sdk', () => {
 	return () => sdk;
 });
 
-function renderWithProvider(ui: React.ReactElement, projectId: string) {
-	render(
-			<AuthProvider projectId={projectId}> 
-					{ui}
-			</AuthProvider>
-	);
-}
-
+const renderWithProvider = (ui: React.ReactElement, projectId: string) => {
+	render(<AuthProvider projectId={projectId}>{ui}</AuthProvider>);
+};
 
 describe('Default Flows', () => {
 	it('should render Sign In with the correct props and flow', () => {
-		renderWithProvider(<SignInFlow />, "proj1");
+		renderWithProvider(<SignInFlow />, 'proj1');
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
 			'proj1'
@@ -35,7 +31,7 @@ describe('Default Flows', () => {
 	});
 
 	it('should render Sign Up with the correct props and flow', () => {
-		renderWithProvider(<SignUpFlow />, "proj1");
+		renderWithProvider(<SignUpFlow />, 'proj1');
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
 			'proj1'
@@ -47,7 +43,7 @@ describe('Default Flows', () => {
 	});
 
 	it('should render Sign Up Or In In with the correct props and flow', () => {
-		renderWithProvider(<SignUpOrInFlow />, "proj1");
+		renderWithProvider(<SignUpOrInFlow />, 'proj1');
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
 			'proj1'

@@ -2,45 +2,42 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Descope, useAuth } from '../lib';
 
-const getUserDisplayName = (user) =>
-	user?.name || user?.externalIds?.[0] || '';
+const getUserDisplayName = (user) => user?.name || user?.externalIds?.[0] || '';
 
-const App:FC<{ flowId: string }> = ({ flowId }) => {
+const App: FC<{ flowId: string }> = ({ flowId }) => {
 	const { authenticated, user, logout } = useAuth();
-	
+
 	const [searchParams] = useSearchParams();
-	const [showFlow, setShowFlow] = useState(!!searchParams.get('descope-login-flow'));
-	
+	const [showFlow, setShowFlow] = useState(
+		!!searchParams.get('descope-login-flow')
+	);
+
 	const [errorMessage, setErrorMessage] = useState('');
 
-
 	useEffect(() => {
-		window.localStorage.setItem('base.content.url', 'http://static.sandbox.descope.com.s3-website.eu-central-1.amazonaws.com/pages')
+		window.localStorage.setItem(
+			'base.content.url',
+			'http://static.sandbox.descope.com.s3-website.eu-central-1.amazonaws.com/pages'
+		);
 	}, []);
-	
+
 	const onStart = useCallback(() => {
 		setShowFlow(true);
 		setErrorMessage('');
 	}, [setShowFlow, setErrorMessage]);
 
-	const onSuccess = useCallback(
-		() => {
-			setShowFlow(false);
-		},
-		[setShowFlow, setErrorMessage]
-	);
+	const onSuccess = useCallback(() => {
+		setShowFlow(false);
+	}, [setShowFlow, setErrorMessage]);
 
-	const onError = useCallback(
-		() => {
-			setShowFlow(false);
-			setErrorMessage('Something went wrong');
-		},
-		[setShowFlow, setErrorMessage]
-	);
+	const onError = useCallback(() => {
+		setShowFlow(false);
+		setErrorMessage('Something went wrong');
+	}, [setShowFlow, setErrorMessage]);
 
 	const onLogout = useCallback(() => {
 		logout();
-	}, [logout])
+	}, [logout]);
 
 	return (
 		<div style={{ height: '100vh', position: 'relative' }}>
@@ -58,7 +55,9 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 					transform: 'translateY(-50%)'
 				}}
 			>
-				{authenticated && <div className="username"> Hello {getUserDisplayName(user)}</div>}
+				{authenticated && (
+					<div className="username"> Hello {getUserDisplayName(user)}</div>
+				)}
 				{errorMessage && (
 					<div
 						className="error"
@@ -71,11 +70,7 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 					</div>
 				)}
 				{showFlow && (
-					<Descope
-						flowId={flowId}
-						onSuccess={onSuccess}
-						onError={onError}
-					/>
+					<Descope flowId={flowId} onSuccess={onSuccess} onError={onError} />
 				)}
 				{!showFlow && !authenticated && (
 					<button
@@ -88,10 +83,12 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 							background: 'none',
 							border: 'none',
 							color: 'blue',
-							padding: 5
+							padding: 5,
+							cursor: 'pointer',
+							fontSize: 18
 						}}
 					>
-						Start Flow
+						Login
 					</button>
 				)}
 				{authenticated && (
@@ -105,7 +102,9 @@ const App:FC<{ flowId: string }> = ({ flowId }) => {
 							background: 'none',
 							border: 'none',
 							color: 'blue',
-							padding: 5
+							padding: 5,
+							cursor: 'pointer',
+							fontSize: 18
 						}}
 					>
 						Logout
