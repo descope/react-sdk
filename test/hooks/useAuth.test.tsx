@@ -22,7 +22,8 @@ const { logout } = createSdk({ projectId: '' });
 
 const authProviderWrapper =
 	(projectId: string) =>
-	({ children }: { children: any }) => <AuthProvider projectId={projectId}>{children}</AuthProvider>;
+	({ children }: { children: any }) =>
+		<AuthProvider projectId={projectId}>{children}</AuthProvider>;
 describe('useAuth', () => {
 	it('should throw error when used without provider', () => {
 		expect(() => {
