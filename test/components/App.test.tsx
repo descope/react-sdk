@@ -3,6 +3,7 @@
 import createSdk from '@descope/web-js-sdk';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import App from '../../src/app/App';
 import { AuthProvider } from '../../src/lib';
 
@@ -20,9 +21,11 @@ const { logout } = createSdk({ projectId: '' });
 describe('App', () => {
 	it('should get user on success', () => {
 		render(
-			<AuthProvider projectId="p1">
-				<App flowId="flow-1" />
-			</AuthProvider>
+			<BrowserRouter>
+				<AuthProvider projectId="p1">
+					<App flowId="flow-1" />
+				</AuthProvider>
+			</BrowserRouter>
 		);
 		const showFlowButton = document.querySelector('.start-button');
 		fireEvent.click(showFlowButton);
@@ -42,9 +45,11 @@ describe('App', () => {
 
 	it('should show error message on error', () => {
 		render(
-			<AuthProvider projectId="p1">
-				<App flowId="flow-1" />
-			</AuthProvider>
+			<BrowserRouter>
+				<AuthProvider projectId="p1">
+					<App flowId="flow-1" />
+				</AuthProvider>
+			</BrowserRouter>
 		);
 		const showFlowButton = document.querySelector('.start-button');
 		fireEvent.click(showFlowButton);
@@ -62,9 +67,11 @@ describe('App', () => {
 
 	it('should render logout button and and call sdk logout', () => {
 		render(
-			<AuthProvider projectId="p1">
-				<App flowId="flow-1" />
-			</AuthProvider>
+			<BrowserRouter>
+				<AuthProvider projectId="p1">
+					<App flowId="flow-1" />
+				</AuthProvider>
+			</BrowserRouter>
 		);
 		const showFlowButton = document.querySelector('.start-button');
 		fireEvent.click(showFlowButton);
