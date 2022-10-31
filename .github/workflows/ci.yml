@@ -51,6 +51,8 @@ jobs:
       - run: npm rebuild && npm run prepare --if-present
       - name: Linting
         run: npm run lint
+      - name: Format check
+        run: npm run format-check
 
   testing:
     name: 👔 Test
