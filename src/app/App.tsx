@@ -1,8 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Descope, useAuth } from '../lib';
 
-const getUserDisplayName = (user) =>
-	user?.name || user?.externalIds?.[0].id || '';
+const getUserDisplayName = (user) => user?.name || user?.externalIds?.[0] || '';
 
 const App: FC<{ flowId: string }> = ({ flowId }) => {
 	const { authenticated, user, logout } = useAuth();
