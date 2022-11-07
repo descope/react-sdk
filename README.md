@@ -16,15 +16,15 @@ npm install @descope/react-sdk
 #### Wrap your app with Auth Provider
 
 ```js
-import { AuthProvider } from '@descope/react-sdk'
+import { AuthProvider } from '@descope/react-sdk';
 
 const AppRoot = () => {
 	return (
 		<AuthProvider projectId="myProjectId">
 			<App />
 		</AuthProvider>
-	)
-}
+	);
+};
 ```
 
 #### Use Descope to render specific flow
