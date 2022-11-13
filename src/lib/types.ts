@@ -80,6 +80,7 @@ export interface DescopeProps {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
+	tenant?: string;
 }
 
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
