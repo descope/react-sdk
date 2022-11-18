@@ -62,8 +62,11 @@ export interface IAuth {
 	authenticated: boolean;
 	user?: User;
 	sessionToken?: string;
+	logoutAll: Sdk['logoutAll'];
 	logout: Sdk['logout'];
 	me: Sdk['me'];
+	getJwtRoles: Sdk['logout'];
+	getJwtPermissions: Sdk['logout'];
 }
 
 export interface IAuthContext {
