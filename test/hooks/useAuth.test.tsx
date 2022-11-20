@@ -31,23 +31,17 @@ describe('useAuth', () => {
 		}).toThrowError();
 	});
 
-	it('should throw error when using sdk functions before sdk initialization', () => {
-		const { result } = renderHook(() => useAuth(), {
-			wrapper: authProviderWrapper('')
-		});
-
-		[
-			result.current.logoutAll,
-			result.current.logoutAll,
-			result.current.me,
-			result.current.getJwtPermissions,
-			result.current.getJwtRoles
-		].forEach((fn) => {
+	it.each(['logoutAll', 'logout', 'me', 'getJwtPermissions', 'getJwtRoles'])(
+		'should throw error when using sdk function before sdk initialization - %s',
+		(fnName) => {
+			const { result } = renderHook(() => useAuth(), {
+				wrapper: authProviderWrapper('')
+			});
 			expect(() => {
-				fn();
+				result.current[fnName]();
 			}).toThrowError();
-		});
-	});
+		}
+	);
 
 	it('should throw error when using "me" before sdk initialization', () => {
 		const { result } = renderHook(() => useAuth(), {

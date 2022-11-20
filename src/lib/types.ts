@@ -65,8 +65,8 @@ export interface IAuth {
 	logoutAll: Sdk['logoutAll'];
 	logout: Sdk['logout'];
 	me: Sdk['me'];
-	getJwtRoles: Sdk['logout'];
-	getJwtPermissions: Sdk['logout'];
+	getJwtRoles: Sdk['getJwtRoles'];
+	getJwtPermissions: Sdk['getJwtPermissions'];
 }
 
 export interface IAuthContext {
