@@ -1,6 +1,22 @@
 import React, { useCallback, useMemo } from 'react';
-import { IAuth, Sdk } from '../types';
+import { IAuth } from '../types';
 import AuthContext from './authContext';
+
+/**
+ * Wrap a function with a validation that it exists
+ * @param fn The function to wrap with the validation
+ * @throws if function does not exist, an error with the relevant message will be thrown
+ */
+const withValidation =
+	<T extends Array<any>, U>(fn: (...args: T) => U) =>
+	(...args: T): U => {
+		if (!fn) {
+			throw Error(
+				`You can only use this function after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`
+			);
+		}
+		return fn(...args);
+	};
 
 const useAuth = (): IAuth => {
 	const ctx = React.useContext(AuthContext);
@@ -11,37 +27,29 @@ const useAuth = (): IAuth => {
 	}
 	const { user, sessionToken, sdk } = ctx;
 
-	const logout = useCallback(
-		(...args: Parameters<Sdk['logout']>) => {
-			if (!sdk) {
-				throw Error(
-					`You can only use 'logout' after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`
-				);
-			}
-			return sdk.logout(...args);
-		},
+	const logoutAll = useCallback(withValidation(sdk?.logoutAll), [sdk]);
+
+	const logout = useCallback(withValidation(sdk?.logout), [sdk]);
+
+	const me = useCallback(withValidation(sdk?.me), [sdk]);
+
+	const getJwtPermissions = useCallback(
+		withValidation(sdk?.getJwtPermissions),
 		[sdk]
 	);
 
-	const me = useCallback(
-		(...args: Parameters<Sdk['me']>) => {
-			if (!sdk) {
-				throw Error(
-					`You can only use 'me' after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`
-				);
-			}
-			return sdk.me(...args);
-		},
-		[sdk]
-	);
+	const getJwtRoles = useCallback(withValidation(sdk?.getJwtRoles), [sdk]);
 
 	return useMemo(
 		() => ({
 			authenticated: !!sessionToken,
 			user,
 			sessionToken,
+			logoutAll,
 			logout,
-			me
+			me,
+			getJwtPermissions,
+			getJwtRoles
 		}),
 		[user, sessionToken, sdk]
 	);
