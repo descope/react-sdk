@@ -30,3 +30,5 @@ coverage
 THIRD_PARTY_LICENSE
 
 __debug_bin
+
+.env

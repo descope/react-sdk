@@ -152,9 +152,17 @@ In order to use this repo locally
 - Clone this repository
 - Navigate to repository directory
 - Run `npm i`
-- Edit `src/app/index.tsx` in the following way
-  - Set `projectId` prop - replace `<project-id>` with your project id
-  - Set `flowId` prop - Replace `<flow-id>` (for example - `sign-up-or-in`)
-  - Optional - set a different `baseUrl` (for example - `http://localhost:8000`)
+- Create a `.env` file and add the following parameters:
+
+```env
+// .env
+# Your project id
+DESCOPE_PROJECT_ID=<project-id>
+# Flow id to run, e.g. sign-up-or-in
+DESCOPE_FLOW_ID=<flow-id>
+# Optional - Descope base url, e.g. http://localhost:8000
+DESCOPE_BASE_URL=<base-url>
+```
+
 - Run `npm run start`
 - Go to `http://localhost:3000/` and start flow
