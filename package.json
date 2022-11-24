@@ -1,8 +1,14 @@
 {
 	"name": "@descope/react-sdk",
 	"version": "0.0.52-alpha.16",
-	"main": "dist/index.js",
+	"main": "dist/cjs/index.cjs.js",
+	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
+	"exports": {
+		"require": "./dist/cjs/index.cjs.js",
+		"import": "./dist/index.esm.js"
+	},
+	"type": "module",
 	"description": "Descope React SDK",
 	"license": "ISC",
 	"repository": {
@@ -21,8 +27,8 @@
 		"@babel/preset-react": "7.18.6",
 		"@babel/preset-typescript": "7.18.6",
 		"@open-wc/rollup-plugin-html": "^1.2.5",
-		"@rollup/plugin-commonjs": "^21.0.1",
-		"@rollup/plugin-node-resolve": "^13.1.1",
+		"@rollup/plugin-commonjs": "^21.1.0",
+		"@rollup/plugin-node-resolve": "^13.3.0",
 		"@rollup/plugin-replace": "^3.0.0",
 		"@rollup/plugin-typescript": "^8.3.0",
 		"@testing-library/jest-dom": "5.16.5",
