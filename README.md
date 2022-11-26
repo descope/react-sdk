@@ -145,9 +145,14 @@ const App = () => {
 }
 ```
 
-## Contributing to this project
+## Run a local example
 
-In order to use this repo locally
+There is a simple app that uses Descope React SDK, with two routes
+
+- Home
+- Login
+
+In order to run this app locally, do the following steps:
 
 - Clone this repository
 - Navigate to repository directory
