@@ -24,6 +24,9 @@ export default {
 		dotenv(),
 		nodeResolve(),
 		html(),
-		browsersync({ server: 'build' })
+		browsersync({
+			server: 'build',
+			single: true // requires for routing
+		})
 	]
 };

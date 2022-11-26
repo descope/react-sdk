@@ -3,6 +3,7 @@
 import createSdk from '@descope/web-js-sdk';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import App from '../../src/app/App';
 import { AuthProvider } from '../../src/lib';
 
@@ -17,6 +18,10 @@ jest.mock('@descope/web-js-sdk', () => {
 	return () => sdk;
 });
 
+const renderWithRouter = (ui: React.ReactElement) => {
+	render(<MemoryRouter>{ui}</MemoryRouter>);
+};
+
 const { logout, onSessionTokenChange, onUserChange } = createSdk({
 	projectId: ''
 });
@@ -29,13 +34,13 @@ describe('App', () => {
 	});
 
 	it('should get user on success', () => {
-		render(
+		renderWithRouter(
 			<AuthProvider projectId="p1">
-				<App flowId="flow-1" />
+				<App />
 			</AuthProvider>
 		);
-		const showFlowButton = document.querySelector('.start-button');
-		fireEvent.click(showFlowButton);
+		const loginButton = document.querySelector('#login-button');
+		fireEvent.click(loginButton);
 
 		// mock success
 		fireEvent(
@@ -62,9 +67,9 @@ describe('App', () => {
 			cb({ name: 'user1' });
 			return () => {};
 		});
-		render(
+		renderWithRouter(
 			<AuthProvider projectId="p1">
-				<App flowId="flow-1" />
+				<App />
 			</AuthProvider>
 		);
 
@@ -77,13 +82,13 @@ describe('App', () => {
 	});
 
 	it('should show error message on error', () => {
-		render(
+		renderWithRouter(
 			<AuthProvider projectId="p1">
-				<App flowId="flow-1" />
+				<App />
 			</AuthProvider>
 		);
-		const showFlowButton = document.querySelector('.start-button');
-		fireEvent.click(showFlowButton);
+		const loginButton = document.querySelector('#login-button');
+		fireEvent.click(loginButton);
 
 		// mock error
 		fireEvent(
@@ -97,13 +102,13 @@ describe('App', () => {
 	});
 
 	it('should render logout button and and call sdk logout', () => {
-		render(
+		renderWithRouter(
 			<AuthProvider projectId="p1">
-				<App flowId="flow-1" />
+				<App />
 			</AuthProvider>
 		);
-		const showFlowButton = document.querySelector('.start-button');
-		fireEvent.click(showFlowButton);
+		const loginButton = document.querySelector('#login-button');
+		fireEvent.click(loginButton);
 
 		// mock success
 		fireEvent(
@@ -114,7 +119,7 @@ describe('App', () => {
 		);
 
 		// logout
-		const logoutButton = document.querySelector('.logout-button');
+		const logoutButton = document.querySelector('#logout-button');
 		fireEvent.click(logoutButton);
 
 		// ensure logout called
