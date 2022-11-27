@@ -157,7 +157,7 @@ In order to run this app locally, do the following steps:
 - Clone this repository
 - Navigate to repository directory
 - Run `npm i`
-- Create a `.env` file and add the following parameters:
+- Create a `.env` file with the following variables (or alternatively export them manually):
 
 ```env
 // .env
