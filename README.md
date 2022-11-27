@@ -173,5 +173,3 @@ DESCOPE_BASE_URL=<base-url>
 - Go to `http://localhost:3000/` and press the "Start Flow" button
 
 Note: if you change env file (for example, change DESCOPE_PROJECT_ID), you need to rerun `npm run start`
-
-Note: if you change env file (for example, change DESCOPE_PROJECT_ID), you need to rerun `npm run start`

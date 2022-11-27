@@ -24,7 +24,6 @@ export default {
 			'process.env': JSON.stringify(process.env),
 			delimiters: ['', '']
 		}),
-		dotenv(),
 		nodeResolve(),
 		html(),
 		browsersync({
