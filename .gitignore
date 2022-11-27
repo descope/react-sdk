@@ -31,4 +31,5 @@ THIRD_PARTY_LICENSE
 
 __debug_bin
 
+# File dedicated for enviorment variables
 .env

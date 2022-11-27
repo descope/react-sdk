@@ -17,9 +17,12 @@ export default {
 			declarationDir: 'build'
 		}),
 		commonjs(),
+		dotenv(), // should happen before replace plugin
 		replace({
 			preventAssignment: true,
-			'process.env.NODE_ENV': JSON.stringify('development')
+			'process.env.NODE_ENV': JSON.stringify('development'),
+			'process.env': JSON.stringify(process.env),
+			delimiters: ['', '']
 		}),
 		dotenv(),
 		nodeResolve(),
