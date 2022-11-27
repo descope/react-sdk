@@ -8,7 +8,10 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 
 root.render(
-	<AuthProvider projectId="<project-id>">
-		<App flowId="<flow-id>" />
+	<AuthProvider
+		projectId={process.env.DESCOPE_PROJECT_ID}
+		baseUrl={process.env.DESCOPE_BASE_URL}
+	>
+		<App flowId={process.env.DESCOPE_FLOW_ID} />
 	</AuthProvider>
 );
