@@ -26,6 +26,9 @@ export default {
 		}),
 		nodeResolve(),
 		html(),
-		browsersync({ server: 'build' })
+		browsersync({
+			server: 'build',
+			single: true // requires for routing
+		})
 	]
 };

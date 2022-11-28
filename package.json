@@ -13,7 +13,8 @@
 		"dist"
 	],
 	"dependencies": {
-		"@descope/web-component": "0.1.0-alpha.11"
+		"@descope/web-component": "0.1.0-alpha.11",
+		"react-router-dom": "6.4.3"
 	},
 	"devDependencies": {
 		"@babel/core": "7.20.2",
@@ -31,6 +32,7 @@
 		"@types/jest": "^27.0.2",
 		"@types/react": "18.0.25",
 		"@types/react-dom": "18.0.8",
+		"@types/react-router-dom": "^5.3.3",
 		"babel-jest": "27.5.1",
 		"eslint": "8.26.0",
 		"eslint-config-airbnb": "19.0.4",
