@@ -1,4 +1,3 @@
-import '@descope/web-component';
 import React from 'react';
 import { DefaultFlowProps } from '../types';
 import Descope from './Descope';
