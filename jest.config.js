@@ -1,7 +1,4 @@
-const { pathsToModuleNameMapper } = require('ts-jest');
-const { compilerOptions } = require('./tsconfig.json');
-
-module.exports = {
+export default {
 	// Automatically clear mock calls, instances, contexts and results before every test
 	clearMocks: true,
 
