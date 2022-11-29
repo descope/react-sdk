@@ -145,16 +145,31 @@ const App = () => {
 }
 ```
 
-## Contributing to this project
+## Run a local example
 
-In order to use this repo locally
+There is a simple app that uses Descope React SDK, with two routes
+
+- Home
+- Login
+
+In order to run this app locally, do the following steps:
 
 - Clone this repository
 - Navigate to repository directory
 - Run `npm i`
-- Edit `src/app/index.tsx` in the following way
-  - Set `projectId` prop - replace `<project-id>` with your project id
-  - Set `flowId` prop - Replace `<flow-id>` (for example - `sign-up-or-in`)
-  - Optional - set a different `baseUrl` (for example - `http://localhost:8000`)
+- Create a `.env` file with the following variables (or alternatively export them manually):
+
+```env
+// .env
+# Your project id
+DESCOPE_PROJECT_ID=<project-id>
+# Flow id to run, e.g. sign-up-or-in
+DESCOPE_FLOW_ID=<flow-id>
+# Optional - Descope base url, e.g. http://localhost:8000
+DESCOPE_BASE_URL=<base-url>
+```
+
 - Run `npm run start`
-- Go to `http://localhost:3000/` and start flow
+- Go to `http://localhost:3000/` and press the "Start Flow" button
+
+Note: if you change env file (for example, change DESCOPE_PROJECT_ID), you need to rerun `npm run start`
