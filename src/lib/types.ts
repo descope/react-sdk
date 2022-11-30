@@ -79,11 +79,15 @@ export interface IAuthContext {
 	setSessionToken: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export type DescopeTheme = 'light' | 'dark';
+
 export interface DescopeProps {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
 	tenant?: string;
+	// If theme is not provided - the OS theme will be used
+	theme?: DescopeTheme;
 }
 
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
