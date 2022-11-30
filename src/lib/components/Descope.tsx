@@ -9,7 +9,7 @@ import AuthContext from '../hooks/authContext';
 import { DescopeProps } from '../types';
 
 const Descope = React.forwardRef<HTMLElement, DescopeProps>(
-	({ flowId, onSuccess, onError, tenant }, ref) => {
+	({ flowId, onSuccess, onError, tenant, theme }, ref) => {
 		const innerRef = useRef<HTMLInputElement>();
 
 		useImperativeHandle(ref, () => innerRef.current);
@@ -48,6 +48,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 				base-url={baseUrl}
 				ref={innerRef}
 				tenant={tenant}
+				theme={theme}
 			/>
 		);
 	}

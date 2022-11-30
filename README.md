@@ -62,6 +62,8 @@ const App = () => {
             flowId="myFlowId"
             onSuccess={(e) => console.log('Logged in!')}
             onError={(e) => console.log('Could not logged in!')}
+            // theme can be "light" or "dark". If empty, Descope will use the OS theme
+            // theme="light"
         />
     )
 }
