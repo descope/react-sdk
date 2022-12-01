@@ -1,6 +1,6 @@
 {
 	"name": "@descope/react-sdk",
-	"version": "0.0.52-alpha.19",
+	"version": "0.0.52-alpha.20",
 	"main": "dist/cjs/index.cjs.js",
 	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
