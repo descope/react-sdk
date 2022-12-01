@@ -60,7 +60,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		}, [innerRef, onError, handleSuccess]);
 
 		return (
-			<Suspense>
+			<Suspense fallback={null}>
 				<DescopeWC
 					projectId={projectId}
 					flowId={flowId}
