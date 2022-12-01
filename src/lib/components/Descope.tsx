@@ -1,5 +1,6 @@
-import '@descope/web-component';
 import React, {
+	lazy,
+	Suspense,
 	useCallback,
 	useEffect,
 	useImperativeHandle,
@@ -7,6 +8,23 @@ import React, {
 } from 'react';
 import AuthContext from '../hooks/authContext';
 import { DescopeProps } from '../types';
+
+// web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
+const DescopeWC = lazy(async () => {
+	await import('@descope/web-component');
+	return {
+		default: ({ projectId, flowId, baseUrl, innerRef, tenant, theme }) => (
+			<descope-wc
+				project-id={projectId}
+				flow-id={flowId}
+				base-url={baseUrl}
+				ref={innerRef}
+				tenant={tenant}
+				theme={theme}
+			/>
+		)
+	};
+});
 
 const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 	({ flowId, onSuccess, onError, tenant, theme }, ref) => {
@@ -42,14 +60,16 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		}, [innerRef, onError, handleSuccess]);
 
 		return (
-			<descope-wc
-				project-id={projectId}
-				flow-id={flowId}
-				base-url={baseUrl}
-				ref={innerRef}
-				tenant={tenant}
-				theme={theme}
-			/>
+			<Suspense>
+				<DescopeWC
+					projectId={projectId}
+					flowId={flowId}
+					baseUrl={baseUrl}
+					innerRef={innerRef}
+					tenant={tenant}
+					theme={theme}
+				/>
+			</Suspense>
 		);
 	}
 );
