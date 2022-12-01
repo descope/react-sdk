@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../../src/app/App';
@@ -18,8 +18,9 @@ jest.mock('@descope/web-js-sdk', () => {
 	return () => sdk;
 });
 
-const renderWithRouter = (ui: React.ReactElement) =>
+const renderWithRouter = (ui: React.ReactElement) => {
 	render(<MemoryRouter>{ui}</MemoryRouter>);
+};
 
 const { logout, onSessionTokenChange, onUserChange } = createSdk({
 	projectId: ''
@@ -32,19 +33,14 @@ describe('App', () => {
 		(onUserChange as jest.Mock).mockImplementation();
 	});
 
-	it('should get user on success', async () => {
+	it('should get user on success', () => {
 		renderWithRouter(
 			<AuthProvider projectId="p1">
 				<App />
 			</AuthProvider>
 		);
-
 		const loginButton = document.querySelector('#login-button');
 		fireEvent.click(loginButton);
-
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 
 		// mock success
 		fireEvent(

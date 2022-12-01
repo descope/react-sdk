@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import AuthProvider from '../../src/lib/components/AuthProvider';
 import Descope from '../../src/lib/components/Descope';
@@ -20,20 +20,17 @@ const renderWithProvider = (
 	ui: React.ReactElement,
 	projectId: string = 'project1',
 	baseUrl?: string
-) =>
+) => {
 	render(
 		<AuthProvider projectId={projectId} baseUrl={baseUrl}>
 			{ui}
 		</AuthProvider>
 	);
+};
 
 describe('Descope', () => {
-	it('should render the WC with the correct props', async () => {
+	it('should render the WC with the correct props', () => {
 		renderWithProvider(<Descope flowId="flow1" />, 'proj1', 'url1');
-
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
@@ -49,20 +46,17 @@ describe('Descope', () => {
 		);
 	});
 
-	it('should register to the error event when received an onError cb', async () => {
+	it('should register to the error event when received an onError cb', () => {
 		const onError = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" onError={onError} />);
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 		fireEvent(document.querySelector('descope-wc'), new CustomEvent('error'));
 
 		expect(onError).toHaveBeenCalled();
 	});
 
-	it('should register to the success event when received an onSuccess cb', async () => {
+	it('should register to the success event when received an onSuccess cb', () => {
 		const onSuccess = jest.fn();
-		await renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
+		renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
 		fireEvent(
 			document.querySelector('descope-wc'),
 			new CustomEvent('success', {
@@ -73,21 +67,15 @@ describe('Descope', () => {
 		expect(onSuccess).toHaveBeenCalled();
 	});
 
-	it('should pass the ref to the wc element', async () => {
+	it('should pass the ref to the wc element', () => {
 		const ref = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" ref={ref} />);
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 		expect(ref).toHaveBeenCalledWith(document.querySelector('descope-wc'));
 	});
 
-	it('should add descope headers to request', async () => {
+	it('should add descope headers to request', () => {
 		const ref = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" ref={ref} />);
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 		const returnedConf = (
 			createSdk as jest.Mock
 		).mock.calls[0][0].hooks.beforeRequest({

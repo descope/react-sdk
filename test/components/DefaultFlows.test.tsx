@@ -1,7 +1,4 @@
-/* eslint-disable testing-library/no-node-access */ import {
-	render,
-	waitFor
-} from '@testing-library/react';
+/* eslint-disable testing-library/no-node-access */ import { render } from '@testing-library/react';
 import React from 'react';
 import { SignInFlow, SignUpFlow, SignUpOrInFlow } from '../../src/lib';
 import AuthProvider from '../../src/lib/components/AuthProvider';
@@ -17,16 +14,13 @@ jest.mock('@descope/web-js-sdk', () => {
 	return () => sdk;
 });
 
-const renderWithProvider = (ui: React.ReactElement, projectId: string) =>
-	// eslint-disable-next-line testing-library/no-unnecessary-act
+const renderWithProvider = (ui: React.ReactElement, projectId: string) => {
 	render(<AuthProvider projectId={projectId}>{ui}</AuthProvider>);
+};
 
 describe('Default Flows', () => {
-	it('should render Sign In with the correct props and flow', async () => {
+	it('should render Sign In with the correct props and flow', () => {
 		renderWithProvider(<SignInFlow />, 'proj1');
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
 			'proj1'
@@ -37,11 +31,8 @@ describe('Default Flows', () => {
 		);
 	});
 
-	it('should render Sign Up with the correct props and flow', async () => {
+	it('should render Sign Up with the correct props and flow', () => {
 		renderWithProvider(<SignUpFlow />, 'proj1');
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
 			'proj1'
@@ -52,11 +43,8 @@ describe('Default Flows', () => {
 		);
 	});
 
-	it('should render Sign Up Or In In with the correct props and flow', async () => {
+	it('should render Sign Up Or In In with the correct props and flow', () => {
 		renderWithProvider(<SignUpOrInFlow />, 'proj1');
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
 		expect(document.querySelector('descope-wc')).toHaveAttribute(
 			'project-id',
 			'proj1'

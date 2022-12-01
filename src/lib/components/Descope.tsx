@@ -1,36 +1,18 @@
+import '@descope/web-component';
 import React, {
-	lazy,
-	Suspense,
 	useCallback,
 	useEffect,
 	useImperativeHandle,
-	useState
+	useRef
 } from 'react';
 import AuthContext from '../hooks/authContext';
 import { DescopeProps } from '../types';
 
-// web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
-const DescopeWC = lazy(async () => {
-	await import('@descope/web-component');
-	return {
-		default: ({ projectId, flowId, baseUrl, innerRef, tenant, theme }) => (
-			<descope-wc
-				project-id={projectId}
-				flow-id={flowId}
-				base-url={baseUrl}
-				ref={innerRef}
-				tenant={tenant}
-				theme={theme}
-			/>
-		)
-	};
-});
-
 const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 	({ flowId, onSuccess, onError, tenant, theme }, ref) => {
-		const [innerRef, setInnerRef] = useState(null);
+		const innerRef = useRef<HTMLInputElement>();
 
-		useImperativeHandle(ref, () => innerRef);
+		useImperativeHandle(ref, () => innerRef.current);
 
 		const { projectId, baseUrl, setUser, setSessionToken } =
 			React.useContext(AuthContext);
@@ -48,7 +30,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		);
 
 		useEffect(() => {
-			const ele = innerRef;
+			const ele = innerRef.current;
 			ele?.addEventListener('success', handleSuccess);
 			if (onError) ele?.addEventListener('error', onError);
 
@@ -60,16 +42,14 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		}, [innerRef, onError, handleSuccess]);
 
 		return (
-			<Suspense>
-				<DescopeWC
-					projectId={projectId}
-					flowId={flowId}
-					baseUrl={baseUrl}
-					innerRef={setInnerRef}
-					tenant={tenant}
-					theme={theme}
-				/>
-			</Suspense>
+			<descope-wc
+				project-id={projectId}
+				flow-id={flowId}
+				base-url={baseUrl}
+				ref={innerRef}
+				tenant={tenant}
+				theme={theme}
+			/>
 		);
 	}
 );
