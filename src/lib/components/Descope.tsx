@@ -4,7 +4,7 @@ import React, {
 	useCallback,
 	useEffect,
 	useImperativeHandle,
-	useRef
+	useState
 } from 'react';
 import AuthContext from '../hooks/authContext';
 import { DescopeProps } from '../types';
@@ -28,9 +28,9 @@ const DescopeWC = lazy(async () => {
 
 const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 	({ flowId, onSuccess, onError, tenant, theme }, ref) => {
-		const innerRef = useRef<HTMLInputElement>();
+		const [innerRef, setInnerRef] = useState(null);
 
-		useImperativeHandle(ref, () => innerRef.current);
+		useImperativeHandle(ref, () => innerRef);
 
 		const { projectId, baseUrl, setUser, setSessionToken } =
 			React.useContext(AuthContext);
@@ -48,7 +48,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		);
 
 		useEffect(() => {
-			const ele = innerRef.current;
+			const ele = innerRef;
 			ele?.addEventListener('success', handleSuccess);
 			if (onError) ele?.addEventListener('error', onError);
 
@@ -65,7 +65,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 					projectId={projectId}
 					flowId={flowId}
 					baseUrl={baseUrl}
-					innerRef={innerRef}
+					innerRef={setInnerRef}
 					tenant={tenant}
 					theme={theme}
 				/>
