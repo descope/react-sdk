@@ -40,6 +40,10 @@ const useAuth = (): IAuth => {
 
 	const getJwtRoles = useCallback(withValidation(sdk?.getJwtRoles), [sdk]);
 
+	const getRefreshToken = useCallback(withValidation(sdk?.getRefreshToken), [
+		sdk
+	]);
+
 	return useMemo(
 		() => ({
 			authenticated: !!sessionToken,
@@ -49,7 +53,14 @@ const useAuth = (): IAuth => {
 			logout,
 			me,
 			getJwtPermissions,
-			getJwtRoles
+			getJwtRoles,
+			/**
+			 * Returns refresh token. Use this function when:
+			 * 1. You need to pass refresh token to another party (For example, in SSR)
+			 * 2. Descope project's configuration is set to manage token response in BODY (in contrast to manage response in COOKIES)
+			 * NOTE: Use carefully! Refresh token is sensitive token with relativity long expiration. Prefer using this function only for testing, and to manage token response in COOKIES)
+			 */
+			getRefreshToken
 		}),
 		[user, sessionToken, sdk]
 	);
