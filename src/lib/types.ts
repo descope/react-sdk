@@ -67,6 +67,7 @@ export interface IAuth {
 	me: Sdk['me'];
 	getJwtRoles: Sdk['getJwtRoles'];
 	getJwtPermissions: Sdk['getJwtPermissions'];
+	getRefreshToken: Sdk['getRefreshToken'];
 }
 
 export interface IAuthContext {
