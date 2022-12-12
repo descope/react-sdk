@@ -13,7 +13,15 @@ import { DescopeProps } from '../types';
 const DescopeWC = lazy(async () => {
 	await import('@descope/web-component');
 	return {
-		default: ({ projectId, flowId, baseUrl, innerRef, tenant, theme }) => (
+		default: ({
+			projectId,
+			flowId,
+			baseUrl,
+			innerRef,
+			tenant,
+			theme,
+			debug
+		}) => (
 			<descope-wc
 				project-id={projectId}
 				flow-id={flowId}
@@ -21,13 +29,14 @@ const DescopeWC = lazy(async () => {
 				ref={innerRef}
 				tenant={tenant}
 				theme={theme}
+				debug={debug}
 			/>
 		)
 	};
 });
 
 const Descope = React.forwardRef<HTMLElement, DescopeProps>(
-	({ flowId, onSuccess, onError, tenant, theme }, ref) => {
+	({ flowId, onSuccess, onError, tenant, theme, debug }, ref) => {
 		const [innerRef, setInnerRef] = useState(null);
 
 		useImperativeHandle(ref, () => innerRef);
@@ -68,6 +77,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 					innerRef={setInnerRef}
 					tenant={tenant}
 					theme={theme}
+					debug={debug}
 				/>
 			</Suspense>
 		);
