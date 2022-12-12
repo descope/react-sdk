@@ -64,6 +64,9 @@ const App = () => {
             onError={(e) => console.log('Could not logged in!')}
             // theme can be "light" or "dark". If empty, Descope will use the OS theme
             // theme="light"
+
+            // debug can be set to true to enable debug mode
+            // debug={true}
         />
     )
 }
@@ -169,6 +172,8 @@ DESCOPE_PROJECT_ID=<project-id>
 DESCOPE_FLOW_ID=<flow-id>
 # Optional - Descope base url, e.g. http://localhost:8000
 DESCOPE_BASE_URL=<base-url>
+# Optional - Debug mode
+DESCOPE_DEBUG_MODE=<debug-mode>
 ```
 
 - Run `npm run start`

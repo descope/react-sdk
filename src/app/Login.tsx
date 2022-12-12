@@ -19,6 +19,7 @@ const Login = () => {
 				flowId={process.env.DESCOPE_FLOW_ID || 'sign-up-or-in'}
 				onSuccess={onSuccess}
 				onError={onError}
+				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
 			/>
 			{errorMessage && (
 				<div
