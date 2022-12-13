@@ -174,6 +174,8 @@ DESCOPE_FLOW_ID=<flow-id>
 DESCOPE_BASE_URL=<base-url>
 # Optional - Debug mode
 DESCOPE_DEBUG_MODE=<debug-mode>
+# Optional - Theme, can be "light" or "dark". If empty, Descope will use the OS theme
+DESCOPE_THEME=<theme>
 ```
 
 - Run `npm run start`
