@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Descope } from '../lib';
+import { DescopeTheme } from '../lib/types';
 
 const Login = () => {
 	const [errorMessage, setErrorMessage] = useState('');
@@ -20,6 +21,7 @@ const Login = () => {
 				onSuccess={onSuccess}
 				onError={onError}
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
+				theme={process.env.DESCOPE_THEME as DescopeTheme}
 			/>
 			{errorMessage && (
 				<div
