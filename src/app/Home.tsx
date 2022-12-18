@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../lib';
-import fetchData from './api';
+import { fetchData } from './api';
 
 const getUserDisplayName = (user) => user?.name || user?.externalIds?.[0] || '';
 

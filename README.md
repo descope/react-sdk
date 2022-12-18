@@ -127,7 +127,7 @@ import { getSessionToken } from '@descope/react-sdk';
 
 // fetch data using back
 // Note: Descope backend SDKs support extracting session token from the Authorization header
-export async function fetchData() {
+export const fetchData = async () => {
 	const sessionToken = getSessionToken();
 	const res = await fetch('/path/to/server/api', {
 		headers: {
@@ -135,7 +135,7 @@ export async function fetchData() {
 		}
 	});
 	// ... use res
-}
+};
 ```
 
 An example for component that uses `fetchData` function from above
