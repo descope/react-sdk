@@ -11,12 +11,18 @@ declare const BUILD_VERSION: string;
 interface IAuthProviderProps {
 	projectId: string;
 	baseUrl?: string;
+	// If true, session token (jwt) will be stored on cookie. Otherwise, the session token will be
+	// stored on local storage and can accessed with getSessionToken function
+	// Use this option if session token will stay small (less than 1k)
+	// NOTE: Session token can grow, especially in cases of using authorization, or adding custom claims
+	sessionTokenViaCookie?: boolean;
 	children?: JSX.Element;
 }
 
 const AuthProvider: FC<IAuthProviderProps> = ({
 	projectId,
 	baseUrl,
+	sessionTokenViaCookie,
 	children
 }) => {
 	const [user, setUser] = useState({});
@@ -29,6 +35,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		return createSdk({
 			projectId,
 			baseUrl,
+			sessionTokenViaCookie,
 			hooks: {
 				beforeRequest: (config) => {
 					const conf = config;
@@ -73,7 +80,8 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 
 AuthProvider.defaultProps = {
 	baseUrl: '',
-	children: undefined
+	children: undefined,
+	sessionTokenViaCookie: false
 };
 
 export default AuthProvider;

@@ -20,7 +20,7 @@ import { AuthProvider } from '@descope/react-sdk';
 
 const AppRoot = () => {
 	return (
-		<AuthProvider projectId="myProjectId">
+		<AuthProvider projectId="my-project-id">
 			<App />
 		</AuthProvider>
 	);
@@ -59,9 +59,9 @@ const App = () => {
     return (
         {...}
         <Descope
-            flowId="myFlowId"
+            flowId="my-flow-id"
             onSuccess={(e) => console.log('Logged in!')}
-            onError={(e) => console.log('Could not logged in!')}
+            onError={(e) => console.log('Could not logged in')}
             // theme can be "light" or "dark". If empty, Descope will use the OS theme
             // theme="light"
 
@@ -113,33 +113,42 @@ When developing a full-stack application, it is common to have private server AP
 
 Note: Descope also provides server-side SDKs in various languages (NodeJS, Go, Python, etc). Descope's server SDKs have out-of-the-box session validation API that supports the options described bellow. To read more about session validation, Read [this section](https://docs.descope.com/guides/gettingstarted/#session-validation) in Descope documentation.
 
-The mechanism to pass session token depends on the Descope project's "Token response method" configuration.
+There are 2 ways to achieve that:
 
-##### 1. Manage in cookies
+1. Using `getSessionToken` to get the token, and pass it on the `Authorization` Header (Recommended)
+2. Passing `sessionTokenViaCookie` boolean prop to the `AuthProvider` component (Use cautiously, session token may grow, especially in cases of using authorization, or adding custom claim)
 
-- Descope sets session token as cookie, which automatically sent each server api request. This option is more secure and is the recommended method for managing tokens, but for this option to work well with the browser - you must also configure a CNAME record for the custom domain listed, which will give a unified log in experience and securely restrict access to the session tokens that are stored in the cookies.
+##### 1. Using `getSessionToken` to get the token
 
-When this option is configured, the browser will automatically add the session token cookie to the server in every request.
-
-##### 2. Manage in response body
-
-- Descope API returns session token in body. In this option, The React application should pass session cookie (`const { sessionToken } = useAuth()`) as Authorization header. This option never requires a custom domain, and is recommended for testing or while working in a sandbox environment.
-
-An example for using session token,
+An example for api function, and passing the token on the `Authorization` header:
 
 ```js
-import { useAuth } from '@descope/react-sdk'
+import { getSessionToken } from '@descope/react-sdk';
+
+// fetch data using back
+// Note: Descope backend SDKs support extracting session token from the Authorization header
+export const fetchData = async () => {
+	const sessionToken = getSessionToken();
+	const res = await fetch('/path/to/server/api', {
+		headers: {
+			Authorization: `Bearer ${sessionToken}`
+		}
+	});
+	// ... use res
+};
+```
+
+An example for component that uses `fetchData` function from above
+
+```js
+// Component code
+import { fetchData } from 'path/to/api/file'
 import { useCallback } from 'react'
 
-const App = () => {
-    const { sessionToken } = useAuth()
-
+const Component = () => {
     const onClick = useCallback(() => {
-        fetch('https://localhost:3002/api/some-path' {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${sessionToken}` }
-        })
-    },[sessionToken])
+        fetchData()
+    },[])
     return (
         {...}
         {
@@ -149,6 +158,28 @@ const App = () => {
     )
 }
 ```
+
+##### 2. Passing `sessionTokenViaCookie` boolean prop to the `AuthProvider`
+
+Passing `sessionTokenViaCookie` prop to `AuthProvider` component. Descope SDK will automatically store session token on the `DS` cookie.
+
+Note: Use this option if session token will stay small (less than 1k). Session token can grow, especially in cases of using authorization, or adding custom claims
+
+Example:
+
+```js
+import { AuthProvider } from '@descope/react-sdk';
+
+const AppRoot = () => {
+	return (
+		<AuthProvider projectId="my-project-id" sessionTokenViaCookie>
+			<App />
+		</AuthProvider>
+	);
+};
+```
+
+Now, whenever you call `fetch`, the cookie will automatically be sent with the request. Descope backend SDKs also support extracting the token from the `DS` cookie.
 
 ## Run a local example
 
