@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+export { getSessionToken } from '@descope/web-js-sdk';
 export { default as AuthProvider } from './components/AuthProvider';
 export {
 	SignInFlow,
