@@ -1,8 +1,5 @@
-// '@descope/web-js-sdk' is a dependency of '@descope/web-component'
-// and we want to use the same version that is used there
-// eslint-disable-next-line import/no-extraneous-dependencies
-import createSdk from '@descope/web-js-sdk';
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import createSdk from '../sdk';
 import AuthContext from '../hooks/authContext';
 import { IAuthContext } from '../types';
 
@@ -46,7 +43,9 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 					};
 					return conf;
 				}
-			}
+			},
+			persistToken: true,
+			autoRefresh: true
 		});
 	}, [projectId, baseUrl]);
 
@@ -57,6 +56,9 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 
 		const unsubscribeSessionToken = sdk.onSessionTokenChange(setSessionToken);
 		const unsubscribeUser = sdk.onUserChange(setUser);
+		// we are calling refresh once after creating the SDK instance
+		// so if refresh token exists, the user will be logged in automatically
+		sdk.refresh();
 		return () => {
 			unsubscribeSessionToken?.();
 			unsubscribeUser?.();
