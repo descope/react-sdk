@@ -6,13 +6,25 @@ import React from 'react';
 import AuthProvider from '../../src/lib/components/AuthProvider';
 import Descope from '../../src/lib/components/Descope';
 
+Object.defineProperty(global, 'Response', {
+	value: class {},
+	configurable: true,
+	writable: true
+});
+
 jest.mock('@descope/web-component', () => {});
 
 jest.mock('@descope/web-js-sdk', () =>
 	jest.fn(() => ({
 		logout: jest.fn().mockName('logout'),
 		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
-		onUserChange: jest.fn().mockName('onUserChange')
+		onUserChange: jest.fn().mockName('onUserChange'),
+		refresh: jest.fn(),
+		httpClient: {
+			hooks: {
+				afterRequest: jest.fn()
+			}
+		}
 	}))
 );
 

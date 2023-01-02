@@ -7,13 +7,25 @@ import { MemoryRouter } from 'react-router-dom';
 import App from '../../src/app/App';
 import { AuthProvider } from '../../src/lib';
 
+Object.defineProperty(global, 'Response', {
+	value: class {},
+	configurable: true,
+	writable: true
+});
+
 jest.mock('@descope/web-component', () => {});
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
 		logout: jest.fn().mockName('logout'),
 		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
-		onUserChange: jest.fn().mockName('onUserChange')
+		onUserChange: jest.fn().mockName('onUserChange'),
+		refresh: jest.fn(),
+		httpClient: {
+			hooks: {
+				afterRequest: jest.fn()
+			}
+		}
 	};
 	return () => sdk;
 });
