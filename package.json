@@ -19,7 +19,7 @@
 		"dist"
 	],
 	"dependencies": {
-		"@descope/web-component": "0.1.0-alpha.21",
+		"@descope/web-component": "0.1.0-alpha.23",
 		"react-router-dom": "6.5.0"
 	},
 	"devDependencies": {
@@ -81,7 +81,8 @@
 	},
 	"peerDependencies": {
 		"@types/react": ">=16",
-		"react": ">=16"
+		"react": ">=16",
+		"@descope/web-js-sdk": ">=0.1.0"
 	},
 	"scripts": {
 		"start": "npm run build && rollup -c rollup.config.app.js -w",

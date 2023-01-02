@@ -19,6 +19,7 @@ export default {
 		commonjs(),
 		dotenv(), // should happen before replace plugin
 		replace({
+			BUILD_VERSION: JSON.stringify(require('./package.json').version),
 			preventAssignment: true,
 			'process.env.NODE_ENV': JSON.stringify('development'),
 			'process.env': JSON.stringify(process.env),
