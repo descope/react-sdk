@@ -11,6 +11,7 @@ const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
 		autoRefresh: true
 	});
 	sdkInstance = sdk;
+
 	return sdk;
 };
 

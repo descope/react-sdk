@@ -82,7 +82,7 @@
 	"peerDependencies": {
 		"@types/react": ">=16",
 		"react": ">=16",
-		"@descope/web-js-sdk": ">=0.1.0"
+		"@descope/web-js-sdk": "0.1.0-alpha.17"
 	},
 	"scripts": {
 		"start": "npm run build && rollup -c rollup.config.app.js -w",

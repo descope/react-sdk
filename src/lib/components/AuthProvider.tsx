@@ -43,7 +43,9 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 					};
 					return conf;
 				}
-			}
+			},
+			persistToken: true,
+			autoRefresh: true
 		});
 	}, [projectId, baseUrl]);
 
