@@ -1,7 +1,4 @@
 import DescopeWc from '@descope/web-component';
-// '@descope/web-js-sdk' is a dependency of '@descope/web-component'
-// and we want to use the same version that is used there
-// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { DOMAttributes } from 'react';
 import createSdk from './sdk';
 
