@@ -14,8 +14,8 @@ Object.defineProperty(global, 'Response', {
 
 jest.mock('@descope/web-component', () => {});
 
-jest.mock('@descope/web-js-sdk', () =>
-	jest.fn(() => ({
+jest.mock('@descope/web-js-sdk', () => {
+	const sdk = {
 		logout: jest.fn().mockName('logout'),
 		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
 		onUserChange: jest.fn().mockName('onUserChange'),
@@ -25,8 +25,9 @@ jest.mock('@descope/web-js-sdk', () =>
 				afterRequest: jest.fn()
 			}
 		}
-	}))
-);
+	};
+	return jest.fn(() => sdk);
+});
 
 const renderWithProvider = (
 	ui: React.ReactElement,
@@ -82,7 +83,11 @@ describe('Descope', () => {
 			})
 		);
 
+		const sdk = createSdk({ projectId: '1' });
+		const mockAfterRequest = sdk.httpClient.hooks.afterRequest as jest.Mock;
 		expect(onSuccess).toHaveBeenCalled();
+		expect(mockAfterRequest).toHaveBeenCalled();
+		expect(mockAfterRequest).toHaveBeenCalledBefore(onSuccess);
 	});
 
 	it('should pass the ref to the wc element', async () => {

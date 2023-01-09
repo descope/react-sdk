@@ -49,15 +49,15 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 				setUser(e.detail?.user);
 				const sessionJwt = e.detail?.sessionJwt;
 				setSessionToken(sessionJwt);
-				if (onSuccess) {
-					onSuccess(e);
-				}
 				// In order to make sure all the after-hooks are running with the success response
 				// we are generating a fake response with the success data and calling the http client after hook fn with it
 				sdk.httpClient.hooks.afterRequest(
 					{} as any,
 					new Response(JSON.stringify(e.detail))
 				);
+				if (onSuccess) {
+					onSuccess(e);
+				}
 			},
 			[setUser, setSessionToken, onSuccess]
 		);
