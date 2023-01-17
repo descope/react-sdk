@@ -75,17 +75,19 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		}, [innerRef, onError, handleSuccess]);
 
 		return (
-			<Suspense fallback={null}>
-				<DescopeWC
-					projectId={projectId}
-					flowId={flowId}
-					baseUrl={baseUrl}
-					innerRef={setInnerRef}
-					tenant={tenant}
-					theme={theme}
-					debug={debug}
-				/>
-			</Suspense>
+			<form>
+				<Suspense fallback={null}>
+					<DescopeWC
+						projectId={projectId}
+						flowId={flowId}
+						baseUrl={baseUrl}
+						innerRef={setInnerRef}
+						tenant={tenant}
+						theme={theme}
+						debug={debug}
+					/>
+				</Suspense>
+			</form>
 		);
 	}
 );
