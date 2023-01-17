@@ -79,7 +79,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			 * in order to avoid redundant remounting of the WC, we are wrapping it with a form element
 			 * this workaround is done in order to support webauthn passkeys
 			 * it can be removed once this issue will be solved
-			 * https://github.com/descope/etc/issues/733#issuecomment-1370165226
+			 * https://bugs.chromium.org/p/chromium/issues/detail?id=1404106#c2
 			 */
 			<form>
 				<Suspense fallback={null}>
