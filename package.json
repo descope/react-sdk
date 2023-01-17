@@ -19,7 +19,7 @@
 		"dist"
 	],
 	"dependencies": {
-		"@descope/web-component": "0.1.0-alpha.28",
+		"@descope/web-component": "0.1.0-alpha.29",
 		"react-router-dom": "6.6.1"
 	},
 	"devDependencies": {
