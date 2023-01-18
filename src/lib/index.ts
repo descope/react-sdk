@@ -14,3 +14,4 @@ export {
 	getRefreshToken
 } from './sdk';
 export { default as useSession } from './hooks/useSession';
+export { default as useUser } from './hooks/useUser';
