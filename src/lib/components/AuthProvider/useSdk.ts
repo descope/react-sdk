@@ -3,11 +3,10 @@ import createSdk from '../../sdk';
 
 declare const BUILD_VERSION: string;
 
-type Config = {
-	projectId: string;
-	baseUrl?: string;
-	sessionTokenViaCookie?: boolean;
-};
+type Config = Pick<
+	Parameters<typeof createSdk>[0],
+	'projectId' | 'baseUrl' | 'sessionTokenViaCookie'
+>;
 
 export default ({
 	projectId,
