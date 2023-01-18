@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, useSession } from '../lib';
+import { useAuth, useSession, useUser } from '../lib';
 import { fetchData } from './api';
 
 const getUserDisplayName = (user) => user?.name || user?.externalIds?.[0] || '';
 
 const Home = () => {
-	const { useUser, logout } = useAuth();
+	const { logout } = useAuth();
 	const { isAuthenticated, isSessionLoading } = useSession();
 	const { user } = useUser();
 
