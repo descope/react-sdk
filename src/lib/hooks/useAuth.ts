@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
 import { IAuth } from '../types';
 import AuthContext from './authContext';
-import useUser from './useUser';
-import useSession from './useSession';
 import useAuthContext from './useAuthContext';
 
 const useAuth = (): IAuth => {
@@ -17,11 +15,9 @@ const useAuth = (): IAuth => {
 	return useMemo(
 		() => ({
 			logoutAll,
-			logout,
-			useUser,
-			useSession
+			logout
 		}),
-		[logoutAll, logout, useUser, useSession]
+		[logoutAll, logout]
 	);
 };
 

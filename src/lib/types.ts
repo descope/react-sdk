@@ -58,12 +58,6 @@ export interface User {
 export interface IAuth {
 	logoutAll: Sdk['logoutAll'];
 	logout: Sdk['logout'];
-	useUser: () => { isUserLoading: boolean; user: User };
-	useSession: () => {
-		isSessionLoading: boolean;
-		isAuthenticated: boolean;
-		sessionToken: string;
-	};
 }
 
 export interface IAuthContext {

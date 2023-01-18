@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import useAuthContext from './useAuthContext';
-import { IAuth } from '../types';
 
-const useSession: IAuth['useSession'] = () => {
+const useSession = () => {
 	const { session, isSessionLoading, fetchSession } = useAuthContext();
 
 	useEffect(() => {
