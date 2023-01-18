@@ -41,14 +41,14 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 
 		useImperativeHandle(ref, () => innerRef);
 
-		const { projectId, baseUrl, setUser, setSessionToken, sdk } =
+		const { projectId, baseUrl, setUser, setSession, sdk } =
 			React.useContext(AuthContext);
 
 		const handleSuccess = useCallback(
 			(e: CustomEvent) => {
 				setUser(e.detail?.user);
 				const sessionJwt = e.detail?.sessionJwt;
-				setSessionToken(sessionJwt);
+				setSession(sessionJwt);
 				// In order to make sure all the after-hooks are running with the success response
 				// we are generating a fake response with the success data and calling the http client after hook fn with it
 				sdk.httpClient.hooks.afterRequest(
@@ -59,7 +59,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 					onSuccess(e);
 				}
 			},
-			[setUser, setSessionToken, onSuccess]
+			[setUser, setSession, onSuccess]
 		);
 
 		useEffect(() => {

@@ -1,12 +1,15 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../lib';
+import { useAuth, useSession } from '../lib';
 import { fetchData } from './api';
 
 const getUserDisplayName = (user) => user?.name || user?.externalIds?.[0] || '';
 
 const Home = () => {
-	const { authenticated, user, logout } = useAuth();
+	const { useUser, logout } = useAuth();
+	const { isAuthenticated, isSessionLoading } = useSession();
+	const { user } = useUser();
+
 	const onLogout = useCallback(() => {
 		logout();
 	}, [logout]);
@@ -15,15 +18,18 @@ const Home = () => {
 		const data = await fetchData();
 		alert(data);
 	}, []);
+
+	if (isSessionLoading) return <div>Loading...</div>;
+
 	return (
 		<>
 			<h2>Home</h2>
-			{!authenticated && (
+			{!isAuthenticated && (
 				<Link id="login-button" to="/login">
 					Login
 				</Link>
 			)}
-			{authenticated && (
+			{isAuthenticated && (
 				<>
 					<div className="username"> Hello {getUserDisplayName(user)}</div>
 					<button

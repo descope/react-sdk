@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../../src/app/App';
@@ -20,7 +20,7 @@ jest.mock('@descope/web-js-sdk', () => {
 		logout: jest.fn().mockName('logout'),
 		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
 		onUserChange: jest.fn().mockName('onUserChange'),
-		refresh: jest.fn(),
+		refresh: jest.fn(() => Promise.resolve()),
 		httpClient: {
 			hooks: {
 				afterRequest: jest.fn()
@@ -38,10 +38,10 @@ const { logout, onSessionTokenChange, onUserChange } = createSdk({
 });
 
 describe('App', () => {
-	afterEach(() => {
+	beforeEach(() => {
 		// reset mock functions that may be override
-		(onSessionTokenChange as jest.Mock).mockImplementation();
-		(onUserChange as jest.Mock).mockImplementation();
+		(onSessionTokenChange as jest.Mock).mockImplementation(() => () => {});
+		(onUserChange as jest.Mock).mockImplementation(() => () => {});
 	});
 
 	it('should get user on success', async () => {
@@ -51,7 +51,7 @@ describe('App', () => {
 			</AuthProvider>
 		);
 
-		const loginButton = document.querySelector('#login-button');
+		const loginButton = await screen.findByText('Login');
 		fireEvent.click(loginButton);
 
 		await waitFor(() => {
@@ -71,7 +71,7 @@ describe('App', () => {
 		expect(username).toHaveTextContent(/user1/);
 	});
 
-	it('should subscribe to user and session token', () => {
+	it('should subscribe to user and session token', async () => {
 		(onSessionTokenChange as jest.Mock).mockImplementation((cb) => {
 			expect(cb).toBeTruthy();
 			cb('token1');
@@ -93,22 +93,27 @@ describe('App', () => {
 		expect(onUserChange).toBeCalled();
 
 		// ensure user details are shown
-		const username = document.querySelector('.username');
-		expect(username).toHaveTextContent(/user1/);
+		await screen.findByText(/user1/);
 	});
 
-	it('should show error message on error', () => {
-		renderWithRouter(
+	it('should show error message on error', async () => {
+		const { container } = renderWithRouter(
 			<AuthProvider projectId="p1">
 				<App />
 			</AuthProvider>
 		);
-		const loginButton = document.querySelector('#login-button');
+		const loginButton = await screen.findByText('Login');
 		fireEvent.click(loginButton);
+
+		await waitFor(() =>
+			// eslint-disable-next-line testing-library/no-container
+			expect(container.querySelector('descope-wc')).toBeInTheDocument()
+		);
 
 		// mock error
 		fireEvent(
-			document.querySelector('descope-wc'),
+			// eslint-disable-next-line testing-library/no-container
+			container.querySelector('descope-wc'),
 			new CustomEvent('error', {})
 		);
 
@@ -117,25 +122,32 @@ describe('App', () => {
 		expect(error).not.toBeNull();
 	});
 
-	it('should render logout button and and call sdk logout', () => {
-		renderWithRouter(
+	it('should render logout button and and call sdk logout', async () => {
+		const { container } = renderWithRouter(
 			<AuthProvider projectId="p1">
 				<App />
 			</AuthProvider>
 		);
-		const loginButton = document.querySelector('#login-button');
+		const loginButton = await screen.findByText('Login');
 		fireEvent.click(loginButton);
+
+		// eslint-disable-next-line testing-library/no-container
+		await waitFor(() =>
+			// eslint-disable-next-line testing-library/no-container
+			expect(container.querySelector('descope-wc')).toBeInTheDocument()
+		);
 
 		// mock success
 		fireEvent(
-			document.querySelector('descope-wc'),
+			// eslint-disable-next-line testing-library/no-container
+			container.querySelector('descope-wc'),
 			new CustomEvent('success', {
 				detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
 			})
 		);
 
 		// logout
-		const logoutButton = document.querySelector('#logout-button');
+		const logoutButton = screen.getByText('Logout');
 		fireEvent.click(logoutButton);
 
 		// ensure logout called

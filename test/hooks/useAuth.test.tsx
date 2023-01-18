@@ -3,15 +3,18 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
 import { renderHook } from '@testing-library/react';
-import { AuthProvider } from '../../src/lib';
+import { AuthProvider, useSession } from '../../src/lib';
 import useAuth from '../../src/lib/hooks/useAuth';
+import useUser from '../../src/lib/hooks/useUser';
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
 		logout: jest.fn().mockName('logout'),
-		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
-		onUserChange: jest.fn().mockName('onUserChange'),
-		refresh: jest.fn(),
+		onSessionTokenChange: jest
+			.fn(() => () => {})
+			.mockName('onSessionTokenChange'),
+		onUserChange: jest.fn(() => () => {}).mockName('onUserChange'),
+		refresh: jest.fn(() => Promise.resolve()),
 		httpClient: {
 			hooks: {
 				afterRequest: jest.fn()
@@ -49,25 +52,37 @@ describe('useAuth', () => {
 		}
 	);
 
-	it('should throw error when using "me" before sdk initialization', () => {
+	it('should throw error when using "logout" before sdk initialization', () => {
 		const { result } = renderHook(() => useAuth(), {
 			wrapper: authProviderWrapper('')
 		});
 
 		expect(() => {
-			result.current.me();
+			result.current.logout();
 		}).toThrowError();
 	});
 
-	it('should get default values from provider', () => {
+	it('should get default values from provider for useAuth', () => {
 		const { result } = renderHook(() => useAuth(), {
 			wrapper: authProviderWrapper('project1')
 		});
-		expect(result.current.authenticated).toBeFalsy();
-		expect(result.current.user).toEqual({});
-		expect(result.current.sessionToken).toEqual('');
 
 		result.current.logout();
 		expect(logout).toBeCalled();
+	});
+
+	it('should get default values from provider for useUser', () => {
+		const { result } = renderHook(() => useUser(), {
+			wrapper: authProviderWrapper('project1')
+		});
+		expect(result.current.user).toEqual(undefined);
+	});
+
+	it('should get default values from provider for useSession', () => {
+		const { result } = renderHook(() => useSession(), {
+			wrapper: authProviderWrapper('project1')
+		});
+		expect(result.current.isAuthenticated).toEqual(false);
+		expect(result.current.sessionToken).toEqual(undefined);
 	});
 });

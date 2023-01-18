@@ -25,5 +25,8 @@ const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
 sdkInstance = createSdkWrapper({ projectId: 'temp pid' });
 
 export const getSessionToken = () => sdkInstance?.getSessionToken();
+export const getJwtPermissions = () => sdkInstance?.getJwtPermissions();
+export const getJwtRoles = () => sdkInstance?.getJwtRoles();
+export const getRefreshToken = () => sdkInstance?.getRefreshToken();
 
 export default createSdkWrapper;
