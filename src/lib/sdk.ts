@@ -1,6 +1,7 @@
 import createSdk from '@descope/web-js-sdk';
 
-let sdkInstance;
+type Sdk = ReturnType<typeof createSdkWrapper>;
+let sdkInstance: Sdk;
 
 const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
 	config: P
@@ -25,8 +26,10 @@ const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
 sdkInstance = createSdkWrapper({ projectId: 'temp pid' });
 
 export const getSessionToken = () => sdkInstance?.getSessionToken();
-export const getJwtPermissions = () => sdkInstance?.getJwtPermissions();
-export const getJwtRoles = () => sdkInstance?.getJwtRoles();
+export const getJwtPermissions = (token = getSessionToken(), tenant?: string) =>
+	sdkInstance?.getJwtPermissions(token, tenant);
+export const getJwtRoles = (token = getSessionToken(), tenant?: string) =>
+	sdkInstance?.getJwtRoles(token, tenant);
 export const getRefreshToken = () => sdkInstance?.getRefreshToken();
 
 export default createSdkWrapper;
