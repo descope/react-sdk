@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useDescope, useAuth, useUser } from '../lib';
+import { useDescope, useSession, useUser } from '../lib';
 import { fetchData } from './api';
 
 const getUserDisplayName = (user) => user?.name || user?.externalIds?.[0] || '';
 
 const Home = () => {
 	const { logout } = useDescope();
-	const { isAuthenticated, isSessionLoading } = useAuth();
+	const { isAuthenticated, isSessionLoading } = useSession();
 	const { user } = useUser();
 
 	const onLogout = useCallback(() => {

@@ -72,7 +72,7 @@ const App = () => {
 }
 ```
 
-#### Use the `useDescope`, `useAuth` and `useUser` hooks in your components in order to get authentication state, user details and utilities
+#### Use the `useDescope`, `useSession` and `useUser` hooks in your components in order to get authentication state, user details and utilities
 
 This can be helpful to implement application-specific logic. Examples:
 
@@ -81,12 +81,12 @@ This can be helpful to implement application-specific logic. Examples:
 - Logout button
 
 ```js
-import { useDescope } from '@descope/react-sdk'
+import { useDescope, useSession, useUser } from '@descope/react-sdk'
 
 const App = () => {
     // NOTE - `useDescope` should be used inside `AuthProvider` context,
     // and will throw an exception if this requirement is not met
-    const { isAuthenticated, isSessionLoading } = useAuth()
+    const { isAuthenticated, isSessionLoading } = useSession()
     const { logout } = useDescope()
     const { user, isUserLoading } = useUser()
 

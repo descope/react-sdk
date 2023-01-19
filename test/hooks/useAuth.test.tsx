@@ -3,7 +3,7 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
 import { renderHook } from '@testing-library/react';
-import { AuthProvider, useAuth } from '../../src/lib';
+import { AuthProvider, useSession } from '../../src/lib';
 import useDescope from '../../src/lib/hooks/useDescope';
 import useUser from '../../src/lib/hooks/useUser';
 
@@ -40,7 +40,7 @@ describe('hooks', () => {
 		}).toThrowError();
 
 		expect(() => {
-			renderHook(() => useAuth());
+			renderHook(() => useSession());
 		}).toThrowError();
 
 		expect(() => {
@@ -76,8 +76,8 @@ describe('hooks', () => {
 		expect(result.current.user).toEqual(undefined);
 	});
 
-	it('should get default values from provider for useAuth', () => {
-		const { result } = renderHook(() => useAuth(), {
+	it('should get default values from provider for useSession', () => {
+		const { result } = renderHook(() => useSession(), {
 			wrapper: authProviderWrapper('project1')
 		});
 		expect(result.current.isAuthenticated).toEqual(false);

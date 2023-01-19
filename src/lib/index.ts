@@ -13,5 +13,5 @@ export {
 	getJwtRoles,
 	getRefreshToken
 } from './sdk';
-export { default as useAuth } from './hooks/useAuth';
+export { default as useSession } from './hooks/useSession';
 export { default as useUser } from './hooks/useUser';
