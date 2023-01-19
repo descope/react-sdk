@@ -6,7 +6,7 @@ import React from 'react';
 import { SignInFlow, SignUpFlow, SignUpOrInFlow } from '../../src/lib';
 import AuthProvider from '../../src/lib/components/AuthProvider';
 
-jest.mock('@descope/web-component', () => {});
+jest.mock('@descope/web-component', () => ({ default: {} }));
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {

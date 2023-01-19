@@ -13,7 +13,7 @@ Object.defineProperty(global, 'Response', {
 	writable: true
 });
 
-jest.mock('@descope/web-component', () => {});
+jest.mock('@descope/web-component', () => ({ default: {} }));
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
