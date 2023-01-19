@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { IAuth } from '../types';
-import useAuthContext from './useAuthContext';
+import useContext from './useContext';
 
 const useDescope = (): IAuth => {
-	const { logout, logoutAll } = useAuthContext();
+	const { logout, logoutAll } = useContext();
 
 	return useMemo(
 		() => ({

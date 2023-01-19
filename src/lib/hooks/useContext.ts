@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import AuthContext from './authContext';
+import Context from './Context';
 
 export default () => {
-	const ctx = useContext(AuthContext);
+	const ctx = useContext(Context);
 	if (!ctx) {
 		throw Error(
 			`You can only use this hook in the context of <AuthProvider />`

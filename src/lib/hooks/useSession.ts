@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import useAuthContext from './useAuthContext';
+import useContext from './useContext';
 
 const useSession = () => {
-	const { session, isSessionLoading, fetchSession } = useAuthContext();
+	const { session, isSessionLoading, fetchSession } = useContext();
 
 	useEffect(() => {
 		if (!session && !isSessionLoading) {

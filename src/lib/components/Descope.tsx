@@ -6,7 +6,7 @@ import React, {
 	useImperativeHandle,
 	useState
 } from 'react';
-import AuthContext from '../hooks/authContext';
+import Context from '../hooks/Context';
 import { DescopeProps } from '../types';
 
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
@@ -42,7 +42,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		useImperativeHandle(ref, () => innerRef);
 
 		const { projectId, baseUrl, setUser, setSession, sdk } =
-			React.useContext(AuthContext);
+			React.useContext(Context);
 
 		const handleSuccess = useCallback(
 			(e: CustomEvent) => {

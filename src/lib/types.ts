@@ -60,7 +60,7 @@ export interface IAuth {
 	logout: Sdk['logout'];
 }
 
-export interface IAuthContext {
+export interface IContext {
 	fetchUser: () => void;
 	user: User;
 	isUserLoading: boolean;

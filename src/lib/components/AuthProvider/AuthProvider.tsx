@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import AuthContext from '../../hooks/authContext';
-import { IAuthContext, User } from '../../types';
+import Context from '../../hooks/Context';
+import { IContext, User } from '../../types';
 import useSdk from './useSdk';
 import { withValidation } from '../../utils';
 
@@ -60,7 +60,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 
 	const logout = useCallback(withValidation(sdk?.logout), [sdk]);
 
-	const value = useMemo<IAuthContext>(
+	const value = useMemo<IContext>(
 		() => ({
 			fetchUser,
 			user,
@@ -92,7 +92,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			sdk
 		]
 	);
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
 AuthProvider.defaultProps = {
