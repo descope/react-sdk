@@ -84,11 +84,11 @@ This can be helpful to implement application-specific logic. Examples:
 import { useDescope, useSession, useUser } from '@descope/react-sdk'
 
 const App = () => {
-    // NOTE - `useDescope` should be used inside `AuthProvider` context,
+    // NOTE - `useDescope`, `useSession`, `useUser` should be used inside `AuthProvider` context,
     // and will throw an exception if this requirement is not met
     const { isAuthenticated, isSessionLoading } = useSession()
-    const { logout } = useDescope()
     const { user, isUserLoading } = useUser()
+    const { logout } = useDescope()
 
     if(isSessionLoading || isUserLoading){
         return <p>Loading...</p>
