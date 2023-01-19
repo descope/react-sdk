@@ -3,7 +3,7 @@ import { IAuth } from '../types';
 import AuthContext from './authContext';
 import useAuthContext from './useAuthContext';
 
-const useAuth = (): IAuth => {
+const useDescope = (): IAuth => {
 	const ctx = React.useContext(AuthContext);
 	if (!ctx) {
 		throw Error(
@@ -21,4 +21,4 @@ const useAuth = (): IAuth => {
 	);
 };
 
-export default useAuth;
+export default useDescope;

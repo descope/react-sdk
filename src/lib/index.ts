@@ -6,7 +6,7 @@ export {
 	SignUpOrInFlow
 } from './components/DefaultFlows';
 export { default as Descope } from './components/Descope';
-export { default as useAuth } from './hooks/useAuth';
+export { default as useDescope } from './hooks/useDescope';
 export {
 	getSessionToken,
 	getJwtPermissions,

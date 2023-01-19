@@ -4,7 +4,7 @@ import React from 'react';
 import createSdk from '@descope/web-js-sdk';
 import { renderHook } from '@testing-library/react';
 import { AuthProvider, useSession } from '../../src/lib';
-import useAuth from '../../src/lib/hooks/useAuth';
+import useDescope from '../../src/lib/hooks/useDescope';
 import useUser from '../../src/lib/hooks/useUser';
 
 jest.mock('@descope/web-js-sdk', () => {
@@ -36,14 +36,14 @@ const authProviderWrapper =
 describe('useAuth', () => {
 	it('should throw error when used without provider', () => {
 		expect(() => {
-			renderHook(() => useAuth());
+			renderHook(() => useDescope());
 		}).toThrowError();
 	});
 
 	it.each(['logoutAll', 'logout', 'me', 'getJwtPermissions', 'getJwtRoles'])(
 		'should throw error when using sdk function before sdk initialization - %s',
 		(fnName) => {
-			const { result } = renderHook(() => useAuth(), {
+			const { result } = renderHook(() => useDescope(), {
 				wrapper: authProviderWrapper('')
 			});
 			expect(() => {
@@ -53,7 +53,7 @@ describe('useAuth', () => {
 	);
 
 	it('should throw error when using "logout" before sdk initialization', () => {
-		const { result } = renderHook(() => useAuth(), {
+		const { result } = renderHook(() => useDescope(), {
 			wrapper: authProviderWrapper('')
 		});
 
@@ -63,7 +63,7 @@ describe('useAuth', () => {
 	});
 
 	it('should get default values from provider for useAuth', () => {
-		const { result } = renderHook(() => useAuth(), {
+		const { result } = renderHook(() => useDescope(), {
 			wrapper: authProviderWrapper('project1')
 		});
 
