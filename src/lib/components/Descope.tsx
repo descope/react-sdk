@@ -8,18 +8,13 @@ import React, {
 } from 'react';
 import Context from '../hooks/Context';
 import { DescopeProps } from '../types';
-
-declare const BUILD_VERSION: string;
+import { baseHeaders } from '../constants';
 
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
 const DescopeWC = lazy(async () => {
 	const module = await import('@descope/web-component');
-	module.default.sdkConfigOverrides = {
-		baseHeaders: {
-			'x-descope-sdk-name': 'react',
-			'x-descope-sdk-version': BUILD_VERSION
-		}
-	};
+	// we want to override the web-component base headers so we can tell that is was used via the React SDK
+	module.default.sdkConfigOverrides = { baseHeaders };
 
 	return {
 		default: ({

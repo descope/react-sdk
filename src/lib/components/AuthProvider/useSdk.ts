@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import createSdk from '../../sdk';
-
-declare const BUILD_VERSION: string;
+import { baseHeaders } from '../../constants';
 
 type Config = Pick<
 	Parameters<typeof createSdk>[0],
@@ -21,10 +20,7 @@ export default ({
 			projectId,
 			baseUrl,
 			sessionTokenViaCookie,
-			baseHeaders: {
-				'x-descope-sdk-name': 'react',
-				'x-descope-sdk-version': BUILD_VERSION
-			},
+			baseHeaders,
 			persistToken: true,
 			autoRefresh: true
 		});
