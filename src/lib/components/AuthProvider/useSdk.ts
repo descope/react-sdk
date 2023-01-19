@@ -21,16 +21,9 @@ export default ({
 			projectId,
 			baseUrl,
 			sessionTokenViaCookie,
-			hooks: {
-				beforeRequest: (config) => {
-					const conf = config;
-					conf.headers = {
-						...conf.headers,
-						'x-descope-sdk-name': 'react',
-						'x-descope-sdk-version': BUILD_VERSION
-					};
-					return conf;
-				}
+			baseHeaders: {
+				'x-descope-sdk-name': 'react',
+				'x-descope-sdk-version': BUILD_VERSION
 			},
 			persistToken: true,
 			autoRefresh: true

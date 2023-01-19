@@ -12,7 +12,7 @@ Object.defineProperty(global, 'Response', {
 	writable: true
 });
 
-jest.mock('@descope/web-component', () => {});
+jest.mock('@descope/web-component', () => ({ default: {} }));
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
@@ -107,17 +107,14 @@ describe('Descope', () => {
 		await waitFor(() => {
 			expect(document.querySelector('descope-wc')).toBeInTheDocument();
 		});
-		const returnedConf = (
-			createSdk as jest.Mock
-		).mock.calls[0][0].hooks.beforeRequest({
-			headers: { test: '123' }
-		});
-		expect(returnedConf).toEqual({
-			headers: {
-				test: '123',
-				'x-descope-sdk-name': 'react',
-				'x-descope-sdk-version': 'one.two.three'
-			}
-		});
+
+		expect(createSdk).toHaveBeenCalledWith(
+			expect.objectContaining({
+				baseHeaders: {
+					'x-descope-sdk-name': 'react',
+					'x-descope-sdk-version': 'one.two.three'
+				}
+			})
+		);
 	});
 });

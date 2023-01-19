@@ -9,9 +9,18 @@ import React, {
 import Context from '../hooks/Context';
 import { DescopeProps } from '../types';
 
+declare const BUILD_VERSION: string;
+
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
 const DescopeWC = lazy(async () => {
-	await import('@descope/web-component');
+	const module = await import('@descope/web-component');
+	module.default.sdkConfigOverrides = {
+		baseHeaders: {
+			'x-descope-sdk-name': 'react',
+			'x-descope-sdk-version': BUILD_VERSION
+		}
+	};
+
 	return {
 		default: ({
 			projectId,
