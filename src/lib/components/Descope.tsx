@@ -6,7 +6,7 @@ import React, {
 	useImperativeHandle,
 	useState
 } from 'react';
-import AuthContext from '../hooks/authContext';
+import Context from '../hooks/Context';
 import { DescopeProps } from '../types';
 
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
@@ -41,14 +41,14 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 
 		useImperativeHandle(ref, () => innerRef);
 
-		const { projectId, baseUrl, setUser, setSessionToken, sdk } =
-			React.useContext(AuthContext);
+		const { projectId, baseUrl, setUser, setSession, sdk } =
+			React.useContext(Context);
 
 		const handleSuccess = useCallback(
 			(e: CustomEvent) => {
 				setUser(e.detail?.user);
 				const sessionJwt = e.detail?.sessionJwt;
-				setSessionToken(sessionJwt);
+				setSession(sessionJwt);
 				// In order to make sure all the after-hooks are running with the success response
 				// we are generating a fake response with the success data and calling the http client after hook fn with it
 				sdk.httpClient.hooks.afterRequest(
@@ -59,7 +59,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 					onSuccess(e);
 				}
 			},
-			[setUser, setSessionToken, onSuccess]
+			[setUser, setSession, onSuccess]
 		);
 
 		useEffect(() => {

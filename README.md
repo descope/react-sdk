@@ -72,7 +72,7 @@ const App = () => {
 }
 ```
 
-#### Use the `useAuth` hook in your components in order to access authentication state and utilities
+#### Use the `useDescope`, `useSession` and `useUser` hooks in your components in order to get authentication state, user details and utilities
 
 This can be helpful to implement application-specific logic. Examples:
 
@@ -81,27 +81,27 @@ This can be helpful to implement application-specific logic. Examples:
 - Logout button
 
 ```js
-import { useAuth } from '@descope/react-sdk'
+import { useDescope, useSession, useUser } from '@descope/react-sdk'
 
 const App = () => {
-    // NOTE - `useAuth` should be used inside `AuthProvider` context,
+    // NOTE - `useDescope`, `useSession`, `useUser` should be used inside `AuthProvider` context,
     // and will throw an exception if this requirement is not met
-    const { authenticated, user, logout } = useAuth()
-    return (
-        {...}
-        {
-            // render different components if current session is authenticated
-            authenticated && <MyPrivateComponent />
-        }
-        {
-            // render user's content
-            authenticated && <div>Hello ${user.name}</div>
-        }
-        {
-            // logout button
-            authenticated && <button onClick={logout}>Logout</div>
-        }
-    )
+    const { isAuthenticated, isSessionLoading } = useSession()
+    const { user, isUserLoading } = useUser()
+    const { logout } = useDescope()
+
+    if(isSessionLoading || isUserLoading){
+        return <p>Loading...</p>
+    }
+
+     if(isAuthenticated){
+        return (
+            <p>Hello ${user.name}</p>
+            <button onClick={logout}>Logout</div>
+        )
+    }
+
+    return <p>You are not logged in</p>
 }
 ```
 

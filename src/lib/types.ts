@@ -56,25 +56,24 @@ export interface User {
 }
 
 export interface IAuth {
-	authenticated: boolean;
-	user?: User;
-	sessionToken?: string;
 	logoutAll: Sdk['logoutAll'];
 	logout: Sdk['logout'];
-	me: Sdk['me'];
-	getJwtRoles: Sdk['getJwtRoles'];
-	getJwtPermissions: Sdk['getJwtPermissions'];
-	getRefreshToken: Sdk['getRefreshToken'];
 }
 
-export interface IAuthContext {
+export interface IContext {
+	fetchUser: () => void;
+	user: User;
+	isUserLoading: boolean;
+	fetchSession: () => void;
+	session: string;
+	isSessionLoading: boolean;
 	projectId: string;
 	baseUrl?: string;
-	user?: User;
-	sessionToken?: string;
 	sdk?: Sdk;
 	setUser: React.Dispatch<React.SetStateAction<User>>;
-	setSessionToken: React.Dispatch<React.SetStateAction<string>>;
+	setSession: React.Dispatch<React.SetStateAction<string>>;
+	logout: Sdk['logout'];
+	logoutAll: Sdk['logoutAll'];
 }
 
 export type DescopeTheme = 'light' | 'dark';
