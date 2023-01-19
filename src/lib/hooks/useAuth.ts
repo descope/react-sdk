@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useContext from './useContext';
 
-const useSession = () => {
+const useAuth = () => {
 	const { session, isSessionLoading, fetchSession } = useContext();
 
 	useEffect(() => {
@@ -17,4 +17,4 @@ const useSession = () => {
 	};
 };
 
-export default useSession;
+export default useAuth;
