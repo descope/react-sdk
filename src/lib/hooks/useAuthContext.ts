@@ -5,7 +5,7 @@ export default () => {
 	const ctx = useContext(AuthContext);
 	if (!ctx) {
 		throw Error(
-			`You can only use 'useAuth' in the context of <AuthProvider />`
+			`You can only use this hook in the context of <AuthProvider />`
 		);
 	}
 

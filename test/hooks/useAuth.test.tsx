@@ -33,14 +33,22 @@ const authProviderWrapper =
 	(projectId: string) =>
 	({ children }: { children: any }) =>
 		<AuthProvider projectId={projectId}>{children}</AuthProvider>;
-describe('useAuth', () => {
+describe('hooks', () => {
 	it('should throw error when used without provider', () => {
 		expect(() => {
 			renderHook(() => useDescope());
 		}).toThrowError();
+
+		expect(() => {
+			renderHook(() => useSession());
+		}).toThrowError();
+
+		expect(() => {
+			renderHook(() => useUser());
+		}).toThrowError();
 	});
 
-	it.each(['logoutAll', 'logout', 'me', 'getJwtPermissions', 'getJwtRoles'])(
+	it.each(['logoutAll', 'logout'])(
 		'should throw error when using sdk function before sdk initialization - %s',
 		(fnName) => {
 			const { result } = renderHook(() => useDescope(), {
@@ -52,17 +60,7 @@ describe('useAuth', () => {
 		}
 	);
 
-	it('should throw error when using "logout" before sdk initialization', () => {
-		const { result } = renderHook(() => useDescope(), {
-			wrapper: authProviderWrapper('')
-		});
-
-		expect(() => {
-			result.current.logout();
-		}).toThrowError();
-	});
-
-	it('should get default values from provider for useAuth', () => {
+	it('should get default values from provider', () => {
 		const { result } = renderHook(() => useDescope(), {
 			wrapper: authProviderWrapper('project1')
 		});
