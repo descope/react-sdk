@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import createSdk from '../../sdk';
 import { baseHeaders } from '../../constants';
+import createSdk from '../../sdk';
 
 type Config = Pick<
 	Parameters<typeof createSdk>[0],
@@ -24,4 +24,4 @@ export default ({
 			persistToken: true,
 			autoRefresh: true
 		});
-	}, [projectId, baseUrl]);
+	}, [projectId, baseUrl, sessionTokenViaCookie]);
