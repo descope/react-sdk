@@ -8,7 +8,7 @@ const useSession = () => {
 		if (!session && !isSessionLoading) {
 			fetchSession();
 		}
-	}, [fetchSession]);
+	}, [fetchSession, session, isSessionLoading]);
 
 	return {
 		isSessionLoading,

@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import Context from '../../hooks/Context';
 import { IContext, User } from '../../types';
-import useSdk from './useSdk';
 import { withValidation } from '../../utils';
+import useSdk from './useSdk';
 
 interface IAuthProviderProps {
 	projectId: string;
@@ -40,21 +40,21 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			};
 		}
 		return undefined;
-	}, [sdk]);
+	}, [sdk, setUser, setSession]);
 
 	const fetchSession = useCallback(() => {
 		setIsSessionLoading(true);
 		withValidation(sdk?.refresh)().then(() => {
 			setIsSessionLoading(false);
 		});
-	}, [sdk]);
+	}, [sdk, setIsSessionLoading]);
 
 	const fetchUser = useCallback(() => {
 		setIsUserLoading(true);
 		withValidation(sdk.me)().then(() => {
 			setIsUserLoading(false);
 		});
-	}, [sdk]);
+	}, [sdk, setIsUserLoading]);
 
 	const logoutAll = useCallback(withValidation(sdk?.logoutAll), [sdk]);
 
