@@ -117,4 +117,23 @@ describe('Descope', () => {
 			})
 		);
 	});
+
+	it('should render web-component with fingerprint enabled when set to true', async () => {
+		renderWithProvider(<Descope flowId="flow-1" fingerprint />);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toHaveAttribute(
+				'fingerprint',
+				'true'
+			);
+		});
+	});
+
+	it('should render web-component with fingerprint disabled when not provided', async () => {
+		renderWithProvider(<Descope flowId="flow-1" />);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).not.toHaveAttribute(
+				'fingerprint'
+			);
+		});
+	});
 });

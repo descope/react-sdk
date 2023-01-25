@@ -24,7 +24,8 @@ const DescopeWC = lazy(async () => {
 			innerRef,
 			tenant,
 			theme,
-			debug
+			debug,
+			fingerprint
 		}) => (
 			<descope-wc
 				project-id={projectId}
@@ -34,13 +35,14 @@ const DescopeWC = lazy(async () => {
 				tenant={tenant}
 				theme={theme}
 				debug={debug}
+				fingerprint={fingerprint}
 			/>
 		)
 	};
 });
 
 const Descope = React.forwardRef<HTMLElement, DescopeProps>(
-	({ flowId, onSuccess, onError, tenant, theme, debug }, ref) => {
+	({ flowId, onSuccess, onError, tenant, theme, debug, fingerprint }, ref) => {
 		const [innerRef, setInnerRef] = useState(null);
 
 		useImperativeHandle(ref, () => innerRef);
@@ -95,6 +97,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						tenant={tenant}
 						theme={theme}
 						debug={debug}
+						fingerprint={fingerprint}
 					/>
 				</Suspense>
 			</form>
