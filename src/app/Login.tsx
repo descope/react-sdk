@@ -22,7 +22,7 @@ const Login = () => {
 				onError={onError}
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
 				theme={process.env.DESCOPE_THEME as DescopeTheme}
-				fingerprint
+				telemetryKey={process.env.DESCOPE_TELEMETRY_KEY || undefined}
 			/>
 			{errorMessage && (
 				<div
