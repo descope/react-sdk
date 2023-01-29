@@ -51,13 +51,13 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			React.useContext(Context);
 
 		const handleSuccess = useCallback(
-			(e: CustomEvent) => {
+			async (e: CustomEvent) => {
 				setUser(e.detail?.user);
 				const sessionJwt = e.detail?.sessionJwt;
 				setSession(sessionJwt);
 				// In order to make sure all the after-hooks are running with the success response
 				// we are generating a fake response with the success data and calling the http client after hook fn with it
-				sdk.httpClient.hooks.afterRequest(
+				await sdk.httpClient.hooks.afterRequest(
 					{} as any,
 					new Response(JSON.stringify(e.detail))
 				);

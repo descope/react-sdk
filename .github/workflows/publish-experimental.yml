@@ -1,0 +1,48 @@
+name: 📢 Publish Experimental
+
+on:
+  push:
+    branches:
+      - react-sdk-experimental-test
+
+env:
+  NODE_VERSION: 16.14
+
+jobs:
+  publish:
+    name: 📢 Publish Experimental
+    permissions:
+      packages: write
+      contents: read
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com
+      # Skip post-install scripts here, as a malicious
+      # script could steal NODE_AUTH_TOKEN.
+      - name Get Short SHA
+        run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Use Experimental Version
+        run: |
+          current_version=`cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]'`
+          current_date=$(date +'%Y%m%d')
+          new_version="0.0.0-${SHORT_SHA}-${current_date}"
+          sed -i '' "s/${current_version}/${NEW_VERSION}/" package.json
+          cat package.json
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
+      # `npm rebuild` will run all those post-install scripts for us.
+      - run: npm rebuild && npm run prepare --if-present
+
+      - name: Publish to NPM Package Registry
+        run: npm publish --access=public
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
