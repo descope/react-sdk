@@ -24,7 +24,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
       # Skip post-install scripts here, as a malicious
       # script could steal NODE_AUTH_TOKEN.
-      - name Get Short SHA
+      - name: Get Short SHA
         run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
       - name: Use Experimental Version
         run: |
