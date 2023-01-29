@@ -41,6 +41,9 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Change experimental version
+          file_pattern: package.json
+          skip_dirty_check: true
+          push_options: '--force'
       - name: Install dependencies
         run: npm ci --ignore-scripts
         env:
@@ -60,3 +63,6 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Revert experimental version
+          file_pattern: package.json
+          skip_dirty_check: true
+          push_options: '--force'
