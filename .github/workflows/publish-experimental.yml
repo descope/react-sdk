@@ -13,7 +13,7 @@ jobs:
     name: 📢 Publish Experimental
     permissions:
       packages: write
-      contents: read
+      contents: write
     runs-on: ubuntu-latest
 
     steps:
@@ -24,15 +24,23 @@ jobs:
           registry-url: https://npm.pkg.github.com
       # Skip post-install scripts here, as a malicious
       # script could steal NODE_AUTH_TOKEN.
+      - name: Get Current Version
+        run: |
+          version=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | tr -d '"' | tr -d ',' | xargs)
+          echo "CURRENT_VERSION=$version" >> $GITHUB_ENV
       - name: Get Short SHA
         run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Get Experimental Version
+        run: |
+          current_date=$(date +'%Y%m%d')
+          echo "NEW_VERSION=0.0.0-${SHORT_SHA}-${current_date}" >> $GITHUB_ENV
       - name: Use Experimental Version
         run: |
-          current_version=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | tr -d '"' | tr -d ',' | xargs)
-          current_date=$(date +'%Y%m%d')
-          new_version="0.0.0-${SHORT_SHA}-${current_date}"
-          sed "s/${current_version}/${new_version}/" package.json
+          sed "s/${CURRENT_VERSION}/${NEW_VERSION}/" package.json
           cat package.json
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Change experimental version
       - name: Install dependencies
         run: npm ci --ignore-scripts
         env:
@@ -40,9 +48,15 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
       # `npm rebuild` will run all those post-install scripts for us.
       - run: npm rebuild && npm run prepare --if-present
-
       - name: Publish to NPM Package Registry
         run: npm publish --access=public
         env:
           CI: true
-          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Revert Experimental Version
+        run: |
+          sed "s/${NEW_VERSION}/${CURRENT_VERSION}/" package.json
+          cat package.json
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Revert experimental version
