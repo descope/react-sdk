@@ -86,6 +86,7 @@ export interface DescopeProps {
 	// If theme is not provided - the OS theme will be used
 	theme?: DescopeTheme;
 	debug?: boolean;
+	telemetryKey?: string;
 }
 
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
