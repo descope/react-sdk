@@ -1,4 +1,5 @@
 import DescopeWc from '@descope/web-component';
+import type { UserResponse } from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
 import createSdk from './sdk';
 
@@ -29,32 +30,6 @@ export type DescopeCustomElement = CustomElement<
 	'success' | 'error'
 >;
 
-export enum UserStatus {
-	enabled = 'enabled',
-	disabled = 'disabled',
-	invited = 'invited',
-	unknown = 'unknown'
-}
-
-export interface IExternalID {
-	id: string;
-	type?: string;
-}
-
-export interface User {
-	externalIDs?: IExternalID[];
-	displayName?: string;
-	project?: string;
-	logoutTime?: number;
-	createTime?: number;
-	email?: string;
-	phoneNumber?: string;
-	status?: UserStatus;
-	verifiedEmail?: boolean;
-	verifiedPhone?: boolean;
-	tenants?: string[];
-}
-
 export interface IAuth {
 	logoutAll: Sdk['logoutAll'];
 	logout: Sdk['logout'];
@@ -62,7 +37,7 @@ export interface IAuth {
 
 export interface IContext {
 	fetchUser: () => void;
-	user: User;
+	user: UserResponse;
 	isUserLoading: boolean;
 	fetchSession: () => void;
 	session: string;
@@ -70,7 +45,7 @@ export interface IContext {
 	projectId: string;
 	baseUrl?: string;
 	sdk?: Sdk;
-	setUser: React.Dispatch<React.SetStateAction<User>>;
+	setUser: React.Dispatch<React.SetStateAction<UserResponse>>;
 	setSession: React.Dispatch<React.SetStateAction<string>>;
 	logout: Sdk['logout'];
 	logoutAll: Sdk['logoutAll'];
