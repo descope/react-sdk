@@ -30,7 +30,7 @@ jobs:
       - name: Get Next Version
         run: |
           current_date=$(date +'%Y%m%d')
-          echo "NEW_VERSION=0.0.0-${SHORT_SHA}-${current_date}" >> $GITHUB_ENV
+          echo "NEW_VERSION=0.0.0-next-${SHORT_SHA}-${current_date}" >> $GITHUB_ENV
       - name: Use Next Version
         run: |
           git config --global user.email "info@descope.com"
