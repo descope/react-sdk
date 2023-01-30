@@ -51,7 +51,7 @@ jobs:
       # `npm rebuild` will run all those post-install scripts for us.
       - run: npm rebuild && npm run prepare --if-present
       - name: Publish to NPM Package Registry
-        run: npm publish --access=public --tag experimental
+        run: npm publish --access=public
         env:
           CI: true
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
