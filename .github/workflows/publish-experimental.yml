@@ -39,6 +39,8 @@ jobs:
           echo "NEW_VERSION=0.0.0-${SHORT_SHA}-${current_date}" >> $GITHUB_ENV
       - name: Use Experimental Version
         run: |
+          git config --global user.email "info@descope.com"
+          git config --global user.name "Descope"
           yarn version --new-version ${NEW_VERSION}
           cat package.json
       - name: Install dependencies
