@@ -67,8 +67,9 @@ describe('App', () => {
 		);
 
 		// ensure user details are shown
-		const username = document.querySelector('.username');
-		expect(username).toHaveTextContent(/user1/);
+		await waitFor(() =>
+			expect(document.querySelector('.username')).toHaveTextContent(/user1/)
+		);
 	});
 
 	it('should subscribe to user and session token', async () => {
@@ -147,8 +148,8 @@ describe('App', () => {
 		);
 
 		// logout
-		const logoutButton = screen.getByText('Logout');
-		fireEvent.click(logoutButton);
+		await screen.findByText('Logout');
+		fireEvent.click(screen.getByText('Logout'));
 
 		// ensure logout called
 		expect(logout).toBeCalled();

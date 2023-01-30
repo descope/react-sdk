@@ -25,12 +25,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: https://npm.pkg.github.com
-      # Skip post-install scripts here, as a malicious
-      # script could steal NODE_AUTH_TOKEN.
-      - name: Get Current Version
-        run: |
-          version=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | tr -d '"' | tr -d ',' | xargs)
-          echo "CURRENT_VERSION=$version" >> $GITHUB_ENV
       - name: Get Short SHA
         run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
       - name: Get Experimental Version
