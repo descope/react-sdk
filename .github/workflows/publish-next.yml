@@ -1,0 +1,51 @@
+name: 📢 Publish Next
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: 16.14
+
+jobs:
+  publish:
+    name: 📢 Publish Next
+    permissions:
+      packages: write
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://registry.npmjs.org/
+      - name: Get Short SHA
+        run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Get Next Version
+        run: |
+          current_date=$(date +'%Y%m%d')
+          echo "NEW_VERSION=0.0.0-${SHORT_SHA}-${current_date}" >> $GITHUB_ENV
+      - name: Use Next Version
+        run: |
+          git config --global user.email "info@descope.com"
+          git config --global user.name "Descope"
+          yarn version --new-version ${NEW_VERSION}
+          cat package.json
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_READ_ORG }}
+      # `npm rebuild` will run all those post-install scripts for us.
+      - run: npm rebuild && npm run prepare --if-present
+      - name: Publish to NPM Package Registry
+        run: npm publish --access=public --tag next
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
