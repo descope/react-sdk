@@ -1,16 +1,16 @@
-name: 📢 Publish Experimental
+name: 📢 Publish Next
 
 on:
   push:
     branches:
-      - react-sdk-experimental-test
+      - main
 
 env:
   NODE_VERSION: 16.14
 
 jobs:
   publish:
-    name: 📢 Publish Experimental
+    name: 📢 Publish Next
     permissions:
       packages: write
       contents: write
@@ -27,11 +27,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Get Short SHA
         run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
-      - name: Get Experimental Version
+      - name: Get Next Version
         run: |
           current_date=$(date +'%Y%m%d')
           echo "NEW_VERSION=0.0.0-${SHORT_SHA}-${current_date}" >> $GITHUB_ENV
-      - name: Use Experimental Version
+      - name: Use Next Version
         run: |
           git config --global user.email "info@descope.com"
           git config --global user.name "Descope"
@@ -45,7 +45,7 @@ jobs:
       # `npm rebuild` will run all those post-install scripts for us.
       - run: npm rebuild && npm run prepare --if-present
       - name: Publish to NPM Package Registry
-        run: npm publish --access=public --tag experimental --dry-run
+        run: npm publish --access=public --tag next
         env:
           CI: true
           NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
