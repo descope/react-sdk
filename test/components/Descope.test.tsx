@@ -77,7 +77,10 @@ describe('Descope', () => {
 
 	it('should register to the success event when received an onSuccess cb', async () => {
 		const onSuccess = jest.fn();
-		await renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
+		renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
 		fireEvent(
 			document.querySelector('descope-wc'),
 			new CustomEvent('success', {
@@ -87,7 +90,7 @@ describe('Descope', () => {
 
 		const sdk = createSdk({ projectId: '1' });
 		const mockAfterRequest = sdk.httpClient.hooks.afterRequest as jest.Mock;
-		expect(onSuccess).toHaveBeenCalled();
+		await waitFor(() => expect(onSuccess).toHaveBeenCalled());
 		expect(mockAfterRequest).toHaveBeenCalled();
 		expect(mockAfterRequest).toHaveBeenCalledBefore(onSuccess);
 	});
