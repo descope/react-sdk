@@ -65,9 +65,9 @@ jobs:
           sed "s/${NEW_VERSION}/${CURRENT_VERSION}/" package.json
           cat package.json
       - run: git add .
-    - name: Commit & Push changes
-      uses: actions-js/push@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        message: Revert experimental version
-        branch: ${GITHUB_REF##*/}
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Revert experimental version
+          branch: ${GITHUB_REF##*/}
