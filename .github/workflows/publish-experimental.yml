@@ -3,7 +3,7 @@ name: 📢 Publish Experimental
 on:
   push:
     branches:
-      - react-sdk-experimental-test
+      - main
 
 env:
   NODE_VERSION: 16.14
