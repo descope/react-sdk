@@ -205,7 +205,7 @@ DESCOPE_FLOW_ID=<flow-id>
 DESCOPE_BASE_URL=<base-url>
 # Optional - Debug mode
 DESCOPE_DEBUG_MODE=<debug-mode>
-# Optional - Theme, can be "light" or "dark". If empty, Descope will use the OS theme
+# Optional - Theme, can be "light", "dark" or "os" (Auto select based on the OS theme settings). Default is "light"
 DESCOPE_THEME=<theme>
 # Optional - Telemetry key provided by Descope Inc
 DESCOPE_TELEMETRY_KEY=<telemetry-key>
