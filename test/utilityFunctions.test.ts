@@ -30,7 +30,16 @@ describe('utility functions', () => {
 	});
 	it('should call getJwtRoles with the session token when not provided', () => {
 		(sdk.getSessionToken as jest.Mock).mockReturnValueOnce('session');
+		jest.spyOn(sdk, 'getJwtRoles').mockReturnValueOnce([]);
 		getJwtRoles();
 		expect(sdk.getJwtRoles).toHaveBeenCalledWith('session', undefined);
+	});
+	it('should call getJwtRoles with the session token when not provided', () => {
+		jest.spyOn(console, 'error').mockImplementation(() => {});
+		jest.spyOn(sdk, 'getJwtRoles').mockImplementation(() => {
+			throw new Error('session token');
+		});
+		getJwtRoles();
+		expect(console.error).toHaveBeenCalled(); // eslint-disable-line no-console
 	});
 });
