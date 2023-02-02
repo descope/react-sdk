@@ -33,7 +33,7 @@ jest.mock('@descope/web-js-sdk', () => {
 });
 
 const renderWithRouter = (ui: React.ReactElement) =>
-	render(<MemoryRouter initialEntries={['/']}>{ui}</MemoryRouter>);
+	render(<MemoryRouter>{ui}</MemoryRouter>);
 
 const { logout, onSessionTokenChange, onUserChange } = createSdk({
 	projectId: ''
