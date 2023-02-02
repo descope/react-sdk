@@ -1,7 +1,7 @@
 import type { UserResponse } from '@descope/web-js-sdk';
-import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { useDescope, useSession, useUser } from '../lib';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDescope, useSession, useUser, getJwtRoles } from '../lib';
 import { fetchData } from './api';
 
 const getUserDisplayName = (user?: UserResponse) =>
@@ -9,8 +9,13 @@ const getUserDisplayName = (user?: UserResponse) =>
 
 const Home = () => {
 	const { logout } = useDescope();
-	const { isAuthenticated, isSessionLoading } = useSession();
+	const { isAuthenticated, isSessionLoading, sessionToken } = useSession();
 	const { user } = useUser();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!isAuthenticated) navigate('/login');
+	}, [isAuthenticated]);
 
 	const onLogout = useCallback(() => {
 		logout();
@@ -18,11 +23,11 @@ const Home = () => {
 
 	const onFetch = useCallback(async () => {
 		const data = await fetchData();
-		alert(data);
+		alert(data); // eslint-disable-line no-alert
 	}, []);
+	const roles = useMemo(() => getJwtRoles(sessionToken) || [], [sessionToken]);
 
 	if (isSessionLoading) return <div>Loading...</div>;
-
 	return (
 		<>
 			<h2>Home</h2>
@@ -34,6 +39,7 @@ const Home = () => {
 			{isAuthenticated && (
 				<>
 					<div className="username"> Hello {getUserDisplayName(user)}</div>
+					<div className="username"> Roles {roles}</div>
 					<button
 						type="button"
 						id="logout-button"

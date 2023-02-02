@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 /**
  * Wrap a function with a validation that it exists
  * @param fn The function to wrap with the validation
@@ -14,4 +12,15 @@ export const withValidation =
 			);
 		}
 		return fn(...args);
+	};
+
+export const wrapInTry =
+	<T extends Array<any>, U>(fn: (...args: T) => U) =>
+	(...args: T): U => {
+		try {
+			return fn(...args);
+		} catch (err) {
+			console.error(err); // eslint-disable-line no-console
+		}
+		return null;
 	};
