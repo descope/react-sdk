@@ -1,6 +1,6 @@
 import type { UserResponse } from '@descope/web-js-sdk';
-import React, { useCallback, useEffect, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useCallback, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useDescope, useSession, useUser, getJwtRoles } from '../lib';
 import { fetchData } from './api';
 
@@ -11,11 +11,6 @@ const Home = () => {
 	const { logout } = useDescope();
 	const { isAuthenticated, isSessionLoading, sessionToken } = useSession();
 	const { user } = useUser();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (!isAuthenticated) navigate('/login');
-	}, [isAuthenticated]);
 
 	const onLogout = useCallback(() => {
 		logout();
