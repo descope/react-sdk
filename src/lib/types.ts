@@ -35,9 +35,11 @@ export interface IAuth {
 	logout: Sdk['logout'];
 }
 
+export type User = UserResponse;
+
 export interface IContext {
 	fetchUser: () => void;
-	user: UserResponse;
+	user: User;
 	isUserLoading: boolean;
 	fetchSession: () => void;
 	session: string;
@@ -45,7 +47,7 @@ export interface IContext {
 	projectId: string;
 	baseUrl?: string;
 	sdk?: Sdk;
-	setUser: React.Dispatch<React.SetStateAction<UserResponse>>;
+	setUser: React.Dispatch<React.SetStateAction<User>>;
 	setSession: React.Dispatch<React.SetStateAction<string>>;
 	logout: Sdk['logout'];
 	logoutAll: Sdk['logoutAll'];

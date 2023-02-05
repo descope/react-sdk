@@ -18,6 +18,7 @@ const Home = () => {
 
 	const onFetch = useCallback(async () => {
 		const data = await fetchData();
+		// eslint-disable-next-line no-alert
 		alert(data);
 	}, []);
 
