@@ -7,22 +7,12 @@ let sdkInstance: Sdk;
 const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
 	config: P
 ) => {
-	let sdk: ReturnType<typeof createSdk>;
-	if (IS_BROWSER) {
-		sdk = createSdk({
-			...config,
-			persistTokens: true,
-			autoRefresh: true
-		});
-		sdkInstance = sdk;
-	} else {
-		sdk = createSdk({
-			...config,
-			persistTokens: true,
-			autoRefresh: true
-		});
-		sdkInstance = sdk;
-	}
+	const sdk = createSdk({
+		...config,
+		persistTokens: IS_BROWSER as true,
+		autoRefresh: IS_BROWSER as true
+	});
+	sdkInstance = sdk;
 
 	return sdk;
 };
@@ -40,13 +30,25 @@ export const getSessionToken = () => {
 	if (IS_BROWSER) {
 		return sdkInstance?.getSessionToken();
 	}
+
+	// eslint-disable-next-line no-console
+	console.warn('Get session token is not supported in ssr');
 	return '';
 };
 
 export const getJwtPermissions = (token = getSessionToken(), tenant?: string) =>
 	sdkInstance?.getJwtPermissions(token, tenant);
+
 export const getJwtRoles = (token = getSessionToken(), tenant?: string) =>
 	sdkInstance?.getJwtRoles(token, tenant);
-export const getRefreshToken = () => sdkInstance?.getRefreshToken();
+
+export const getRefreshToken = () => {
+	if (IS_BROWSER) {
+		return sdkInstance?.getRefreshToken();
+	}
+	// eslint-disable-next-line no-console
+	console.warn('Get refresh token is not supported in ssr');
+	return '';
+};
 
 export default createSdkWrapper;
