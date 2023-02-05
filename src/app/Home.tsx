@@ -20,7 +20,10 @@ const Home = () => {
 		const data = await fetchData();
 		alert(data); // eslint-disable-line no-alert
 	}, []);
-	const roles = useMemo(() => getJwtRoles(sessionToken) || [], [sessionToken]);
+	const roles = useMemo(
+		() => JSON.stringify(getJwtRoles(sessionToken) || []),
+		[sessionToken]
+	);
 
 	if (isSessionLoading) return <div>Loading...</div>;
 	return (
@@ -33,8 +36,8 @@ const Home = () => {
 			)}
 			{isAuthenticated && (
 				<>
-					<div className="username"> Hello {getUserDisplayName(user)}</div>
-					<div className="username"> Roles {roles}</div>
+					<div className="username"> Hello {getUserDisplayName(user)}!</div>
+					<div className="username"> Roles: {roles}</div>
 					<button
 						type="button"
 						id="logout-button"
