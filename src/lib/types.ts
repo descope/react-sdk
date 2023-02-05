@@ -11,6 +11,8 @@ declare global {
 	}
 }
 
+export type User = UserResponse;
+
 export type Sdk = ReturnType<typeof createSdk>;
 
 export type CustomEvents<K extends string> = {

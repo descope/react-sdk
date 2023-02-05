@@ -20,6 +20,8 @@ jest.mock('@descope/web-js-sdk', () => {
 		logout: jest.fn().mockName('logout'),
 		onSessionTokenChange: jest.fn().mockName('onSessionTokenChange'),
 		onUserChange: jest.fn().mockName('onUserChange'),
+		getSessionToken: jest.fn().mockName('getSessionToken'),
+		getJwtRoles: jest.fn().mockName('getJwtRoles'),
 		refresh: jest.fn(() => Promise.resolve()),
 		httpClient: {
 			hooks: {
