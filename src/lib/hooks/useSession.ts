@@ -5,23 +5,23 @@ const useSession = () => {
 	const { session, isSessionLoading, fetchSession } = useContext();
 	// when session should be received, we want "isSessionLoading" to be true starting from the first call
 	// (and not only when receiving an update from the context)
-	const shouldGetSession = useRef(isSessionLoading);
+	const isLoading = useRef(isSessionLoading);
 
 	// we want this to happen before returning a value so we are using "useMemo" and not "useEffect"
 	useMemo(() => {
-		shouldGetSession.current = isSessionLoading;
+		isLoading.current = isSessionLoading;
 	}, [isSessionLoading]);
 
 	// we want this to happen before returning a value so we are using "useMemo" and not "useEffect"
 	useMemo(() => {
 		if (!session && !isSessionLoading) {
-			shouldGetSession.current = true;
+			isLoading.current = true;
 			fetchSession();
 		}
 	}, [fetchSession]);
 
 	return {
-		isSessionLoading: shouldGetSession.current,
+		isSessionLoading: isLoading.current,
 		sessionToken: session,
 		isAuthenticated: !!session
 	};
