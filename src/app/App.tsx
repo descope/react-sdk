@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
+import StepUp from './StepUp';
 
 const Layout = () => (
 	<div style={{ height: '100vh', position: 'relative' }}>
@@ -29,6 +30,7 @@ const App = () => (
 		<Route element={<Layout />}>
 			<Route index element={<Home />} />
 			<Route path="/login" element={<Login />} />
+			<Route path="/step-up" element={<StepUp />} />
 		</Route>
 	</Routes>
 );
