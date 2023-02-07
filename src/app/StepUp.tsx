@@ -8,6 +8,9 @@ const StepUp = () => {
 
 	const navigate = useNavigate();
 	const onSuccess = useCallback(() => {
+		setTimeout(() => {
+			alert('Step Up Succeed!'); // eslint-disable-line no-alert
+		}, 1);
 		navigate('/');
 	}, [navigate]);
 
