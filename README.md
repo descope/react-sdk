@@ -209,6 +209,8 @@ DESCOPE_DEBUG_MODE=<debug-mode>
 DESCOPE_THEME=<theme>
 # Optional - Telemetry key provided by Descope Inc
 DESCOPE_TELEMETRY_KEY=<telemetry-key>
+# Optional - Step-Up flow id. If exists, The home page of a logged-in user will show a step-up button
+DESCOPE_STEP_UP_FLOW_ID=step-up
 ```
 
 - Run `npm run start`

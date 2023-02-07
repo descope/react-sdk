@@ -1,7 +1,7 @@
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useDescope, useSession, useUser, getJwtRoles } from '../lib';
+import { getJwtRoles, useDescope, useSession, useUser } from '../lib';
 import { fetchData } from './api';
 
 const getUserDisplayName = (user?: UserResponse) =>
@@ -68,6 +68,11 @@ const Home = () => {
 					>
 						Fetch Fact
 					</button>
+					{process.env.DESCOPE_STEP_UP_FLOW_ID && (
+						<Link id="step-up-button" to="/step-up">
+							Step Up
+						</Link>
+					)}
 				</>
 			)}
 		</>
