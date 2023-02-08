@@ -57,7 +57,7 @@ describe('App', () => {
 			screen.getByText('Login');
 		});
 
-		const loginButton = await screen.findByText('Login');
+		const loginButton = screen.getByText('Login');
 		fireEvent.click(loginButton);
 
 		await waitFor(() => {
