@@ -66,17 +66,17 @@ describe('App', () => {
 		);
 
 		// mock success
-		// fireEvent(
-		// document.querySelector('descope-wc'),
-		// new CustomEvent('success', {
-		// detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
-		// })
-		// );
+		fireEvent(
+			document.querySelector('descope-wc'),
+			new CustomEvent('success', {
+				detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
+			})
+		);
 
 		// ensure user details are shown
-		// await waitFor(() =>
-		// expect(document.querySelector('.username')).toHaveTextContent(/user1/)
-		// );
+		await waitFor(() =>
+			expect(document.querySelector('.username')).toHaveTextContent(/user1/)
+		);
 	});
 
 	it('should subscribe to user and session token', async () => {
