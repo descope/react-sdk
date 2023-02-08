@@ -53,15 +53,16 @@ describe('App', () => {
 			</AuthProvider>
 		);
 
+		await waitFor(() => {
+			screen.getByText('Login');
+		});
+
 		const loginButton = await screen.findByText('Login');
 		fireEvent.click(loginButton);
 
-		await waitFor(
-			() => {
-				expect(document.querySelector('descope-wc')).toBeInTheDocument();
-			},
-			{ timeout: 3000 }
-		);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
 
 		// mock success
 		fireEvent(

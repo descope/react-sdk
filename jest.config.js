@@ -19,7 +19,7 @@ export default {
 	moduleDirectories: ['node_modules', 'src'],
 	setupFilesAfterEnv: ['<rootDir>/testUtils/jest-setup.js'],
 
-	testTimeout: 5000,
+	testTimeout: 2000,
 
 	transform: {
 		'\\.[jt]sx?$': 'babel-jest'
