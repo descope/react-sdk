@@ -58,12 +58,9 @@ describe('App', () => {
 
 		await userEvent.click(loginButton);
 
-		await waitFor(
-			() => {
-				expect(document.querySelector('descope-wc')).toBeInTheDocument();
-			},
-			{ timeout: 3000 }
-		);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
 
 		// mock success
 		fireEvent(
