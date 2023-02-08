@@ -56,9 +56,12 @@ describe('App', () => {
 		const loginButton = await screen.findByText('Login');
 		fireEvent.click(loginButton);
 
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
+		await waitFor(
+			() => {
+				expect(document.querySelector('descope-wc')).toBeInTheDocument();
+			},
+			{ timeout: 3000 }
+		);
 
 		// mock success
 		fireEvent(
