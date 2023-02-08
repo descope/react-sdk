@@ -3,7 +3,8 @@ import useContext from './useContext';
 
 const useSession = () => {
 	const { session, isSessionLoading, fetchSession } = useContext();
-	// when session should be received, we want "isSessionLoading" to be true starting from the first call
+
+	// when session should be received, we want the return value of "isSessionLoading" to be true starting from the first call
 	// (and not only when receiving an update from the context)
 	const isLoading = useRef(isSessionLoading);
 

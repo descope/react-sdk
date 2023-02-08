@@ -5,7 +5,7 @@ const useUser = () => {
 	const { user, fetchUser, isUserLoading, session } = useContext();
 	const [isInit, setIsInit] = useState(false); // we want to get the user only in the first time we got a session
 
-	// when session should be received, we want "isUserLoading" to be true starting from the first call
+	// when session should be received, we want the return value of "isUserLoading" to be true starting from the first call
 	// (and not only when receiving an update from the context)
 	const isLoading = useRef(isUserLoading);
 
