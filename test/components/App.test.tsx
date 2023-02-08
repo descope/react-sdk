@@ -4,6 +4,7 @@ import createSdk from '@descope/web-js-sdk';
 import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import App from '../../src/app/App';
 import { AuthProvider } from '../../src/lib';
 
@@ -55,7 +56,7 @@ describe('App', () => {
 
 		const loginButton = await screen.findByText('Login');
 
-		fireEvent.click(loginButton);
+		await userEvent.click(loginButton);
 
 		await waitFor(
 			() => {
