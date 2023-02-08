@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import useContext from './useContext';
 
 const useSession = () => {
@@ -16,6 +16,11 @@ const useSession = () => {
 	useMemo(() => {
 		if (!session && !isSessionLoading) {
 			isLoading.current = true;
+		}
+	}, [fetchSession]);
+
+	useEffect(() => {
+		if (!session && !isSessionLoading) {
 			fetchSession();
 		}
 	}, [fetchSession]);

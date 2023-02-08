@@ -21,7 +21,7 @@ const Home = () => {
 		alert(data); // eslint-disable-line no-alert
 	}, []);
 	const roles = useMemo(
-		() => JSON.stringify(getJwtRoles(sessionToken) || []),
+		() => sessionToken && JSON.stringify(getJwtRoles(sessionToken) || []),
 		[sessionToken]
 	);
 
