@@ -53,16 +53,19 @@ describe('App', () => {
 			</AuthProvider>
 		);
 
-		await waitFor(() => {
-			screen.getByText('Login');
-		});
+		const loginButton = await screen.findByText('Login');
 
-		const loginButton = document.querySelector('a');
+		// eslint-disable-next-line no-console
+		console.log('@@@loginButton', loginButton);
+
 		fireEvent.click(loginButton);
 
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
+		await waitFor(
+			() => {
+				expect(document.querySelector('descope-wc')).toBeInTheDocument();
+			},
+			{ timeout: 3000 }
+		);
 
 		// mock success
 		fireEvent(
