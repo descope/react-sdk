@@ -1,3 +1,5 @@
+set -e
+
 # Run detect-secrets
 lint_find_secrets() {
 	echo "- Running secrets check"
@@ -14,14 +16,8 @@ lint_find_secrets() {
 	fi
 	echo "  - Finding leaks in git log"
 	gitleaks detect -v --redact  -c scripts/gitleaks/.gitleaks.toml
-	if [ $? -ne 0 ]; then
-		exit 1
-	fi
 	echo "  - Finding leaks in local repo"
 	gitleaks detect --no-git -v --redact -c scripts/gitleaks/.gitleaks.toml
-	if [ $? -ne 0 ]; then
-		exit 1
-	fi
 	echo "- Secrets check passed sucessfully!"
 }
 
