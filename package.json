@@ -23,6 +23,7 @@
 		"format": "prettier . -w --ignore-path .gitignore",
 		"format-check": "prettier . --check --ignore-path .gitignore",
 		"format-lint": "pretty-quick --staged --ignore-path .gitignore && lint-staged",
+		"leaks": "bash ./scripts/gitleaks/gitleaks.sh",
 		"lint": "eslint '+(src|test|testUtils)/**/*.+(ts|tsx)' --fix",
 		"prepare": "husky install",
 		"prepublishOnly": "npm run build",
