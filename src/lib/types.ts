@@ -11,6 +11,8 @@ declare global {
 	}
 }
 
+export type User = UserResponse;
+
 export type Sdk = ReturnType<typeof createSdk>;
 
 export type CustomEvents<K extends string> = {
@@ -34,8 +36,6 @@ export interface IAuth {
 	logoutAll: Sdk['logoutAll'];
 	logout: Sdk['logout'];
 }
-
-export type User = UserResponse;
 
 export interface IContext {
 	fetchUser: () => void;

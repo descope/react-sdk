@@ -1,7 +1,7 @@
 import type { UserResponse } from '@descope/web-js-sdk';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useDescope, useSession, useUser } from '../lib';
+import { getJwtRoles, useDescope, useSession, useUser } from '../lib';
 import { fetchData } from './api';
 
 const getUserDisplayName = (user?: UserResponse) =>
@@ -9,7 +9,7 @@ const getUserDisplayName = (user?: UserResponse) =>
 
 const Home = () => {
 	const { logout } = useDescope();
-	const { isAuthenticated, isSessionLoading } = useSession();
+	const { isAuthenticated, isSessionLoading, sessionToken } = useSession();
 	const { user } = useUser();
 
 	const onLogout = useCallback(() => {
@@ -18,12 +18,14 @@ const Home = () => {
 
 	const onFetch = useCallback(async () => {
 		const data = await fetchData();
-		// eslint-disable-next-line no-alert
-		alert(data);
+		alert(data); // eslint-disable-line no-alert
 	}, []);
+	const roles = useMemo(
+		() => sessionToken && JSON.stringify(getJwtRoles(sessionToken) || []),
+		[sessionToken]
+	);
 
 	if (isSessionLoading) return <div>Loading...</div>;
-
 	return (
 		<>
 			<h2>Home</h2>
@@ -34,7 +36,8 @@ const Home = () => {
 			)}
 			{isAuthenticated && (
 				<>
-					<div className="username"> Hello {getUserDisplayName(user)}</div>
+					<div className="username"> Hello {getUserDisplayName(user)}!</div>
+					<div className="username"> Roles: {roles}</div>
 					<button
 						type="button"
 						id="logout-button"
@@ -65,6 +68,11 @@ const Home = () => {
 					>
 						Fetch Fact
 					</button>
+					{process.env.DESCOPE_STEP_UP_FLOW_ID && (
+						<Link id="step-up-button" to="/step-up">
+							Step Up
+						</Link>
+					)}
 				</>
 			)}
 		</>

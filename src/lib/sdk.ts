@@ -1,5 +1,6 @@
 import createSdk from '@descope/web-js-sdk';
 import { IS_BROWSER } from './constants';
+import { wrapInTry } from './utils';
 
 type Sdk = ReturnType<typeof createSdkWrapper>;
 let sdkInstance: Sdk;
@@ -36,12 +37,6 @@ export const getSessionToken = () => {
 	return '';
 };
 
-export const getJwtPermissions = (token = getSessionToken(), tenant?: string) =>
-	sdkInstance?.getJwtPermissions(token, tenant);
-
-export const getJwtRoles = (token = getSessionToken(), tenant?: string) =>
-	sdkInstance?.getJwtRoles(token, tenant);
-
 export const getRefreshToken = () => {
 	if (IS_BROWSER) {
 		return sdkInstance?.getRefreshToken();
@@ -50,5 +45,15 @@ export const getRefreshToken = () => {
 	console.warn('Get refresh token is not supported in ssr');
 	return '';
 };
+
+export const getJwtPermissions = wrapInTry(
+	(token = getSessionToken(), tenant?: string) =>
+		sdkInstance?.getJwtPermissions(token, tenant)
+);
+
+export const getJwtRoles = wrapInTry(
+	(token = getSessionToken(), tenant?: string) =>
+		sdkInstance?.getJwtRoles(token, tenant)
+);
 
 export default createSdkWrapper;

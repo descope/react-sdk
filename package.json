@@ -1,6 +1,6 @@
 {
 	"name": "@descope/react-sdk",
-	"version": "0.0.52-alpha.30",
+	"version": "0.1.0",
 	"description": "Descope React SDK",
 	"repository": {
 		"type": "git",
@@ -23,6 +23,7 @@
 		"format": "prettier . -w --ignore-path .gitignore",
 		"format-check": "prettier . --check --ignore-path .gitignore",
 		"format-lint": "pretty-quick --staged --ignore-path .gitignore && lint-staged",
+		"leaks": "bash ./scripts/gitleaks/gitleaks.sh",
 		"lint": "eslint '+(src|test|testUtils)/**/*.+(ts|tsx)' --fix",
 		"prepare": "husky install",
 		"prepublishOnly": "npm run build",
@@ -35,8 +36,8 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "0.1.0-alpha.40",
-		"react-router-dom": "6.7.0"
+		"@descope/web-component": "0.1.0",
+		"react-router-dom": "6.8.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.20.12",
@@ -56,7 +57,7 @@
 		"@types/react-dom": "18.0.10",
 		"@types/react-router-dom": "^5.3.3",
 		"babel-jest": "27.5.1",
-		"eslint": "8.32.0",
+		"eslint": "8.33.0",
 		"eslint-config-airbnb": "19.0.4",
 		"eslint-config-airbnb-typescript": "17.0.0",
 		"eslint-config-prettier": "8.6.0",
@@ -72,9 +73,9 @@
 		"eslint-plugin-prefer-arrow": "1.2.3",
 		"eslint-plugin-prettier": "4.2.1",
 		"eslint-plugin-promise": "6.1.1",
-		"eslint-plugin-react": "7.32.1",
+		"eslint-plugin-react": "7.32.2",
 		"eslint-plugin-react-hooks": "4.6.0",
-		"eslint-plugin-testing-library": "5.9.1",
+		"eslint-plugin-testing-library": "5.10.0",
 		"husky": "^8.0.1",
 		"jest": "^27.3.1",
 		"jest-extended": "^3.2.2",
