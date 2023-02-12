@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test
 
 jobs:
   bump-version:
@@ -31,9 +32,8 @@ jobs:
         id: version-bump
         uses: phips28/gh-action-bump-version@master
         with:
-          tag-prefix: release/v
-          default: prerelease
-          preid: 'alpha'
+          tag-prefix: test/v
+          commit-message: 'Release Version'
         env:
           GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
       - name: cat package.json

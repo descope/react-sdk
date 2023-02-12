@@ -3,7 +3,7 @@ name: 📢 publish
 on:
   push:
     tags:
-      - 'release/**'
+      - 'never/**'
 
 env:
   NODE_VERSION: 16.14
