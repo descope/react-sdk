@@ -9,7 +9,7 @@ jobs:
   bump-version:
     name: 👊 Bump Version & Release
     runs-on: ubuntu-latest
-    if: "!startsWith(github.event.head_commit.message, 'Release Version:')"
+    if: "startsWith(github.event.head_commit.message, 'Release Version:')"
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
