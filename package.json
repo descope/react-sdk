@@ -1,6 +1,6 @@
 {
 	"name": "@descope/react-sdk",
-	"version": "0.0.55",
+	"version": "0.1.0",
 	"description": "Descope React SDK",
 	"repository": {
 		"type": "git",
