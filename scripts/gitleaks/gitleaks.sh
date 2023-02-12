@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 # Run detect-secrets
