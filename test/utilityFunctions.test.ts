@@ -41,7 +41,7 @@ describe('utility functions', () => {
 		jest.resetModules();
 
 		expect(warnSpy).toHaveBeenCalledWith(
-			'Get session token is not supported in ssr'
+			'Get session token is not supported in SSR'
 		);
 		expect(sdk.getSessionToken).not.toHaveBeenCalled();
 	});
@@ -72,7 +72,7 @@ describe('utility functions', () => {
 		jest.resetModules();
 
 		expect(warnSpy).toHaveBeenCalledWith(
-			'Get refresh token is not supported in ssr'
+			'Get refresh token is not supported in SSR'
 		);
 		expect(sdk.getRefreshToken).not.toHaveBeenCalled();
 	});
