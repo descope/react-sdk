@@ -64,6 +64,7 @@ export interface DescopeProps {
 	theme?: DescopeTheme;
 	debug?: boolean;
 	telemetryKey?: string;
+	redirectUrl?: string;
 }
 
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
