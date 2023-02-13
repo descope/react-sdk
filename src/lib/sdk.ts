@@ -33,7 +33,7 @@ export const getSessionToken = () => {
 	}
 
 	// eslint-disable-next-line no-console
-	console.warn('Get session token is not supported in ssr');
+	console.warn('Get session token is not supported in SSR');
 	return '';
 };
 
