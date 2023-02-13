@@ -20,9 +20,61 @@ describe('utility functions', () => {
 		expect(sdk.getSessionToken).toHaveBeenCalled();
 	});
 
+	it('should warn when using getSessionToken in non browser environment', () => {
+		const warnSpy = jest.spyOn(console, 'warn');
+
+		const origWindow = window;
+		Object.defineProperty(global, 'window', {
+			value: undefined,
+			writable: true,
+			configurable: true
+		});
+
+		jest.resetModules();
+
+		// eslint-disable-next-line global-require
+		const { getSessionToken: getSessionTokenLocal } = require('../src/lib/sdk');
+
+		getSessionTokenLocal();
+
+		global.window = origWindow;
+		jest.resetModules();
+
+		expect(warnSpy).toHaveBeenCalledWith(
+			'Get session token is not supported in SSR'
+		);
+		expect(sdk.getSessionToken).not.toHaveBeenCalled();
+	});
+
 	it('should call getRefreshToken from sdk', () => {
 		getRefreshToken();
 		expect(sdk.getRefreshToken).toHaveBeenCalled();
+	});
+
+	it('should warn when using getRefreshToken in non browser environment', () => {
+		const warnSpy = jest.spyOn(console, 'warn');
+
+		const origWindow = window;
+		Object.defineProperty(global, 'window', {
+			value: undefined,
+			writable: true,
+			configurable: true
+		});
+
+		jest.resetModules();
+
+		// eslint-disable-next-line global-require
+		const { getRefreshToken: getRefreshTokenLocal } = require('../src/lib/sdk');
+
+		getRefreshTokenLocal();
+
+		global.window = origWindow;
+		jest.resetModules();
+
+		expect(warnSpy).toHaveBeenCalledWith(
+			'Get refresh token is not supported in SSR'
+		);
+		expect(sdk.getRefreshToken).not.toHaveBeenCalled();
 	});
 
 	it('should call getJwtPermissions with the session token when not provided', () => {

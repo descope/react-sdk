@@ -1,4 +1,5 @@
 import createSdk from '@descope/web-js-sdk';
+import { IS_BROWSER } from './constants';
 import { wrapInTry } from './utils';
 
 type Sdk = ReturnType<typeof createSdkWrapper>;
@@ -9,8 +10,8 @@ const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
 ) => {
 	const sdk = createSdk({
 		...config,
-		persistTokens: true,
-		autoRefresh: true
+		persistTokens: IS_BROWSER as true,
+		autoRefresh: IS_BROWSER as true
 	});
 	sdkInstance = sdk;
 
@@ -26,15 +27,33 @@ const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
  */
 sdkInstance = createSdkWrapper({ projectId: 'temp pid' });
 
-export const getSessionToken = () => sdkInstance?.getSessionToken();
+export const getSessionToken = () => {
+	if (IS_BROWSER) {
+		return sdkInstance?.getSessionToken();
+	}
+
+	// eslint-disable-next-line no-console
+	console.warn('Get session token is not supported in SSR');
+	return '';
+};
+
+export const getRefreshToken = () => {
+	if (IS_BROWSER) {
+		return sdkInstance?.getRefreshToken();
+	}
+	// eslint-disable-next-line no-console
+	console.warn('Get refresh token is not supported in SSR');
+	return '';
+};
+
 export const getJwtPermissions = wrapInTry(
 	(token = getSessionToken(), tenant?: string) =>
 		sdkInstance?.getJwtPermissions(token, tenant)
 );
+
 export const getJwtRoles = wrapInTry(
 	(token = getSessionToken(), tenant?: string) =>
 		sdkInstance?.getJwtRoles(token, tenant)
 );
-export const getRefreshToken = () => sdkInstance?.getRefreshToken();
 
 export default createSdkWrapper;
