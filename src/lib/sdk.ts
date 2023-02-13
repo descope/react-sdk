@@ -42,7 +42,7 @@ export const getRefreshToken = () => {
 		return sdkInstance?.getRefreshToken();
 	}
 	// eslint-disable-next-line no-console
-	console.warn('Get refresh token is not supported in ssr');
+	console.warn('Get refresh token is not supported in SSR');
 	return '';
 };
 
