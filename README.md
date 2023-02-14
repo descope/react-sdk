@@ -67,6 +67,12 @@ const App = () => {
 
             // debug can be set to true to enable debug mode
             // debug={true}
+
+            // You can configure which tenant the signin/signup flow will sign the user into by providing the tenant ID
+            // tenant=<tenantId>
+
+            // You can configure the redirect URL for OAuth and SSO (will be used when redirecting back from the OAuth provider / IdP), or for "Magic Link" and "Enchanted Link" (will be used as a link in the message sent to the the user)
+            // redirectUrl=<redirectUrl>
         />
     )
 }
@@ -199,18 +205,30 @@ In order to run this app locally, do the following steps:
 // .env
 # Your project id
 DESCOPE_PROJECT_ID=<project-id>
+
 # Flow id to run, e.g. sign-up-or-in
 DESCOPE_FLOW_ID=<flow-id>
+
 # Optional - Descope base url, e.g. http://localhost:8000
 DESCOPE_BASE_URL=<base-url>
+
 # Optional - Debug mode
 DESCOPE_DEBUG_MODE=<debug-mode>
+
 # Optional - Theme, can be "light", "dark" or "os" (Auto select based on the OS theme settings). Default is "light"
 DESCOPE_THEME=<theme>
+
 # Optional - Telemetry key provided by Descope Inc
 DESCOPE_TELEMETRY_KEY=<telemetry-key>
+
 # Optional - Step-Up flow id. If exists, The home page of a logged-in user will show a step-up button
 DESCOPE_STEP_UP_FLOW_ID=step-up
+
+# Optional - You can configure the redirect URL for OAuth and SSO (will be used when redirecting back from the OAuth provider / IdP), or for "Magic Link" and "Enchanted Link" (will be used as a link in the message sent to the the user). Default is the browser address
+DESCOPE_REDIRECT_URL=<redirectUrl>
+
+# Optional - You can configure which tenant the signin/signup flow will sign the user into by providing the tenant ID
+DESCOPE_TENANT_ID=<tenantId>
 ```
 
 - Run `npm run start`

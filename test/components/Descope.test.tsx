@@ -139,4 +139,16 @@ describe('Descope', () => {
 			);
 		});
 	});
+
+	it('should render web-component with redirect-url when provided', async () => {
+		renderWithProvider(
+			<Descope flowId="flow-1" redirectUrl="http://custom.url" />
+		);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toHaveAttribute(
+				'redirect-url',
+				'http://custom.url'
+			);
+		});
+	});
 });

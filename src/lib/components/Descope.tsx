@@ -25,7 +25,8 @@ const DescopeWC = lazy(async () => {
 			tenant,
 			theme,
 			debug,
-			telemetryKey
+			telemetryKey,
+			redirectUrl
 		}) => (
 			<descope-wc
 				project-id={projectId}
@@ -36,13 +37,26 @@ const DescopeWC = lazy(async () => {
 				theme={theme}
 				debug={debug}
 				telemetryKey={telemetryKey}
+				redirect-url={redirectUrl}
 			/>
 		)
 	};
 });
 
 const Descope = React.forwardRef<HTMLElement, DescopeProps>(
-	({ flowId, onSuccess, onError, tenant, theme, debug, telemetryKey }, ref) => {
+	(
+		{
+			flowId,
+			onSuccess,
+			onError,
+			tenant,
+			theme,
+			debug,
+			telemetryKey,
+			redirectUrl
+		},
+		ref
+	) => {
 		const [innerRef, setInnerRef] = useState(null);
 
 		useImperativeHandle(ref, () => innerRef);
@@ -98,6 +112,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						theme={theme}
 						debug={debug}
 						telemetryKey={telemetryKey}
+						redirectUrl={redirectUrl}
 					/>
 				</Suspense>
 			</form>
