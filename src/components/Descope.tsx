@@ -6,9 +6,9 @@ import React, {
 	useImperativeHandle,
 	useState
 } from 'react';
+import { baseHeaders } from '../constants';
 import Context from '../hooks/Context';
 import { DescopeProps } from '../types';
-import { baseHeaders } from '../constants';
 
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
 const DescopeWC = lazy(async () => {

@@ -7,11 +7,11 @@ export {
 } from './components/DefaultFlows';
 export { default as Descope } from './components/Descope';
 export { default as useDescope } from './hooks/useDescope';
-export {
-	getSessionToken,
-	getJwtPermissions,
-	getJwtRoles,
-	getRefreshToken
-} from './sdk';
 export { default as useSession } from './hooks/useSession';
 export { default as useUser } from './hooks/useUser';
+export {
+	getJwtPermissions,
+	getJwtRoles,
+	getRefreshToken,
+	getSessionToken
+} from './sdk';

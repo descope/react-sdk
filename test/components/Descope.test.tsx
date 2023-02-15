@@ -3,8 +3,8 @@
 import createSdk from '@descope/web-js-sdk';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
-import AuthProvider from '../../src/lib/components/AuthProvider';
-import Descope from '../../src/lib/components/Descope';
+import AuthProvider from '../../src/components/AuthProvider';
+import Descope from '../../src/components/Descope';
 
 Object.defineProperty(global, 'Response', {
 	value: class {},

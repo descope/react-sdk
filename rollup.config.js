@@ -10,7 +10,7 @@ const packageJson = require('./package.json');
 
 export default [
 	{
-		input: 'src/lib/index.ts',
+		input: 'src/index.ts',
 		output: {
 			file: packageJson.main,
 			sourcemap: true,
@@ -30,7 +30,7 @@ export default [
 		]
 	},
 	{
-		input: 'src/lib/index.ts',
+		input: 'src/index.ts',
 		output: {
 			file: packageJson.module,
 			sourcemap: true,
@@ -50,7 +50,7 @@ export default [
 		]
 	},
 	{
-		input: './dist/src/lib/index.d.ts',
+		input: './dist/src/index.d.ts',
 		output: [{ file: packageJson.types, format: 'esm' }],
 		plugins: [
 			dts(),

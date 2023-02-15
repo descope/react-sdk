@@ -3,8 +3,8 @@
 	waitFor
 } from '@testing-library/react';
 import React from 'react';
-import { SignInFlow, SignUpFlow, SignUpOrInFlow } from '../../src/lib';
-import AuthProvider from '../../src/lib/components/AuthProvider';
+import AuthProvider from '../../src/components/AuthProvider';
+import { SignInFlow, SignUpFlow, SignUpOrInFlow } from '../../src';
 
 jest.mock('@descope/web-component', () => ({ default: {} }));
 

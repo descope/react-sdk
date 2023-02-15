@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { getSessionToken } from '../lib';
+import { getSessionToken } from '../../src';
 
 // In this sample app, we just call an external public API
 // You will probably want to replace it with your backend URL

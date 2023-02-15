@@ -1,16 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Descope } from '../lib';
-import { DescopeTheme } from '../lib/types';
+import { Descope } from '../../src';
+import { DescopeTheme } from '../../src/types';
 
-const StepUp = () => {
+const Login = () => {
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const navigate = useNavigate();
 	const onSuccess = useCallback(() => {
-		setTimeout(() => {
-			alert('Step Up Succeed!'); // eslint-disable-line no-alert
-		}, 1);
 		navigate('/');
 	}, [navigate]);
 
@@ -20,7 +17,7 @@ const StepUp = () => {
 	return (
 		<>
 			<Descope
-				flowId={process.env.DESCOPE_STEP_UP_FLOW_ID}
+				flowId={process.env.DESCOPE_FLOW_ID || 'sign-up-or-in'}
 				onSuccess={onSuccess}
 				onError={onError}
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
@@ -44,4 +41,4 @@ const StepUp = () => {
 	);
 };
 
-export default StepUp;
+export default Login;
