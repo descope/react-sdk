@@ -4,7 +4,7 @@ export default {
 
 	collectCoverage: true,
 	coverageDirectory: 'coverage',
-	collectCoverageFrom: ['src/lib/**/*.{js,jsx,ts,tsx}'],
+	collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
 
 	// A set of global variables that need to be available in all test environments
 	globals: {

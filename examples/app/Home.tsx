@@ -1,7 +1,7 @@
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { getJwtRoles, useDescope, useSession, useUser } from '../lib';
+import { getJwtRoles, useDescope, useSession, useUser } from '../../src';
 import { fetchData } from './api';
 
 const getUserDisplayName = (user?: UserResponse) =>

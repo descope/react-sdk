@@ -1,12 +1,12 @@
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { fireEvent, render, waitFor, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-import App from '../../src/app/App';
-import { AuthProvider } from '../../src/lib';
+import App from '../../examples/app/App';
+import { AuthProvider } from '../../src';
 
 Object.defineProperty(global, 'Response', {
 	value: class {},

@@ -8,7 +8,7 @@ import del from 'rollup-plugin-delete';
 import dotenv from 'rollup-plugin-dotenv';
 
 export default {
-	input: 'src/app/index.html',
+	input: 'examples/app/index.html',
 	output: { dir: 'build', format: 'esm' },
 	plugins: [
 		del({ targets: 'build' }),

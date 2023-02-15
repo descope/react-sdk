@@ -3,7 +3,7 @@ import createSdk, {
 	getJwtRoles,
 	getRefreshToken,
 	getSessionToken
-} from '../src/lib/sdk';
+} from '../src/sdk';
 
 jest.mock('@descope/web-js-sdk', () => () => ({
 	getSessionToken: jest.fn(),
@@ -33,7 +33,7 @@ describe('utility functions', () => {
 		jest.resetModules();
 
 		// eslint-disable-next-line global-require
-		const { getSessionToken: getSessionTokenLocal } = require('../src/lib/sdk');
+		const { getSessionToken: getSessionTokenLocal } = require('../src/sdk');
 
 		getSessionTokenLocal();
 
@@ -64,7 +64,7 @@ describe('utility functions', () => {
 		jest.resetModules();
 
 		// eslint-disable-next-line global-require
-		const { getRefreshToken: getRefreshTokenLocal } = require('../src/lib/sdk');
+		const { getRefreshToken: getRefreshTokenLocal } = require('../src/sdk');
 
 		getRefreshTokenLocal();
 

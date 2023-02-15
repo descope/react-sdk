@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import Context from '../../hooks/Context';
 import { IContext, User } from '../../types';
-import useSdk from './useSdk';
 import { withValidation } from '../../utils';
+import useSdk from './useSdk';
 
 interface IAuthProviderProps {
 	projectId: string;

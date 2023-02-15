@@ -2,7 +2,7 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from '../lib';
+import { AuthProvider } from '../../src';
 import App from './App';
 
 const container = document.getElementById('root');

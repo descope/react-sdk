@@ -3,9 +3,9 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
 import { renderHook } from '@testing-library/react';
-import { AuthProvider, useSession } from '../../src/lib';
-import useDescope from '../../src/lib/hooks/useDescope';
-import useUser from '../../src/lib/hooks/useUser';
+import { AuthProvider, useSession } from '../../src';
+import useDescope from '../../src/hooks/useDescope';
+import useUser from '../../src/hooks/useUser';
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
