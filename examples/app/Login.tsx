@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Descope } from '../../src';
-import { ThemeOptions } from '../../src/types';
 
 const Login = () => {
 	const [errorMessage, setErrorMessage] = useState('');
@@ -21,7 +20,7 @@ const Login = () => {
 				onSuccess={onSuccess}
 				onError={onError}
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
-				theme={process.env.DESCOPE_THEME as ThemeOptions}
+				theme={process.env.DESCOPE_THEME as any}
 				redirectUrl={process.env.DESCOPE_REDIRECT_URL}
 				tenant={process.env.DESCOPE_TENANT_ID}
 				telemetryKey={process.env.DESCOPE_TELEMETRY_KEY}

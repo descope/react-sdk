@@ -67,5 +67,4 @@ export interface DescopeProps {
 	redirectUrl?: string;
 }
 
-export { ThemeOptions, AutoFocusOptions };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
