@@ -1,15 +1,21 @@
-# @descope/react-sdk
+# Descope SDK for React
 
-This library lets you consume your login pages created by Descope console-app in your application
-Under the hood, it uses [web-js-sdk](https://github.com/descope/web-js-sdk)
+The Descope SDK for React provides convenient access to the Descope for an application written on top of React. You can read more on the [Descope Website](https://descope.com).
 
-## Usage
+## Requirements
 
-### Install the package
+- The SDK supports React version 16 and above.
+- A Descope `Project ID` is required for using the SDK. Find it on the [project page in the Descope Console](https://app.descope.com/settings/project).
+
+## Installing the SDK
+
+Install the package with:
 
 ```bash
-npm install @descope/react-sdk
+npm i --save @descope/react-sdk
 ```
+
+## Usage
 
 ### Render it in your application
 
@@ -189,7 +195,7 @@ Now, whenever you call `fetch`, the cookie will automatically be sent with the r
 
 ## Code Example
 
-You can find an example react app in the [examples folder](https://github.com/descope/react-sdk/blob/main/examples).
+You can find an example react app in the [examples folder](./examples).
 
 ### Setup
 
@@ -244,3 +250,15 @@ DESCOPE_STEP_UP_FLOW_ID=step-up
 # Telemetry key
 DESCOPE_TELEMETRY_KEY=""
 ```
+
+## Learn More
+
+To learn more please see the [Descope Documentation and API reference page](https://docs.descope.com/).
+
+## Contact Us
+
+If you need help you can email [Descope Support](mailto:support@descope.com)
+
+## License
+
+The Descope SDK for React is licensed for use under the terms and conditions of the [MIT license Agreement](./LICENSE).
