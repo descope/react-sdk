@@ -68,17 +68,23 @@ const App = () => {
             flowId="my-flow-id"
             onSuccess={(e) => console.log('Logged in!')}
             onError={(e) => console.log('Could not logged in')}
-            // theme can be "light" or "dark". If empty, Descope will use the OS theme
-            // theme="light"
+            // theme can be "light", "dark" or "os", which auto select a theme based on the OS theme. Default is "light"
+            // theme="dark"
 
             // debug can be set to true to enable debug mode
             // debug={true}
 
-            // You can configure which tenant the signin/signup flow will sign the user into by providing the tenant ID
+            // Which tenant the signin/signup flow will sign the user into by providing the tenant ID
             // tenant=<tenantId>
 
-            // You can configure the redirect URL for OAuth and SSO (will be used when redirecting back from the OAuth provider / IdP), or for "Magic Link" and "Enchanted Link" (will be used as a link in the message sent to the the user)
+            // Redirect URL for OAuth and SSO (will be used when redirecting back from the OAuth provider / IdP), or for "Magic Link" and "Enchanted Link" (will be used as a link in the message sent to the the user)
             // redirectUrl=<redirectUrl>
+
+            // auto-focus can be true, false or "skipFirstScreen". Default is true.
+            // - true: automatically focus on the first input of each screen
+            // - false: do not automatically focus on screen's inputs
+            // - "skipFirstScreen": automatically focus on the first input of each screen, except first screen
+            // autoFocus="skipFirstScreen"
         />
     )
 }

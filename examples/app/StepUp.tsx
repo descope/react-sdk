@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Descope } from '../../src';
-import { DescopeTheme } from '../../src/types';
+import { ThemeOptions } from '../../src/types';
 
 const StepUp = () => {
 	const [errorMessage, setErrorMessage] = useState('');
@@ -24,7 +24,7 @@ const StepUp = () => {
 				onSuccess={onSuccess}
 				onError={onError}
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
-				theme={process.env.DESCOPE_THEME as DescopeTheme}
+				theme={process.env.DESCOPE_THEME as ThemeOptions}
 				redirectUrl={process.env.DESCOPE_REDIRECT_URL}
 				tenant={process.env.DESCOPE_TENANT_ID}
 				telemetryKey={process.env.DESCOPE_TELEMETRY_KEY}
