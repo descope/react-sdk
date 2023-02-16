@@ -1,3 +1,4 @@
+import type { AutoFocusOptions, ThemeOptions } from '@descope/web-component';
 import DescopeWc from '@descope/web-component';
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
@@ -53,15 +54,14 @@ export interface IContext {
 	logoutAll: Sdk['logoutAll'];
 }
 
-export type DescopeTheme = 'light' | 'dark';
-
 export interface DescopeProps {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
-	theme?: DescopeTheme;
+	theme?: ThemeOptions;
+	autoFocus?: AutoFocusOptions;
 	debug?: boolean;
 	telemetryKey?: string;
 	redirectUrl?: string;

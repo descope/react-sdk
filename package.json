@@ -42,7 +42,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "0.1.3",
+		"@descope/web-component": "0.1.4",
 		"react-router-dom": "6.8.0"
 	},
 	"devDependencies": {
