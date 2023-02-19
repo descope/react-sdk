@@ -74,7 +74,7 @@ const App = () => {
             // debug can be set to true to enable debug mode
             // debug={true}
 
-            // Which tenant the signin/signup flow will sign the user into by providing the tenant ID
+            // tenant ID for SSO (SAML) login. If not provided, Descope will use the domain of available email to choose the tenant
             // tenant=<tenantId>
 
             // Redirect URL for OAuth and SSO (will be used when redirecting back from the OAuth provider / IdP), or for "Magic Link" and "Enchanted Link" (will be used as a link in the message sent to the the user)
@@ -228,15 +228,17 @@ npm i && npm start
 
 See the following table for customization environment variables for the example app:
 
-| Env Variable            | Description                                                                                                             | Default value     |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| DESCOPE_FLOW_ID         | Which flow id to use in the login page                                                                                  | **sign-up-or-in** |
-| DESCOPE_BASE_URL        | Custom Descope base URL                                                                                                 | **""**            |
-| DESCOPE_THEME           | **"light"** - Light theme</br>**"dark"** - Dark theme</br>**"os"** - Auto select a theme based on the OS theme settings | **light**         |
-| DESCOPE_DEBUG_MODE      | **"true"** - Enable debugger</br>**"false"** - Disable flow debugger                                                    | **false**         |
-| DESCOPE_STEP_UP_FLOW_ID | Step up flow ID to show to logged in user (via button). e.g. "step-up". Button will be hidden if not provided           | **""**            |
-| DESCOPE_TELEMETRY_KEY   | **String** - Telemetry public key provided by Descope Inc                                                               | **""**            |
-|                         |                                                                                                                         |                   |
+| Env Variable            | Description                                                                                                   | Default value     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------- |
+| DESCOPE_FLOW_ID         | Which flow ID to use in the login page                                                                        | **sign-up-or-in** |
+| DESCOPE_BASE_URL        | Custom Descope base URL                                                                                       | None              |
+| DESCOPE_THEME           | Flow theme                                                                                                    | None              |
+| DESCOPE_REDIRECT_URL    | Flow redirect URL for OAuth/SSO/Magic Link/Enchanted Link                                                     | None              |
+| DESCOPE_TENANT_ID       | Flow tenant ID for SSO/SAML                                                                                   | None              |
+| DESCOPE_DEBUG_MODE      | **"true"** - Enable debugger</br>**"false"** - Disable flow debugger                                          | None              |
+| DESCOPE_STEP_UP_FLOW_ID | Step up flow ID to show to logged in user (via button). e.g. "step-up". Button will be hidden if not provided | None              |
+| DESCOPE_TELEMETRY_KEY   | **String** - Telemetry public key provided by Descope Inc                                                     | None              |
+|                         |                                                                                                               |                   |
 
 Example for `.env` file template:
 
@@ -249,6 +251,10 @@ DESCOPE_FLOW_ID=""
 DESCOPE_BASE_URL=""
 # Set flow theme to dark
 DESCOPE_THEME=dark
+# Flow Redirect URL
+DESCOPE_REDIRECT_URL=""
+# Tenant ID
+DESCOPE_TENANT_ID=""
 # Enable debugger
 DESCOPE_DEBUG_MODE=true
 # Show step-up flow for logged in user
