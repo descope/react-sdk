@@ -80,7 +80,7 @@ const App = () => {
             // Redirect URL for OAuth and SSO (will be used when redirecting back from the OAuth provider / IdP), or for "Magic Link" and "Enchanted Link" (will be used as a link in the message sent to the the user)
             // redirectUrl=<redirectUrl>
 
-            // auto-focus can be true, false or "skipFirstScreen". Default is true.
+            // autoFocus can be true, false or "skipFirstScreen". Default is true.
             // - true: automatically focus on the first input of each screen
             // - false: do not automatically focus on screen's inputs
             // - "skipFirstScreen": automatically focus on the first input of each screen, except first screen
