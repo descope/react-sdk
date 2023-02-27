@@ -56,4 +56,13 @@ export const getJwtRoles = wrapInTry(
 		sdkInstance?.getJwtRoles(token, tenant)
 );
 
+export const refreshToken = (token?: string) => {
+	if (IS_BROWSER) {
+		return sdkInstance?.refresh(token);
+	}
+	// eslint-disable-next-line no-console
+	console.warn('Refresh token is not supported in SSR');
+	return null;
+};
+
 export default createSdkWrapper;

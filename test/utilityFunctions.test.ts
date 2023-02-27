@@ -1,4 +1,4 @@
-import createSdk, {
+import createSdk, { refreshToken ,
 	getJwtPermissions,
 	getJwtRoles,
 	getRefreshToken,
@@ -9,7 +9,8 @@ jest.mock('@descope/web-js-sdk', () => () => ({
 	getSessionToken: jest.fn(),
 	getRefreshToken: jest.fn(),
 	getJwtPermissions: jest.fn(),
-	getJwtRoles: jest.fn()
+	getJwtRoles: jest.fn(),
+	refresh: jest.fn()
 }));
 
 const sdk = createSdk({ projectId: 'test' });
@@ -75,6 +76,12 @@ describe('utility functions', () => {
 			'Get refresh token is not supported in SSR'
 		);
 		expect(sdk.getRefreshToken).not.toHaveBeenCalled();
+	});
+
+	it('should call refresh token with the session token', async () => {
+		(sdk.refresh as jest.Mock).getMockImplementation();
+		await refreshToken('test');
+		expect(sdk.refresh).toHaveBeenCalledWith('test');
 	});
 
 	it('should call getJwtPermissions with the session token when not provided', () => {
