@@ -1,4 +1,5 @@
-import createSdk, { refreshToken ,
+import createSdk, {
+	refreshToken,
 	getJwtPermissions,
 	getJwtRoles,
 	getRefreshToken,
