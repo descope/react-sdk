@@ -1,5 +1,5 @@
 import createSdk, {
-	refreshToken,
+	refresh,
 	getJwtPermissions,
 	getJwtRoles,
 	getRefreshToken,
@@ -81,7 +81,7 @@ describe('utility functions', () => {
 
 	it('should call refresh token with the session token', async () => {
 		(sdk.refresh as jest.Mock).getMockImplementation();
-		await refreshToken('test');
+		await refresh('test');
 		expect(sdk.refresh).toHaveBeenCalledWith('test');
 	});
 
