@@ -267,9 +267,9 @@ DESCOPE_TELEMETRY_KEY=""
 
 You can also use the following functions to assist with various actions managing your JWT.
 
-`refresh(token = getRefreshToken())` - force a refresh on current session token using an existing valid refresh token.
-`getJwtRoles(token = getSessionToken(), tenant = '')` - get current (tenant if provided) roles from an existing session token.
-`getJwtPermissions(token = getSessionToken(), tenant = '')` - get current (tenant if provided) permissions from an existing session token.
+`refresh(token = getRefreshToken())` - Force a refresh on current session token using an existing valid refresh token.
+`getJwtRoles(token = getSessionToken(), tenant = '')` - Get current roles from an existing session token. Provide tenant id for specific tenant roles.
+`getJwtPermissions(token = getSessionToken(), tenant = '')` - Fet current permissions from an existing session token. Provide tenant id for specific tenant permissions.
 
 ## Learn More
 
