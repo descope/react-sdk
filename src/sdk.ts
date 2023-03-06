@@ -56,4 +56,7 @@ export const getJwtRoles = wrapInTry(
 		sdkInstance?.getJwtRoles(token, tenant)
 );
 
+export const refresh = (token = getRefreshToken()) =>
+	sdkInstance?.refresh(token);
+
 export default createSdkWrapper;

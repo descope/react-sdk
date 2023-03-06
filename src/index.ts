@@ -12,6 +12,7 @@ export { default as useUser } from './hooks/useUser';
 export {
 	getJwtPermissions,
 	getJwtRoles,
+	refresh,
 	getRefreshToken,
 	getSessionToken
 } from './sdk';

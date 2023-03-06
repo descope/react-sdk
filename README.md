@@ -263,6 +263,14 @@ DESCOPE_STEP_UP_FLOW_ID=step-up
 DESCOPE_TELEMETRY_KEY=""
 ```
 
+## Helper Functions
+
+You can also use the following functions to assist with various actions managing your JWT.
+
+`refresh(token = getRefreshToken())` - Force a refresh on current session token using an existing valid refresh token.
+`getJwtRoles(token = getSessionToken(), tenant = '')` - Get current roles from an existing session token. Provide tenant id for specific tenant roles.
+`getJwtPermissions(token = getSessionToken(), tenant = '')` - Fet current permissions from an existing session token. Provide tenant id for specific tenant permissions.
+
 ## Learn More
 
 To learn more please see the [Descope Documentation and API reference page](https://docs.descope.com/).
