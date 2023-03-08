@@ -5,7 +5,7 @@ lint_find_secrets() {
 	INSTALLED_SECRETS_VERSION="$(gitleaks version)"
 	if [[ $INSTALLED_SECRETS_VERSION != *"$SECRETS_SUPPORTED_VERSION"* ]]; then
 		echo "Installing gitleaks $(uname -s)_$(arch) for the first time..."
-		FILE=`curl -s https://api.github.com/repos/zricethezav/gitleaks/releases/tags/v${SECRETS_SUPPORTED_VERSION} | jq -r "first(.assets[].name | select(test(\"$(uname -s)_$(arch)\"; \"i\") or test(\"$(uname -s)_x64\"; \"i\")))"`
+		FILE=`curl -s https://api.github.com/repositories/119190187/releases/tags/v${SECRETS_SUPPORTED_VERSION} | jq -r "first(.assets[].name | select(test(\"$(uname -s)_$(arch)\"; \"i\") or test(\"$(uname -s)_x64\"; \"i\")))"`
 		TMPDIR=$(mktemp -d)
  		curl -o ${TMPDIR}/${FILE} -JL https://github.com/zricethezav/gitleaks/releases/download/v${SECRETS_SUPPORTED_VERSION}/${FILE}
 		tar zxv -C /usr/local/bin -f ${TMPDIR}/${FILE} gitleaks
