@@ -2,7 +2,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../../examples/app/App';
@@ -45,35 +44,6 @@ describe('App', () => {
 		// reset mock functions that may be override
 		(onSessionTokenChange as jest.Mock).mockImplementation(() => () => {});
 		(onUserChange as jest.Mock).mockImplementation(() => () => {});
-	});
-
-	it('should get user on success', async () => {
-		renderWithRouter(
-			<AuthProvider projectId="p1">
-				<App />
-			</AuthProvider>
-		);
-
-		const loginButton = await screen.findByText('Login');
-
-		await userEvent.click(loginButton);
-
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).toBeInTheDocument();
-		});
-
-		// mock success
-		fireEvent(
-			document.querySelector('descope-wc'),
-			new CustomEvent('success', {
-				detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
-			})
-		);
-
-		// ensure user details are shown
-		await waitFor(() =>
-			expect(document.querySelector('.username')).toHaveTextContent(/user1/)
-		);
 	});
 
 	it('should subscribe to user and session token', async () => {
@@ -128,27 +98,18 @@ describe('App', () => {
 	});
 
 	it('should render logout button and and call sdk logout', async () => {
-		const { container } = renderWithRouter(
+		(onSessionTokenChange as jest.Mock).mockImplementation((cb) => {
+			cb('token1');
+			return () => {};
+		});
+		(onUserChange as jest.Mock).mockImplementation((cb) => {
+			cb({ name: 'user1' });
+			return () => {};
+		});
+		renderWithRouter(
 			<AuthProvider projectId="p1">
 				<App />
 			</AuthProvider>
-		);
-		const loginButton = await screen.findByText('Login');
-		fireEvent.click(loginButton);
-
-		// eslint-disable-next-line testing-library/no-container
-		await waitFor(() =>
-			// eslint-disable-next-line testing-library/no-container
-			expect(container.querySelector('descope-wc')).toBeInTheDocument()
-		);
-
-		// mock success
-		fireEvent(
-			// eslint-disable-next-line testing-library/no-container
-			container.querySelector('descope-wc'),
-			new CustomEvent('success', {
-				detail: { user: { name: 'user1' }, sessionJwt: 'session1' }
-			})
 		);
 
 		// logout
