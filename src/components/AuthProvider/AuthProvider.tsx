@@ -56,10 +56,6 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		});
 	}, [sdk]);
 
-	const logoutAll = useCallback(withValidation(sdk?.logoutAll), [sdk]);
-
-	const logout = useCallback(withValidation(sdk?.logout), [sdk]);
-
 	const value = useMemo<IContext>(
 		() => ({
 			fetchUser,
@@ -68,8 +64,6 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			fetchSession,
 			session,
 			isSessionLoading,
-			logout,
-			logoutAll,
 			projectId,
 			baseUrl,
 			setUser,
@@ -83,8 +77,6 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			fetchSession,
 			session,
 			isSessionLoading,
-			logout,
-			logoutAll,
 			projectId,
 			baseUrl,
 			setUser,

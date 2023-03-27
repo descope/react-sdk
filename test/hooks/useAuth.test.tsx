@@ -7,9 +7,18 @@ import { AuthProvider, useSession } from '../../src';
 import useDescope from '../../src/hooks/useDescope';
 import useUser from '../../src/hooks/useUser';
 
+const get = (obj: Record<string, any>, str: string) =>
+	str.split('.').reduce((acc, key) => acc[key], obj);
+
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
 		logout: jest.fn().mockName('logout'),
+		logoutAll: jest.fn().mockName('logoutAll'),
+		otp: {
+			signIn: {
+				email: jest.fn().mockName('otp.signIn.email')
+			}
+		},
 		onSessionTokenChange: jest
 			.fn(() => () => {})
 			.mockName('onSessionTokenChange'),
@@ -48,15 +57,20 @@ describe('hooks', () => {
 		}).toThrowError();
 	});
 
-	it.each(['logoutAll', 'logout'])(
+	it.each(['logoutAll', 'logout', 'otp.signIn.email'])(
 		'should throw error when using sdk function before sdk initialization - %s',
 		(fnName) => {
 			const { result } = renderHook(() => useDescope(), {
 				wrapper: authProviderWrapper('')
 			});
-			expect(() => {
-				result.current[fnName]();
-			}).toThrowError();
+
+			expect(get(result.current, fnName)).toThrowError(
+				expect.objectContaining({
+					message: expect.stringContaining(
+						'You can only use this function after sdk initialization'
+					)
+				})
+			);
 		}
 	);
 
