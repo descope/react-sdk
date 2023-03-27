@@ -37,8 +37,6 @@ const useDescope = (): Sdk => {
 
 		return sdk;
 	}, [sdk]);
-
-	return sdk;
 };
 
 export default useDescope;

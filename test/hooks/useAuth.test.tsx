@@ -28,7 +28,8 @@ jest.mock('@descope/web-js-sdk', () => {
 			hooks: {
 				afterRequest: jest.fn()
 			}
-		}
+		},
+		dummyKey: 123
 	};
 	return () => sdk;
 });
@@ -74,13 +75,21 @@ describe('hooks', () => {
 		}
 	);
 
-	it('should get default values from provider', () => {
+	it('should invoke sdk function when sdk is initialized', () => {
 		const { result } = renderHook(() => useDescope(), {
 			wrapper: authProviderWrapper('project1')
 		});
 
 		result.current.logout();
 		expect(logout).toBeCalled();
+	});
+
+	it('should get sdk constant when sdk is initialized', () => {
+		const { result } = renderHook(() => useDescope(), {
+			wrapper: authProviderWrapper('project1')
+		});
+
+		expect((result.current as any).dummyKey).toBe(123);
 	});
 
 	it('should get default values from provider for useUser', () => {
