@@ -84,12 +84,18 @@ describe('hooks', () => {
 		expect(logout).toBeCalled();
 	});
 
-	it('should get sdk constant when sdk is initialized', () => {
+	it('should throw an error when trying to access attribute and sdk is not initialized', () => {
 		const { result } = renderHook(() => useDescope(), {
-			wrapper: authProviderWrapper('project1')
+			wrapper: authProviderWrapper('')
 		});
 
-		expect((result.current as any).dummyKey).toBe(123);
+		expect(() => get(result.current, 'dummyKey')).toThrowError(
+			expect.objectContaining({
+				message: expect.stringContaining(
+					'You can only use this attribute after sdk initialization'
+				)
+			})
+		);
 	});
 
 	it('should get default values from provider for useUser', () => {

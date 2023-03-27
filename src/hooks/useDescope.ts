@@ -3,6 +3,9 @@ import { Sdk } from '../types';
 import useContext from './useContext';
 import createSdk from '../sdk';
 
+const generateErrorMsg = (entryType: string) =>
+	`You can only use this ${entryType} after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`;
+
 // handler which throw an error for every SDK function
 const proxyThrowHandler = {
 	// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
@@ -13,13 +16,11 @@ const proxyThrowHandler = {
 
 		if (typeof target[key] === 'function') {
 			return () => {
-				throw Error(
-					`You can only use this function after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`
-				);
+				throw Error(generateErrorMsg('function'));
 			};
 		}
 
-		return target[key];
+		throw Error(generateErrorMsg('attribute'));
 	}
 };
 
