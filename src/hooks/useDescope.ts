@@ -3,12 +3,14 @@ import { Sdk } from '../types';
 import useContext from './useContext';
 import createSdk from '../sdk';
 
-const validator = {
+// handler which throw an error for every SDK function
+const proxyThrowHandler = {
 	// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 	get(target: Record<string, any>, key: string) {
 		if (typeof target[key] === 'object' && target[key] !== null) {
-			return new Proxy(target[key], validator);
+			return new Proxy(target[key], proxyThrowHandler);
 		}
+
 		if (typeof target[key] === 'function') {
 			return () => {
 				throw Error(
@@ -16,6 +18,7 @@ const validator = {
 				);
 			};
 		}
+
 		return target[key];
 	}
 };
@@ -25,9 +28,11 @@ const useDescope = (): Sdk => {
 
 	return useMemo(() => {
 		if (!sdk) {
-			const dummySdk = createSdk({ projectId: 'dummy' });
-
-			return new Proxy(dummySdk, validator) as Sdk;
+			// In case the SDK is not initialized, we want to throw an error when the SDK functions are called
+			return new Proxy(
+				createSdk({ projectId: 'dummy' }),
+				proxyThrowHandler
+			) as Sdk;
 		}
 
 		return sdk;
