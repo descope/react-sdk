@@ -33,11 +33,6 @@ export type DescopeCustomElement = CustomElement<
 	'success' | 'error'
 >;
 
-export interface IAuth {
-	logoutAll: Sdk['logoutAll'];
-	logout: Sdk['logout'];
-}
-
 export interface IContext {
 	fetchUser: () => void;
 	user: User;
@@ -50,8 +45,6 @@ export interface IContext {
 	sdk?: Sdk;
 	setUser: React.Dispatch<React.SetStateAction<User>>;
 	setSession: React.Dispatch<React.SetStateAction<string>>;
-	logout: Sdk['logout'];
-	logoutAll: Sdk['logoutAll'];
 }
 
 export interface DescopeProps {

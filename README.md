@@ -106,7 +106,7 @@ const App = () => {
     // and will throw an exception if this requirement is not met
     const { isAuthenticated, isSessionLoading } = useSession()
     const { user, isUserLoading } = useUser()
-    const { logout } = useDescope()
+    const sdk = useDescope()
 
     if(isSessionLoading || isUserLoading){
         return <p>Loading...</p>
@@ -115,13 +115,15 @@ const App = () => {
      if(isAuthenticated){
         return (
             <p>Hello ${user.name}</p>
-            <button onClick={logout}>Logout</div>
+            <button onClick={sdk.logout}>Logout</div>
         )
     }
 
     return <p>You are not logged in</p>
 }
 ```
+
+**For more SDK usage examples refer to [docs](https://docs.descope.com/build/guides/client_sdks/)**
 
 #### Session token server validation (pass session token to server API)
 
