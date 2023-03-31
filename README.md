@@ -113,9 +113,10 @@ const App = () => {
     }
 
      if(isAuthenticated){
-        return (
+        return (<>
             <p>Hello ${user.name}</p>
-            <button onClick={sdk.logout}>Logout</div>
+            <button onClick={sdk.logout}>Logout</button>
+	    </>
         )
     }
 
@@ -173,7 +174,7 @@ const Component = () => {
         {...}
         {
             // button that triggers an API that may use session token
-            <button onClick={onClick}>Click Me</div>
+            <button onClick={onClick}>Click Me</button>
         }
     )
 }
