@@ -114,7 +114,7 @@ const App = () => {
 
      if(isAuthenticated){
         return (<>
-            <p>Hello ${user.name}</p>
+            <p>Hello {user.name}</p>
             <button onClick={sdk.logout}>Logout</button>
 	    </>
         )
