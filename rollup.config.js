@@ -50,6 +50,32 @@ export default [
 		]
 	},
 	{
+		input: 'src/index.ts',
+		external: ['@descope/web-js-sdk', 'react'],
+		output: {
+			file: 'dist/index.umd.js',
+			format: 'umd',
+			sourcemap: true,
+			name: 'DescopeReactSdk',
+			globals: {
+				react: 'React',
+				'@descope/web-js-sdk': 'Descope'
+			}
+		},
+		plugins: [
+			define({
+				replacements: {
+					BUILD_VERSION: JSON.stringify(require('./package.json').version)
+				}
+			}),
+			typescript({
+				tsconfig: './tsconfig.json'
+			}),
+			autoExternal(),
+			terser()
+		]
+	},
+	{
 		input: './dist/src/index.d.ts',
 		output: [{ file: packageJson.types, format: 'esm' }],
 		plugins: [
