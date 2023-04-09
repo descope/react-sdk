@@ -5,6 +5,8 @@ import define from 'rollup-plugin-define';
 import del from 'rollup-plugin-delete';
 import dts from 'rollup-plugin-dts';
 import { terser } from 'rollup-plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
 
 const packageJson = require('./package.json');
 
@@ -51,15 +53,15 @@ export default [
 	},
 	{
 		input: 'src/index.ts',
-		external: ['@descope/web-js-sdk', 'react'],
+		external: ['react'],
+		inlineDynamicImports: true,
 		output: {
 			file: 'dist/index.umd.js',
 			format: 'umd',
 			sourcemap: true,
-			name: 'DescopeReactSdk',
+			name: 'Descope',
 			globals: {
-				react: 'React',
-				'@descope/web-js-sdk': 'Descope'
+				react: 'React'
 			}
 		},
 		plugins: [
@@ -71,7 +73,8 @@ export default [
 			typescript({
 				tsconfig: './tsconfig.json'
 			}),
-			autoExternal(),
+			commonjs(),
+			nodeResolve(),
 			terser()
 		]
 	},
