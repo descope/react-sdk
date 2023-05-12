@@ -43,7 +43,7 @@
 	},
 	"dependencies": {
 		"@descope/web-component": "2.3.0",
-		"react-router-dom": "6.10.0"
+		"react-router-dom": "6.11.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.21.4",
