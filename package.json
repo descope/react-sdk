@@ -110,7 +110,7 @@
 		"typescript": "^4.5.3"
 	},
 	"peerDependencies": {
-		"@descope/web-js-sdk": "1.2.3",
+		"@descope/web-js-sdk": "1.2.6",
 		"@types/react": ">=16",
 		"react": ">=16"
 	}
