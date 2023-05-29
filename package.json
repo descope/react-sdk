@@ -48,7 +48,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "2.3.12",
+		"@descope/web-component": "2.4.0",
 		"react-router-dom": "6.11.1"
 	},
 	"devDependencies": {
@@ -110,7 +110,7 @@
 		"typescript": "^4.5.3"
 	},
 	"peerDependencies": {
-		"@descope/web-js-sdk": "1.2.6",
+		"@descope/web-js-sdk": "1.2.7",
 		"@types/react": ">=16",
 		"react": ">=16"
 	}
