@@ -112,12 +112,4 @@ describe('hooks', () => {
 		expect(result.current.isAuthenticated).toEqual(false);
 		expect(result.current.sessionToken).toEqual(undefined);
 	});
-
-	it('test1111', () => {
-		const { result } = renderHook(() => useSession(), {
-			wrapper: authProviderWrapper('project1')
-		});
-		expect(result.current.isAuthenticated).toEqual(false);
-		expect(result.current.sessionToken).toEqual(undefined);
-	});
 });
