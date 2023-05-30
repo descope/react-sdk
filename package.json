@@ -1,6 +1,6 @@
 {
 	"name": "@descope/react-sdk",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Descope React SDK",
 	"author": "Descope Team <info@descope.com>",
 	"homepage": "https://github.com/descope/react-sdk",
@@ -48,7 +48,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "^2.3.7",
+		"@descope/web-component": "2.4.0",
 		"react-router-dom": "6.11.1"
 	},
 	"devDependencies": {
@@ -87,7 +87,7 @@
 		"eslint-plugin-promise": "6.1.1",
 		"eslint-plugin-react": "7.32.2",
 		"eslint-plugin-react-hooks": "4.6.0",
-		"eslint-plugin-testing-library": "5.10.3",
+		"eslint-plugin-testing-library": "5.11.0",
 		"husky": "^8.0.1",
 		"jest": "^27.3.1",
 		"jest-extended": "^3.2.2",
@@ -110,7 +110,7 @@
 		"typescript": "^4.5.3"
 	},
 	"peerDependencies": {
-		"@descope/web-js-sdk": "1.2.6",
+		"@descope/web-js-sdk": "1.2.7",
 		"@types/react": ">=16",
 		"react": ">=16"
 	}
