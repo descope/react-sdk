@@ -1,6 +1,6 @@
 {
 	"name": "@descope/react-sdk",
-	"version": "1.0.3",
+	"version": "1.0.7",
 	"description": "Descope React SDK",
 	"author": "Descope Team <info@descope.com>",
 	"homepage": "https://github.com/descope/react-sdk",
@@ -15,8 +15,14 @@
 	"license": "MIT",
 	"type": "module",
 	"exports": {
-		"require": "./dist/cjs/index.cjs.js",
-		"import": "./dist/index.esm.js"
+		"require": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/cjs/index.cjs.js"
+		},
+		"import": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.esm.js"
+		}
 	},
 	"main": "dist/cjs/index.cjs.js",
 	"module": "dist/index.esm.js",
@@ -42,16 +48,16 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "2.0.27",
-		"react-router-dom": "6.10.0"
+		"@descope/web-component": "2.4.0",
+		"react-router-dom": "6.11.1"
 	},
 	"devDependencies": {
-		"@babel/core": "7.21.4",
-		"@babel/preset-env": "7.21.4",
+		"@babel/core": "7.21.8",
+		"@babel/preset-env": "7.21.5",
 		"@babel/preset-react": "7.18.6",
-		"@babel/preset-typescript": "7.21.4",
+		"@babel/preset-typescript": "7.21.5",
 		"@open-wc/rollup-plugin-html": "^1.2.5",
-		"@rollup/plugin-commonjs": "^24.0.0",
+		"@rollup/plugin-commonjs": "^25.0.0",
 		"@rollup/plugin-node-resolve": "^15.0.0",
 		"@rollup/plugin-replace": "^5.0.0",
 		"@rollup/plugin-typescript": "^8.3.0",
@@ -59,11 +65,11 @@
 		"@testing-library/react": "14.0.0",
 		"@testing-library/user-event": "14.4.3",
 		"@types/jest": "^27.0.2",
-		"@types/react": "18.0.34",
-		"@types/react-dom": "18.0.11",
+		"@types/react": "18.2.6",
+		"@types/react-dom": "18.2.4",
 		"@types/react-router-dom": "^5.3.3",
 		"babel-jest": "27.5.1",
-		"eslint": "8.38.0",
+		"eslint": "8.40.0",
 		"eslint-config-airbnb": "19.0.4",
 		"eslint-config-airbnb-typescript": "17.0.0",
 		"eslint-config-prettier": "8.8.0",
@@ -81,7 +87,7 @@
 		"eslint-plugin-promise": "6.1.1",
 		"eslint-plugin-react": "7.32.2",
 		"eslint-plugin-react-hooks": "4.6.0",
-		"eslint-plugin-testing-library": "5.10.2",
+		"eslint-plugin-testing-library": "5.11.0",
 		"husky": "^8.0.1",
 		"jest": "^27.3.1",
 		"jest-extended": "^3.2.2",
@@ -104,7 +110,7 @@
 		"typescript": "^4.5.3"
 	},
 	"peerDependencies": {
-		"@descope/web-js-sdk": "1.0.20",
+		"@descope/web-js-sdk": "1.2.7",
 		"@types/react": ">=16",
 		"react": ">=16"
 	}

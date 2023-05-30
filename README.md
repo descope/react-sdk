@@ -99,28 +99,30 @@ This can be helpful to implement application-specific logic. Examples:
 - Logout button
 
 ```js
-import { useDescope, useSession, useUser } from '@descope/react-sdk'
+import { useDescope, useSession, useUser } from '@descope/react-sdk';
 
 const App = () => {
-    // NOTE - `useDescope`, `useSession`, `useUser` should be used inside `AuthProvider` context,
-    // and will throw an exception if this requirement is not met
-    const { isAuthenticated, isSessionLoading } = useSession()
-    const { user, isUserLoading } = useUser()
-    const sdk = useDescope()
+	// NOTE - `useDescope`, `useSession`, `useUser` should be used inside `AuthProvider` context,
+	// and will throw an exception if this requirement is not met
+	const { isAuthenticated, isSessionLoading } = useSession();
+	const { user, isUserLoading } = useUser();
+	const sdk = useDescope();
 
-    if(isSessionLoading || isUserLoading){
-        return <p>Loading...</p>
-    }
+	if (isSessionLoading || isUserLoading) {
+		return <p>Loading...</p>;
+	}
 
-     if(isAuthenticated){
-        return (
-            <p>Hello ${user.name}</p>
-            <button onClick={sdk.logout}>Logout</div>
-        )
-    }
+	if (isAuthenticated) {
+		return (
+			<>
+				<p>Hello {user.name}</p>
+				<button onClick={sdk.logout}>Logout</button>
+			</>
+		);
+	}
 
-    return <p>You are not logged in</p>
-}
+	return <p>You are not logged in</p>;
+};
 ```
 
 **For more SDK usage examples refer to [docs](https://docs.descope.com/build/guides/client_sdks/)**
@@ -173,7 +175,7 @@ const Component = () => {
         {...}
         {
             // button that triggers an API that may use session token
-            <button onClick={onClick}>Click Me</div>
+            <button onClick={onClick}>Click Me</button>
         }
     )
 }
