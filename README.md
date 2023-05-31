@@ -26,7 +26,13 @@ import { AuthProvider } from '@descope/react-sdk';
 
 const AppRoot = () => {
 	return (
-		<AuthProvider projectId="my-project-id">
+		<AuthProvider
+			projectId="my-project-id"
+			// If the Descope project manages the token response in cookies, a custom domain
+			// must be configured (e.g., https://auth.myapp.com)
+			// and should be set as the baseUrl property.
+			// baseUrl = "https://auth.myapp.com"
+		>
 			<App />
 		</AuthProvider>
 	);
