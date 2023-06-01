@@ -26,7 +26,13 @@ import { AuthProvider } from '@descope/react-sdk';
 
 const AppRoot = () => {
 	return (
-		<AuthProvider projectId="my-project-id">
+		<AuthProvider
+			projectId="my-project-id"
+			// If the Descope project manages the token response in cookies, a custom domain
+			// must be configured (e.g., https://auth.app.example.com)
+			// and should be set as the baseUrl property.
+			// baseUrl = "https://auth.app.example.com"
+		>
 			<App />
 		</AuthProvider>
 	);
@@ -202,6 +208,11 @@ const AppRoot = () => {
 ```
 
 Now, whenever you call `fetch`, the cookie will automatically be sent with the request. Descope backend SDKs also support extracting the token from the `DS` cookie.
+
+#### Refresh token management
+
+If the Descope project settings are configured to manage tokens in cookies.
+you must also configure a custom domain, and set it as the `baseUrl` prop in the `AuthProvider` component. See the above [`AuthProvider` usage](https://github.com/descope/react-sdk#wrap-your-app-with-auth-provider) for usage example.
 
 ## Code Example
 
