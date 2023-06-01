@@ -209,7 +209,9 @@ const AppRoot = () => {
 
 Now, whenever you call `fetch`, the cookie will automatically be sent with the request. Descope backend SDKs also support extracting the token from the `DS` cookie.
 
-#### Refresh token management
+#### Refresh token lifecycle
+
+Descope SDK is automatically refreshes the session token when it is about to expire. This is done in the background using the refresh token, without any additional configuration.
 
 If the Descope project settings are configured to manage tokens in cookies.
 you must also configure a custom domain, and set it as the `baseUrl` prop in the `AuthProvider` component. See the above [`AuthProvider` usage](https://github.com/descope/react-sdk#wrap-your-app-with-auth-provider) for usage example.
