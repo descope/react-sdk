@@ -29,9 +29,9 @@ const AppRoot = () => {
 		<AuthProvider
 			projectId="my-project-id"
 			// If the Descope project manages the token response in cookies, a custom domain
-			// must be configured (e.g., https://auth.app.myapp.com)
+			// must be configured (e.g., https://auth.app.example.com)
 			// and should be set as the baseUrl property.
-			// baseUrl = "https://auth.app.myapp.com"
+			// baseUrl = "https://auth.app.example.com"
 		>
 			<App />
 		</AuthProvider>
