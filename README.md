@@ -106,23 +106,28 @@ This can be helpful to implement application-specific logic. Examples:
 
 ```js
 import { useDescope, useSession, useUser } from '@descope/react-sdk';
+import { useCallback } from 'react';
 
 const App = () => {
 	// NOTE - `useDescope`, `useSession`, `useUser` should be used inside `AuthProvider` context,
 	// and will throw an exception if this requirement is not met
 	const { isAuthenticated, isSessionLoading } = useSession();
 	const { user, isUserLoading } = useUser();
-	const sdk = useDescope();
+	const { logout } = useDescope();
 
 	if (isSessionLoading || isUserLoading) {
 		return <p>Loading...</p>;
 	}
 
+	const onLogout = useCallback(() => {
+		logout();
+	}, [logout]);
+
 	if (isAuthenticated) {
 		return (
 			<>
 				<p>Hello {user.name}</p>
-				<button onClick={sdk.logout}>Logout</button>
+				<button onClick={onLogout}>Logout</button>
 			</>
 		);
 	}
