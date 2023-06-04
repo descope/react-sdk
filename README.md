@@ -106,6 +106,7 @@ This can be helpful to implement application-specific logic. Examples:
 
 ```js
 import { useDescope, useSession, useUser } from '@descope/react-sdk';
+import { useCallback } from 'react';
 
 const App = () => {
 	// NOTE - `useDescope`, `useSession`, `useUser` should be used inside `AuthProvider` context,
