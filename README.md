@@ -119,7 +119,7 @@ const App = () => {
 		return <p>Loading...</p>;
 	}
 
-	const onLogout = useCallback(() => {
+	const handleLogout = useCallback(() => {
 		logout();
 	}, [logout]);
 
@@ -127,7 +127,7 @@ const App = () => {
 		return (
 			<>
 				<p>Hello {user.name}</p>
-				<button onClick={onLogout}>Logout</button>
+				<button onClick={handleLogout}>Logout</button>
 			</>
 		);
 	}
