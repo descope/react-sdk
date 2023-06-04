@@ -113,15 +113,15 @@ const App = () => {
 	// and will throw an exception if this requirement is not met
 	const { isAuthenticated, isSessionLoading } = useSession();
 	const { user, isUserLoading } = useUser();
-	const sdk = useDescope();
+	const { logout } = useDescope();
 
 	if (isSessionLoading || isUserLoading) {
 		return <p>Loading...</p>;
 	}
 
 	const onLogout = useCallback(() => {
-		sdk.logout();
-	}, [sdk]);
+		logout();
+	}, [logout]);
 
 	if (isAuthenticated) {
 		return (
