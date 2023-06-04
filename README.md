@@ -118,11 +118,15 @@ const App = () => {
 		return <p>Loading...</p>;
 	}
 
+	const onLogout = useCallback(() => {
+		sdk.logout();
+	}, [sdk]);
+
 	if (isAuthenticated) {
 		return (
 			<>
 				<p>Hello {user.name}</p>
-				<button onClick={sdk.logout}>Logout</button>
+				<button onClick={onLogout}>Logout</button>
 			</>
 		);
 	}
