@@ -2,7 +2,7 @@ import React from 'react';
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 import { AuthProvider, useSession } from '../../src';
 import useDescope from '../../src/hooks/useDescope';
 import useUser from '../../src/hooks/useUser';

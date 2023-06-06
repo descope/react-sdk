@@ -1,14 +1,13 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../../src';
 import App from './App';
 
-const container = document.getElementById('root');
-const root = createRoot(container!);
+const root = document.getElementById('root');
 
-root.render(
+render(
 	<BrowserRouter>
 		<AuthProvider
 			projectId={process.env.DESCOPE_PROJECT_ID}
@@ -16,5 +15,6 @@ root.render(
 		>
 			<App />
 		</AuthProvider>
-	</BrowserRouter>
+	</BrowserRouter>,
+	root
 );
