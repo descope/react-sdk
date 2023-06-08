@@ -134,4 +134,27 @@ describe('App', () => {
 		// ensure refresh called only once
 		expect(refresh).toBeCalledTimes(1);
 	});
+
+	it('should trigger refresh once when navigating between pages', async () => {
+		// rendering App twice which uses useSession
+		const { container } = renderWithRouter(
+			<AuthProvider projectId="p1">
+				<App />
+			</AuthProvider>
+		);
+
+		// ensure refresh called only once
+		expect(refresh).toBeCalledTimes(1);
+
+		const loginButton = await screen.findByText('Login');
+		fireEvent.click(loginButton);
+
+		await waitFor(() =>
+			// eslint-disable-next-line testing-library/no-container
+			expect(container.querySelector('descope-wc')).toBeInTheDocument()
+		);
+
+		// ensure refresh called only once
+		expect(refresh).toBeCalledTimes(1);
+	});
 });

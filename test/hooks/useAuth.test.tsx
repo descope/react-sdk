@@ -2,7 +2,7 @@ import React from 'react';
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { AuthProvider, useSession } from '../../src';
 import useDescope from '../../src/hooks/useDescope';
 import useUser from '../../src/hooks/useUser';
@@ -37,7 +37,7 @@ jest.mock('@descope/web-js-sdk', () => {
 // mock console.error to avoid those errors in tests
 jest.spyOn(console, 'error').mockImplementation(() => {});
 
-const { logout } = createSdk({ projectId: '' });
+const { logout, refresh } = createSdk({ projectId: '' });
 
 const authProviderWrapper =
 	(projectId: string) =>
@@ -111,5 +111,23 @@ describe('hooks', () => {
 		});
 		expect(result.current.isAuthenticated).toEqual(false);
 		expect(result.current.sessionToken).toEqual(undefined);
+	});
+
+	it('should refresh session only once when useSession rendered twice', async () => {
+		const wrapper = authProviderWrapper('project1');
+
+		const { result, rerender } = renderHook(() => useSession(), {
+			wrapper
+		});
+
+		expect(result.current.isSessionLoading).toEqual(true);
+
+		await waitFor(() => {
+			expect(refresh).toBeCalled();
+		});
+
+		rerender();
+
+		expect(result.current.isSessionLoading).toEqual(false);
 	});
 });

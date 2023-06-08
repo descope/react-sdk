@@ -12,8 +12,6 @@ const Home = () => {
 	const { isAuthenticated, isSessionLoading, sessionToken } = useSession();
 	const { user } = useUser();
 
-	console.log('@@@ home', { isAuthenticated, isSessionLoading }); // eslint-disable-line no-console
-
 	const onLogout = useCallback(() => {
 		logout();
 	}, [logout]);

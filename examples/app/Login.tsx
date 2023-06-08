@@ -19,13 +19,13 @@ const Login = () => {
 		navigate('/');
 	}, [navigate]);
 
-	console.log('@@@ login', { isAuthenticated, isSessionLoading }); // eslint-disable-line no-console
-
 	const onError = useCallback(() => {
 		setErrorMessage('Something went wrong');
 	}, [setErrorMessage]);
 
-	if (isSessionLoading) return <div>Loading...</div>;
+	if (isSessionLoading) {
+		return <div>Loading...</div>;
+	}
 	return (
 		<>
 			<Descope
