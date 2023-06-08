@@ -35,7 +35,7 @@ jest.mock('@descope/web-js-sdk', () => {
 const renderWithRouter = (ui: React.ReactElement) =>
 	render(<MemoryRouter>{ui}</MemoryRouter>);
 
-const { logout, onSessionTokenChange, onUserChange, refresh } = createSdk({
+const { logout, onSessionTokenChange, onUserChange } = createSdk({
 	projectId: ''
 });
 
@@ -118,20 +118,5 @@ describe('App', () => {
 
 		// ensure logout called
 		expect(logout).toBeCalled();
-	});
-
-	it('should call refresh only once when useSession used twice', async () => {
-		// rendering App twice which uses useSession
-		renderWithRouter(
-			<AuthProvider projectId="p1">
-				<>
-					<App />
-					<App />
-				</>
-			</AuthProvider>
-		);
-
-		// ensure refresh called only once
-		expect(refresh).toBeCalledTimes(1);
 	});
 });

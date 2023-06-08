@@ -1,11 +1,4 @@
-import React, {
-	FC,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState
-} from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import Context from '../../hooks/Context';
 import { IContext, User } from '../../types';
 import { withValidation } from '../../utils';
@@ -49,13 +42,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		return undefined;
 	}, [sdk]);
 
-	const isSessionFetched = useRef(false);
-
 	const fetchSession = useCallback(() => {
-		// We want that the session will fetched only once
-		if (isSessionFetched.current) return;
-		isSessionFetched.current = true;
-
 		setIsSessionLoading(true);
 		withValidation(sdk?.refresh)().then(() => {
 			setIsSessionLoading(false);
