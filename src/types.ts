@@ -40,6 +40,7 @@ export interface IContext {
 	fetchSession: () => void;
 	session: string;
 	isSessionLoading: boolean;
+	isSessionFetched: boolean;
 	projectId: string;
 	baseUrl?: string;
 	sdk?: Sdk;
