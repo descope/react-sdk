@@ -126,8 +126,10 @@ describe('hooks', () => {
 			expect(refresh).toBeCalled();
 		});
 
+		// render again
 		rerender();
 
 		expect(result.current.isSessionLoading).toEqual(false);
+		expect(refresh).toBeCalledTimes(1);
 	});
 });

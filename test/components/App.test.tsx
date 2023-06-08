@@ -136,7 +136,6 @@ describe('App', () => {
 	});
 
 	it('should trigger refresh once when navigating between pages', async () => {
-		// rendering App twice which uses useSession
 		const { container } = renderWithRouter(
 			<AuthProvider projectId="p1">
 				<App />
