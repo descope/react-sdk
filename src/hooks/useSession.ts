@@ -10,12 +10,14 @@ const useSession = () => {
 
 	// we want this to happen before returning a value so we are using "useMemo" and not "useEffect"
 	useMemo(() => {
+		console.log('@@@ useMemo1 change loading to ', isSessionLoading);
 		isLoading.current = isSessionLoading;
 	}, [isSessionLoading]);
 
 	// we want this to happen before returning a value so we are using "useMemo" and not "useEffect"
 	useMemo(() => {
 		if (!session && !isSessionLoading) {
+			console.log('@@@ useMemo2 change loading', { session, isSessionLoading });
 			isLoading.current = true;
 		}
 	}, [fetchSession]);
@@ -26,6 +28,7 @@ const useSession = () => {
 		}
 	}, [fetchSession]);
 
+	console.log('@@@ returning', isLoading.current);
 	return {
 		isSessionLoading: isLoading.current,
 		sessionToken: session,
