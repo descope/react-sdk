@@ -46,7 +46,6 @@ const authProviderWrapper =
 		<AuthProvider projectId={projectId}>{children}</AuthProvider>;
 describe('hooks', () => {
 	it('should throw error when used without provider', () => {
-		// expect().toThrowError();
 		let result;
 		({ result } = renderHook(useDescope));
 		expect(result.error?.message).toEqual(
