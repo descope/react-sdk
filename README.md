@@ -136,6 +136,15 @@ const App = () => {
 };
 ```
 
+Note: `useSession` triggers a single request to the Descope backend to attempt to refresh the session. If you **don't** `useSession` on your app, the session will not be refreshed automatically. If your app does not require `useSession`, you can trigger the refresh manually by calling `refresh` from `useDescope` hook. Example:
+
+```js
+const { refresh } = useDescope();
+useEffect(() => {
+	refresh();
+}, [refresh]);
+```
+
 **For more SDK usage examples refer to [docs](https://docs.descope.com/build/guides/client_sdks/)**
 
 #### Session token server validation (pass session token to server API)
