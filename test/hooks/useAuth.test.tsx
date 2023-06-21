@@ -45,17 +45,22 @@ const authProviderWrapper =
 		<AuthProvider projectId={projectId}>{children}</AuthProvider>;
 describe('hooks', () => {
 	it('should throw error when used without provider', () => {
-		expect(() => {
-			renderHook(() => useDescope());
-		}).toThrowError();
+		// expect().toThrowError();
+		let result;
+		({ result } = renderHook(useDescope));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 
-		expect(() => {
-			renderHook(() => useSession());
-		}).toThrowError();
+		({ result } = renderHook(useSession));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 
-		expect(() => {
-			renderHook(() => useUser());
-		}).toThrowError();
+		({ result } = renderHook(useUser));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 	});
 
 	it.each(['logoutAll', 'logout', 'otp.signIn.email'])(
