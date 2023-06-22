@@ -48,7 +48,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "2.5.1",
+		"@descope/web-component": "2.5.2",
 		"react-router-dom": "6.11.2"
 	},
 	"devDependencies": {
