@@ -2,7 +2,8 @@ import React from 'react';
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { renderHook, waitFor } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
+import { waitFor } from '@testing-library/react';
 import { AuthProvider, useSession } from '../../src';
 import useDescope from '../../src/hooks/useDescope';
 import useUser from '../../src/hooks/useUser';
@@ -45,17 +46,21 @@ const authProviderWrapper =
 		<AuthProvider projectId={projectId}>{children}</AuthProvider>;
 describe('hooks', () => {
 	it('should throw error when used without provider', () => {
-		expect(() => {
-			renderHook(() => useDescope());
-		}).toThrowError();
+		let result;
+		({ result } = renderHook(useDescope));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 
-		expect(() => {
-			renderHook(() => useSession());
-		}).toThrowError();
+		({ result } = renderHook(useSession));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 
-		expect(() => {
-			renderHook(() => useUser());
-		}).toThrowError();
+		({ result } = renderHook(useUser));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 	});
 
 	it.each(['logoutAll', 'logout', 'otp.signIn.email'])(
