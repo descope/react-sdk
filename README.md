@@ -17,9 +17,7 @@ npm i --save @descope/react-sdk
 
 ## Usage
 
-### Render it in your application
-
-#### Wrap your app with Auth Provider
+### Wrap your app with Auth Provider
 
 ```js
 import { AuthProvider } from '@descope/react-sdk';
@@ -39,11 +37,11 @@ const AppRoot = () => {
 };
 ```
 
-#### Use Descope to render specific flow
+### Use Descope to render specific flow
 
 You can use **default flows** or **provide flow id** directly to the Descope component
 
-##### 1. Default flows
+#### 1. Default flows
 
 ```js
 import { SignInFlow } from '@descope/react-sdk'
@@ -62,7 +60,7 @@ const App = () => {
 }
 ```
 
-##### 2. Provide flow id
+#### 2. Provide flow id
 
 ```js
 import { Descope } from '@descope/react-sdk'
@@ -96,7 +94,7 @@ const App = () => {
 }
 ```
 
-#### Use the `useDescope`, `useSession` and `useUser` hooks in your components in order to get authentication state, user details and utilities
+### Use the `useDescope`, `useSession` and `useUser` hooks in your components in order to get authentication state, user details and utilities
 
 This can be helpful to implement application-specific logic. Examples:
 
@@ -147,7 +145,7 @@ useEffect(() => {
 
 **For more SDK usage examples refer to [docs](https://docs.descope.com/build/guides/client_sdks/)**
 
-#### Session token server validation (pass session token to server API)
+### Session token server validation (pass session token to server API)
 
 When developing a full-stack application, it is common to have private server API which requires a valid session token:
 
@@ -160,7 +158,7 @@ There are 2 ways to achieve that:
 1. Using `getSessionToken` to get the token, and pass it on the `Authorization` Header (Recommended)
 2. Passing `sessionTokenViaCookie` boolean prop to the `AuthProvider` component (Use cautiously, session token may grow, especially in cases of using authorization, or adding custom claim)
 
-##### 1. Using `getSessionToken` to get the token
+#### 1. Using `getSessionToken` to get the token
 
 An example for api function, and passing the token on the `Authorization` header:
 
@@ -201,7 +199,7 @@ const Component = () => {
 }
 ```
 
-##### 2. Passing `sessionTokenViaCookie` boolean prop to the `AuthProvider`
+#### 2. Passing `sessionTokenViaCookie` boolean prop to the `AuthProvider`
 
 Passing `sessionTokenViaCookie` prop to `AuthProvider` component. Descope SDK will automatically store session token on the `DS` cookie.
 
@@ -227,7 +225,17 @@ Note:
 The session token cookie is set as a [`Secure`](https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.5) cookie. It will be sent only over HTTPS connections.
 In addition, some browsers (e.g. Safari) may not store `Secure` cookie if the hosted page is running on an HTTP protocol.
 
-#### Refresh token lifecycle
+### Helper Functions
+
+You can also use the following functions to assist with various actions managing your JWT.
+
+`getSessionToken()` - Get current session token.
+`getRefreshToken()` - Get current refresh token.
+`refresh(token = getRefreshToken())` - Force a refresh on current session token using an existing valid refresh token.
+`getJwtRoles(token = getSessionToken(), tenant = '')` - Get current roles from an existing session token. Provide tenant id for specific tenant roles.
+`getJwtPermissions(token = getSessionToken(), tenant = '')` - Fet current permissions from an existing session token. Provide tenant id for specific tenant permissions.
+
+### Refresh token lifecycle
 
 Descope SDK is automatically refreshes the session token when it is about to expire. This is done in the background using the refresh token, without any additional configuration.
 
@@ -297,14 +305,6 @@ DESCOPE_STEP_UP_FLOW_ID=step-up
 # Telemetry key
 DESCOPE_TELEMETRY_KEY=""
 ```
-
-## Helper Functions
-
-You can also use the following functions to assist with various actions managing your JWT.
-
-`refresh(token = getRefreshToken())` - Force a refresh on current session token using an existing valid refresh token.
-`getJwtRoles(token = getSessionToken(), tenant = '')` - Get current roles from an existing session token. Provide tenant id for specific tenant roles.
-`getJwtPermissions(token = getSessionToken(), tenant = '')` - Fet current permissions from an existing session token. Provide tenant id for specific tenant permissions.
 
 ## Learn More
 
