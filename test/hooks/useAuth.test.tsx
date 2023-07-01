@@ -2,7 +2,8 @@ import React from 'react';
 /* eslint-disable testing-library/no-node-access */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import createSdk from '@descope/web-js-sdk';
-import { renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
+import { waitFor } from '@testing-library/react';
 import { AuthProvider, useSession } from '../../src';
 import useDescope from '../../src/hooks/useDescope';
 import useUser from '../../src/hooks/useUser';
@@ -37,7 +38,7 @@ jest.mock('@descope/web-js-sdk', () => {
 // mock console.error to avoid those errors in tests
 jest.spyOn(console, 'error').mockImplementation(() => {});
 
-const { logout } = createSdk({ projectId: '' });
+const { logout, refresh } = createSdk({ projectId: '' });
 
 const authProviderWrapper =
 	(projectId: string) =>
@@ -45,17 +46,21 @@ const authProviderWrapper =
 		<AuthProvider projectId={projectId}>{children}</AuthProvider>;
 describe('hooks', () => {
 	it('should throw error when used without provider', () => {
-		expect(() => {
-			renderHook(() => useDescope());
-		}).toThrowError();
+		let result;
+		({ result } = renderHook(useDescope));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 
-		expect(() => {
-			renderHook(() => useSession());
-		}).toThrowError();
+		({ result } = renderHook(useSession));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 
-		expect(() => {
-			renderHook(() => useUser());
-		}).toThrowError();
+		({ result } = renderHook(useUser));
+		expect(result.error?.message).toEqual(
+			'You can only use this hook in the context of <AuthProvider />'
+		);
 	});
 
 	it.each(['logoutAll', 'logout', 'otp.signIn.email'])(
@@ -111,5 +116,25 @@ describe('hooks', () => {
 		});
 		expect(result.current.isAuthenticated).toEqual(false);
 		expect(result.current.sessionToken).toEqual(undefined);
+	});
+
+	it('should refresh session only once when useSession rendered twice', async () => {
+		const wrapper = authProviderWrapper('project1');
+
+		const { result, rerender } = renderHook(() => useSession(), {
+			wrapper
+		});
+
+		expect(result.current.isSessionLoading).toEqual(true);
+
+		await waitFor(() => {
+			expect(refresh).toBeCalled();
+		});
+
+		// render again
+		rerender();
+
+		expect(result.current.isSessionLoading).toEqual(false);
+		expect(refresh).toBeCalledTimes(1);
 	});
 });
