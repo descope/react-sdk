@@ -124,4 +124,4 @@ jobs:
       - run: npm rebuild && npm run prepare --if-present
       - name: License validation
         shell: bash
-        run: echo no validation
+        run: ./thirdPartyLicenseCollector_linux_amd64 -npm-project .
