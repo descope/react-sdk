@@ -59,6 +59,7 @@ export interface DescopeProps {
 	debug?: boolean;
 	telemetryKey?: string;
 	redirectUrl?: string;
+	errorTransformer?: (error: { text: string; type: string }) => string;
 }
 
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;

@@ -23,6 +23,16 @@ const Login = () => {
 		setErrorMessage('Something went wrong');
 	}, [setErrorMessage]);
 
+	const errorTransformer = useCallback(
+		(error: { text: string; type: string }) => {
+			const translationMap = {
+				SAMLStartFailed: 'Failed to start SAML flow'
+			};
+			return translationMap[error.type] || error.text;
+		},
+		[]
+	);
+
 	if (isSessionLoading) {
 		return <div>Loading...</div>;
 	}
@@ -37,6 +47,7 @@ const Login = () => {
 				redirectUrl={process.env.DESCOPE_REDIRECT_URL}
 				tenant={process.env.DESCOPE_TENANT_ID}
 				telemetryKey={process.env.DESCOPE_TELEMETRY_KEY}
+				errorTransformer={errorTransformer}
 			/>
 			{errorMessage && (
 				<div
