@@ -90,21 +90,21 @@ const App = () => {
             // - "skipFirstScreen": automatically focus on the first input of each screen, except first screen
             // autoFocus="skipFirstScreen"
 
-			// errorTransformer is a function that receives an error object and returns a string. The returned string will be displayed to the user.
-			// NOTE: errorTransformer is not required. If not provided, the error object will be displayed as is.
-			// Example:
-			// const errorTransformer = useCallback(
-			// 	(error: { text: string; type: string }) => {
-			// 		const translationMap = {
-			// 			SAMLStartFailed: 'Failed to start SAML flow'
-			// 		};
-			// 		return translationMap[error.type] || error.text;
-			// 	},
-			// 	[]
-			// );
-			// ...
-			// errorTransformer={errorTransformer}
-			// ...
+            // errorTransformer is a function that receives an error object and returns a string. The returned string will be displayed to the user.
+            // NOTE: errorTransformer is not required. If not provided, the error object will be displayed as is.
+            // Example:
+            // const errorTransformer = useCallback(
+            // 	(error: { text: string; type: string }) => {
+            // 		const translationMap = {
+            // 			SAMLStartFailed: 'Failed to start SAML flow'
+            // 		};
+            // 		return translationMap[error.type] || error.text;
+            // 	},
+            // 	[]
+            // );
+            // ...
+            // errorTransformer={errorTransformer}
+            // ...
         />
     )
 }
