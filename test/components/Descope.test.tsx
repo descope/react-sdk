@@ -104,6 +104,20 @@ describe('Descope', () => {
 		expect(ref).toHaveBeenCalledWith(document.querySelector('descope-wc'));
 	});
 
+	it('should pur error transformer on the component when passing it', async () => {
+		const errorTransformer = jest.fn();
+		renderWithProvider(
+			<Descope flowId="flow-1" errorTransformer={errorTransformer} />
+		);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
+		expect(document.querySelector('descope-wc')).toHaveProperty(
+			`errorTransformer`,
+			errorTransformer
+		);
+	});
+
 	it('should add descope headers to request', async () => {
 		const ref = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" ref={ref} />);

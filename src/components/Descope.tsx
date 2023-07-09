@@ -56,7 +56,8 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			debug,
 			telemetryKey,
 			redirectUrl,
-			autoFocus
+			autoFocus,
+			errorTransformer
 		},
 		ref
 	) => {
@@ -93,6 +94,12 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			};
 		}, [innerRef, onError, handleSuccess]);
 
+		useEffect(() => {
+			if (innerRef) {
+				innerRef.errorTransformer = errorTransformer;
+			}
+		}, [innerRef, errorTransformer]);
+
 		return (
 			/**
 			 * in order to avoid redundant remounting of the WC, we are wrapping it with a form element
@@ -119,10 +126,5 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 		);
 	}
 );
-
-Descope.defaultProps = {
-	onError: undefined,
-	onSuccess: undefined
-};
 
 export default Descope;
