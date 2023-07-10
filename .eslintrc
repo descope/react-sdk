@@ -108,7 +108,8 @@
 					"**/*.test.*",
 					"**/*.spec.*",
 					"**/testUtils/**",
-					"jest.config.ts"
+					"jest.config.ts",
+					"examples/**"
 				]
 			}
 		]
