@@ -48,8 +48,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "2.6.1",
-		"react-router-dom": "6.13.0"
+		"@descope/web-component": "2.6.3"
 	},
 	"devDependencies": {
 		"@babel/core": "7.22.5",
@@ -84,7 +83,7 @@
 		"eslint-plugin-n": "15.7.0",
 		"eslint-plugin-no-only-tests": "3.1.0",
 		"eslint-plugin-prefer-arrow": "1.2.3",
-		"eslint-plugin-prettier": "4.2.1",
+		"eslint-plugin-prettier": "^3.0.0",
 		"eslint-plugin-promise": "6.1.1",
 		"eslint-plugin-react": "7.32.2",
 		"eslint-plugin-react-hooks": "4.6.0",
@@ -93,9 +92,11 @@
 		"jest": "^27.3.1",
 		"jest-extended": "^3.2.2",
 		"lint-staged": "^13.0.3",
-		"pretty-quick": "^3.1.3",
+		"prettier": "^3.0.0",
+		"pretty-quick": "3.1.3",
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
+		"react-router-dom": "6.13.0",
 		"rollup": "^2.62.0",
 		"rollup-plugin-auto-external": "^2.0.0",
 		"rollup-plugin-browsersync": "^1.3.3",
@@ -111,8 +112,10 @@
 		"typescript": "^4.5.3"
 	},
 	"peerDependencies": {
-		"@descope/web-js-sdk": "1.3.5",
 		"@types/react": ">=17",
 		"react": ">=17"
+	},
+	"optionalDependencies": {
+		"@descope/web-js-sdk": ">=1"
 	}
 }
