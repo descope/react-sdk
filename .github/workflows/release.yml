@@ -25,8 +25,8 @@ jobs:
         id: get_token
         uses: tibdex/github-app-token@v1
         with:
-          private_key: ${{ secrets.APP_PEM }}
-          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.RELEASE_APP_PEM }}
+          app_id: ${{ secrets.RELEASE_APP_ID }}
 
       - name: Automated Version Bump
         id: version-bump
