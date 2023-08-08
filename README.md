@@ -75,6 +75,9 @@ const App = () => {
             // theme can be "light", "dark" or "os", which auto select a theme based on the OS theme. Default is "light"
             // theme="dark"
 
+            // locale can be any supported locale which the flow's screen translated to, if not provided, the locale is taken from the browser's locale.
+            // locale="en"
+
             // debug can be set to true to enable debug mode
             // debug={true}
 
@@ -292,6 +295,7 @@ See the following table for customization environment variables for the example 
 | DESCOPE_FLOW_ID         | Which flow ID to use in the login page                                                                        | **sign-up-or-in** |
 | DESCOPE_BASE_URL        | Custom Descope base URL                                                                                       | None              |
 | DESCOPE_THEME           | Flow theme                                                                                                    | None              |
+| DESCOPE_LOCALE          | Flow locale                                                                                                   | Browser's locale  |
 | DESCOPE_REDIRECT_URL    | Flow redirect URL for OAuth/SSO/Magic Link/Enchanted Link                                                     | None              |
 | DESCOPE_TENANT_ID       | Flow tenant ID for SSO/SAML                                                                                   | None              |
 | DESCOPE_DEBUG_MODE      | **"true"** - Enable debugger</br>**"false"** - Disable flow debugger                                          | None              |
@@ -310,6 +314,8 @@ DESCOPE_FLOW_ID=""
 DESCOPE_BASE_URL=""
 # Set flow theme to dark
 DESCOPE_THEME=dark
+# Set flow locale, default is browser's locale
+DESCOPE_LOCALE=""
 # Flow Redirect URL
 DESCOPE_REDIRECT_URL=""
 # Tenant ID
