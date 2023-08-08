@@ -24,6 +24,7 @@ const DescopeWC = lazy(async () => {
 			innerRef,
 			tenant,
 			theme,
+			locale,
 			debug,
 			telemetryKey,
 			redirectUrl,
@@ -36,6 +37,7 @@ const DescopeWC = lazy(async () => {
 				ref={innerRef}
 				tenant={tenant}
 				theme={theme}
+				locale={locale}
 				debug={debug}
 				telemetryKey={telemetryKey}
 				redirect-url={redirectUrl}
@@ -53,6 +55,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			onError,
 			tenant,
 			theme,
+			locale,
 			debug,
 			telemetryKey,
 			redirectUrl,
@@ -116,6 +119,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						innerRef={setInnerRef}
 						tenant={tenant}
 						theme={theme}
+						locale={locale}
 						debug={debug}
 						telemetryKey={telemetryKey}
 						redirectUrl={redirectUrl}

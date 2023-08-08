@@ -165,4 +165,14 @@ describe('Descope', () => {
 			);
 		});
 	});
+
+	it('should render web-component with locale when provided', async () => {
+		renderWithProvider(<Descope flowId="flow-1" locale="de" />);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toHaveAttribute(
+				'locale',
+				'de'
+			);
+		});
+	});
 });
