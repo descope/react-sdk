@@ -1,4 +1,9 @@
-import type { AutoFocusOptions, ThemeOptions } from '@descope/web-component';
+import type {
+	AutoFocusOptions,
+	MessageLog,
+	MessageLogType,
+	ThemeOptions
+} from '@descope/web-component';
 import DescopeWc from '@descope/web-component';
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
@@ -52,6 +57,7 @@ export interface DescopeProps {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
+	onNext?: (e: CustomEvent<MessageLog>) => void;
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
 	theme?: ThemeOptions;
@@ -64,4 +70,5 @@ export interface DescopeProps {
 	errorTransformer?: (error: { text: string; type: string }) => string;
 }
 
+export type { MessageLog, MessageLogType };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;

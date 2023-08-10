@@ -16,3 +16,5 @@ export {
 	getRefreshToken,
 	getSessionToken
 } from './sdk';
+
+export type { MessageLog, MessageLogType } from './types';
