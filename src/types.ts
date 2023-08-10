@@ -57,7 +57,7 @@ export interface DescopeProps {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
-	onNext?: (e: CustomEvent<MessageLog>) => void;
+	onLog?: (e: CustomEvent<MessageLog>) => void;
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
 	theme?: ThemeOptions;

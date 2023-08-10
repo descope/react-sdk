@@ -76,14 +76,14 @@ describe('Descope', () => {
 	});
 
 	it('should register to the next event when received an onNext cb', async () => {
-		const onNext = jest.fn();
-		renderWithProvider(<Descope flowId="flow-1" onNext={onNext} />);
+		const onLog = jest.fn();
+		renderWithProvider(<Descope flowId="flow-1" onLog={onLog} />);
 		await waitFor(() => {
 			expect(document.querySelector('descope-wc')).toBeInTheDocument();
 		});
-		fireEvent(document.querySelector('descope-wc'), new CustomEvent('next'));
+		fireEvent(document.querySelector('descope-wc'), new CustomEvent('log'));
 
-		expect(onNext).toHaveBeenCalled();
+		expect(onLog).toHaveBeenCalled();
 	});
 
 	it('should register to the success event when received an onSuccess cb', async () => {
