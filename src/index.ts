@@ -17,4 +17,4 @@ export {
 	getSessionToken
 } from './sdk';
 
-export type { MessageLog, MessageLogType } from './types';
+export type { MessageLog, MessageLogLevel } from './types';

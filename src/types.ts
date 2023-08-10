@@ -1,7 +1,7 @@
 import type {
 	AutoFocusOptions,
 	MessageLog,
-	MessageLogType,
+	MessageLogLevel,
 	ThemeOptions
 } from '@descope/web-component';
 import DescopeWc from '@descope/web-component';
@@ -70,5 +70,5 @@ export interface DescopeProps {
 	errorTransformer?: (error: { text: string; type: string }) => string;
 }
 
-export type { MessageLog, MessageLogType };
+export type { MessageLog, MessageLogLevel };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
