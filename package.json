@@ -48,7 +48,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "2.7.1"
+		"@descope/web-component": "2.7.2"
 	},
 	"devDependencies": {
 		"@babel/core": "7.22.9",
@@ -60,7 +60,7 @@
 		"@rollup/plugin-node-resolve": "^15.0.0",
 		"@rollup/plugin-replace": "^5.0.0",
 		"@rollup/plugin-typescript": "^8.3.0",
-		"@testing-library/jest-dom": "5.16.5",
+		"@testing-library/jest-dom": "5.17.0",
 		"@testing-library/react": "12.1.5",
 		"@testing-library/react-hooks": "8.0.1",
 		"@testing-library/user-event": "14.4.3",
