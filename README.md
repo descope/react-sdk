@@ -108,6 +108,20 @@ const App = () => {
             // ...
             // errorTransformer={errorTransformer}
             // ...
+
+
+            // logger is an object describing how to log info, warn and errors.
+            // NOTE: logger is not required. If not provided, the logs will be printed by console.
+            // Example:
+            // const logger = {
+            //  ...console,
+            // 	error: { text: string; type: string }) => {
+            //      console.error('OH NOO');
+            //  },
+            // }
+            // ...
+            // logger={logger}
+            // ...
         />
     )
 }

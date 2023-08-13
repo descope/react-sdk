@@ -1,7 +1,6 @@
 import type {
 	AutoFocusOptions,
-	MessageLog,
-	MessageLogLevel,
+	ILogger,
 	ThemeOptions
 } from '@descope/web-component';
 import DescopeWc from '@descope/web-component';
@@ -57,7 +56,7 @@ export interface DescopeProps {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
-	onLog?: (e: CustomEvent<MessageLog>) => void;
+	logger?: ILogger;
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
 	theme?: ThemeOptions;
@@ -70,5 +69,5 @@ export interface DescopeProps {
 	errorTransformer?: (error: { text: string; type: string }) => string;
 }
 
-export type { MessageLog, MessageLogLevel };
+export type { ILogger };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
