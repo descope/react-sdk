@@ -3,11 +3,11 @@
 	"extends": ["local>descope/renovate-config"],
 	"packageRules": [
 		{
-			"matchPackageNames": ["react", "react-dom"],
+			"matchDepNames": ["react", "react-dom"],
 			"allowedVersions": "<=17"
 		},
 		{
-			"matchPackageNames": [
+			"matchDepNames": [
 				"react",
 				"react-dom",
 				"@testing-library/react-hooks",
