@@ -34,21 +34,6 @@ const Login = () => {
 		[]
 	);
 
-	const logger = useMemo(
-		() => ({
-			info: (message: string, description: string, state: any) => {
-				console.log(message, description, JSON.stringify(state));
-			},
-			warn: (title: string, description: string) => {
-				console.warn(`WARN: ${title}`, description);
-			},
-			error: (title: string, description: string) => {
-				console.error(`ERROR: ${title}`, description);
-			}
-		}),
-		[]
-	);
-
 	if (isSessionLoading) {
 		return <div>Loading...</div>;
 	}
@@ -58,7 +43,6 @@ const Login = () => {
 				flowId={process.env.DESCOPE_FLOW_ID || 'sign-up-or-in'}
 				onSuccess={onSuccess}
 				onError={onError}
-				logger={logger}
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
 				theme={process.env.DESCOPE_THEME as any}
 				locale={process.env.DESCOPE_LOCALE as string}
