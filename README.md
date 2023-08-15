@@ -114,7 +114,12 @@ const App = () => {
             // NOTE: logger is not required. If not provided, the logs will be printed to the console.
             // Example:
             // const logger = {
-            //  ...console,
+            // 	info: (title: string, description: string, state: any) => {
+            //      console.log(title, description, JSON.stringify(state));
+            //  },
+            // 	warn: (title: string, description: string) => {
+            //      console.warn(title);
+            //  },
             // 	error: (title: string, description: string) => {
             //      console.error('OH NOO');
             //  },
