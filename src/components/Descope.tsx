@@ -53,6 +53,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			flowId,
 			onSuccess,
 			onError,
+			logger,
 			tenant,
 			theme,
 			locale,
@@ -102,6 +103,12 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 				innerRef.errorTransformer = errorTransformer;
 			}
 		}, [innerRef, errorTransformer]);
+
+		useEffect(() => {
+			if (innerRef && logger) {
+				innerRef.logger = logger;
+			}
+		}, [innerRef, logger]);
 
 		return (
 			/**
