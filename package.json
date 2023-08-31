@@ -51,8 +51,8 @@
 		"@descope/web-component": "2.8.9"
 	},
 	"devDependencies": {
-		"@babel/core": "7.22.9",
-		"@babel/preset-env": "7.22.9",
+		"@babel/core": "7.22.10",
+		"@babel/preset-env": "7.22.10",
 		"@babel/preset-react": "7.22.5",
 		"@babel/preset-typescript": "7.22.5",
 		"@open-wc/rollup-plugin-html": "^1.2.5",
