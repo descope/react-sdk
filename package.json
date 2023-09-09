@@ -48,7 +48,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "2.11.2"
+		"@descope/web-component": "2.11.3"
 	},
 	"devDependencies": {
 		"@babel/core": "7.22.10",
