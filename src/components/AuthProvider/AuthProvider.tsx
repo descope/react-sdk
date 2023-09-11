@@ -24,9 +24,9 @@ interface IAuthProviderProps {
 
 const AuthProvider: FC<IAuthProviderProps> = ({
 	projectId,
-	baseUrl,
-	sessionTokenViaCookie,
-	children
+	baseUrl = '',
+	sessionTokenViaCookie = false,
+	children = undefined
 }) => {
 	const [user, setUser] = useState<User>();
 	const [session, setSession] = useState<string>();
@@ -100,12 +100,6 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		]
 	);
 	return <Context.Provider value={value}>{children}</Context.Provider>;
-};
-
-AuthProvider.defaultProps = {
-	baseUrl: '',
-	children: undefined,
-	sessionTokenViaCookie: false
 };
 
 export default AuthProvider;
