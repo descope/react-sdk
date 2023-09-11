@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Descope, useSession } from '../../src';
@@ -44,6 +45,7 @@ const Login = () => {
 				onError={onError}
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
 				theme={process.env.DESCOPE_THEME as any}
+				locale={process.env.DESCOPE_LOCALE as string}
 				redirectUrl={process.env.DESCOPE_REDIRECT_URL}
 				tenant={process.env.DESCOPE_TENANT_ID}
 				telemetryKey={process.env.DESCOPE_TELEMETRY_KEY}

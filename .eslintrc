@@ -101,6 +101,7 @@
 		"import/no-dynamic-require": 2,
 		"import/no-self-import": 2,
 		"import/no-useless-path-segments": 2,
+		"react/require-default-props": [2, { "functions": "defaultArguments" }],
 		"import/no-extraneous-dependencies": [
 			2,
 			{

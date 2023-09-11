@@ -75,6 +75,20 @@ describe('Descope', () => {
 		expect(onError).toHaveBeenCalled();
 	});
 
+	it('should pass logger and update web components logger', async () => {
+		const logger = { info: jest.fn(), error: jest.fn(), warn: jest.fn() };
+		renderWithProvider(<Descope flowId="flow-1" logger={logger} />);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
+		fireEvent(document.querySelector('descope-wc'), new CustomEvent('log'));
+
+		expect(document.querySelector('descope-wc')).toHaveProperty(
+			`logger`,
+			logger
+		);
+	});
+
 	it('should register to the success event when received an onSuccess cb', async () => {
 		const onSuccess = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" onSuccess={onSuccess} />);
@@ -162,6 +176,16 @@ describe('Descope', () => {
 			expect(document.querySelector('descope-wc')).toHaveAttribute(
 				'redirect-url',
 				'http://custom.url'
+			);
+		});
+	});
+
+	it('should render web-component with locale when provided', async () => {
+		renderWithProvider(<Descope flowId="flow-1" locale="de" />);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toHaveAttribute(
+				'locale',
+				'de'
 			);
 		});
 	});

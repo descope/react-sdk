@@ -1,4 +1,8 @@
-import type { AutoFocusOptions, ThemeOptions } from '@descope/web-component';
+import type {
+	AutoFocusOptions,
+	ILogger,
+	ThemeOptions
+} from '@descope/web-component';
 import DescopeWc from '@descope/web-component';
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
@@ -52,9 +56,12 @@ export interface DescopeProps {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
+	logger?: ILogger;
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
 	theme?: ThemeOptions;
+	// If locale is not provided - the browser's locale will be used
+	locale?: string;
 	autoFocus?: AutoFocusOptions;
 	debug?: boolean;
 	telemetryKey?: string;
@@ -62,4 +69,5 @@ export interface DescopeProps {
 	errorTransformer?: (error: { text: string; type: string }) => string;
 }
 
+export type { ILogger };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;

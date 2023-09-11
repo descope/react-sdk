@@ -24,6 +24,7 @@ const DescopeWC = lazy(async () => {
 			innerRef,
 			tenant,
 			theme,
+			locale,
 			debug,
 			telemetryKey,
 			redirectUrl,
@@ -36,6 +37,7 @@ const DescopeWC = lazy(async () => {
 				ref={innerRef}
 				tenant={tenant}
 				theme={theme}
+				locale={locale}
 				debug={debug}
 				telemetryKey={telemetryKey}
 				redirect-url={redirectUrl}
@@ -51,8 +53,10 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			flowId,
 			onSuccess,
 			onError,
+			logger,
 			tenant,
 			theme,
+			locale,
 			debug,
 			telemetryKey,
 			redirectUrl,
@@ -100,6 +104,12 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			}
 		}, [innerRef, errorTransformer]);
 
+		useEffect(() => {
+			if (innerRef && logger) {
+				innerRef.logger = logger;
+			}
+		}, [innerRef, logger]);
+
 		return (
 			/**
 			 * in order to avoid redundant remounting of the WC, we are wrapping it with a form element
@@ -116,6 +126,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						innerRef={setInnerRef}
 						tenant={tenant}
 						theme={theme}
+						locale={locale}
 						debug={debug}
 						telemetryKey={telemetryKey}
 						redirectUrl={redirectUrl}
