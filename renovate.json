@@ -1,19 +1,40 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["local>descope/renovate-config"],
-	"packageRules": [
-		{
-			"matchDepNames": ["react", "react-dom"],
-			"allowedVersions": "<=17"
-		},
-		{
-			"matchDepNames": [
-				"react",
-				"react-dom",
-				"@testing-library/react-hooks",
-				"@types/react"
-			],
-			"enabled": false
-		}
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["local>descope/renovate-config"],
+  "prCreation": "immediate",
+  "dependencyDashboard": true,
+  "dependencyDashboardApproval": false,
+  "docker-compose": {
+    "digest": {
+      "enabled": false
+    },
+    "automerge": true,
+    "minimumReleaseAge": null
+  },
+  "schedule": ["at any time"],
+  "packageRules": [
+    {
+      "matchCategories": ["docker"],
+      "digest": {
+        "enabled": false
+      }
+    },
+    {
+      "groupName": "descope services images",
+      "matchPackagePatterns": ["ghcr.io/descope/.*"],
+      "matchDatasources": ["docker"],
+      "versioning": "regex:^(?<compatibility>[a-z].*)-(?<major>\\d+).(?<minor>\\d+).(?<patch>\\d+)-(?<build>[\\d]+)$",
+      "recreateWhen": "always"
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [".*"],
+      "matchStrings": [
+        ".*amiFilter=(?<packageName>.*?)\n(.*currentImageName=(?<currentDigest>.*?)\n)?(.*\n)?.*?(?<depName>[a-zA-Z0-9-_:]*)[ ]*?[:|=][ ]*?[\"|']?(?<currentValue>ami-[a-z0-9]{17})[\"|']?.*"
+      ],
+      "datasourceTemplate": "aws-machine-image",
+      "versioningTemplate": "aws-machine-image"
+    }
+  ]
 }
