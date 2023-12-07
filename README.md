@@ -123,7 +123,7 @@ const App = () => {
             // NOTE: client is not required. If not provided, context key will be empty.
             // Example:
             // ...
-            // client={{ isMobile: false }}
+            // client={{ version: "1.2.0" }}
             // ...
 
 
