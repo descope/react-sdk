@@ -67,6 +67,10 @@ export interface DescopeProps {
 	telemetryKey?: string;
 	redirectUrl?: string;
 	errorTransformer?: (error: { text: string; type: string }) => string;
+	// use to override screen's form inputs in flow execution
+	form?: Record<string, any>;
+	// use to override client context in flow execution
+	client?: Record<string, any>;
 }
 
 export type { ILogger };

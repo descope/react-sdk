@@ -43,6 +43,8 @@ const Login = () => {
 				flowId={process.env.DESCOPE_FLOW_ID || 'sign-up-or-in'}
 				onSuccess={onSuccess}
 				onError={onError}
+				form={{ email: 'predefinedname@domain.com' }} // found in context key: form.email
+				client={{ isMobile: false }} // found in context key: client.isMobile
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
 				theme={process.env.DESCOPE_THEME as any}
 				locale={process.env.DESCOPE_LOCALE as string}

@@ -4,6 +4,7 @@ import React, {
 	useCallback,
 	useEffect,
 	useImperativeHandle,
+	useMemo,
 	useState
 } from 'react';
 import { baseHeaders } from '../constants';
@@ -26,8 +27,9 @@ const DescopeWC = lazy(async () => {
 			theme,
 			locale,
 			debug,
-			telemetryKey,
 			redirectUrl,
+			client,
+			form,
 			autoFocus
 		}) => (
 			<descope-wc
@@ -39,7 +41,8 @@ const DescopeWC = lazy(async () => {
 				theme={theme}
 				locale={locale}
 				debug={debug}
-				telemetryKey={telemetryKey}
+				client={client}
+				form={form}
 				redirect-url={redirectUrl}
 				auto-focus={autoFocus}
 			/>
@@ -58,6 +61,8 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			theme,
 			locale,
 			debug,
+			client,
+			form,
 			telemetryKey,
 			redirectUrl,
 			autoFocus,
@@ -110,6 +115,14 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			}
 		}, [innerRef, logger]);
 
+		const { form: initialForm, client: initialClient } = useMemo(
+			() => ({
+				form: JSON.stringify(form || {}),
+				client: JSON.stringify(client || {})
+			}),
+			[form, client]
+		);
+
 		return (
 			/**
 			 * in order to avoid redundant remounting of the WC, we are wrapping it with a form element
@@ -128,6 +141,8 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						theme={theme}
 						locale={locale}
 						debug={debug}
+						form={initialForm}
+						client={initialClient}
 						telemetryKey={telemetryKey}
 						redirectUrl={redirectUrl}
 						autoFocus={autoFocus}
