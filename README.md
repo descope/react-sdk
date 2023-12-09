@@ -110,6 +110,23 @@ const App = () => {
             // ...
 
 
+            // form is an object the initial form context that is used in screens inputs in the flow execution.
+            // Used to inject predifined input values on flow start such as custom inputs, custom attrbiutes and other inputs.
+            // NOTE: form is not required. If not provided, 'form' context key will be empty before user input.
+            // Example:
+            // ...
+            // form={{ email: "predefinedname@domain.com",  firstName: "test", "customAttribute.test": "aaaa", "myCustomInput": 12 }}
+            // ...
+
+
+            // client is an object the initial client context in the flow execution.
+            // NOTE: client is not required. If not provided, context key will be empty.
+            // Example:
+            // ...
+            // client={{ version: "1.2.0" }}
+            // ...
+
+
             // logger is an object describing how to log info, warn and errors.
             // NOTE: logger is not required. If not provided, the logs will be printed to the console.
             // Example:
