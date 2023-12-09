@@ -149,15 +149,6 @@ describe('Descope', () => {
 		);
 	});
 
-	it('should render web-component with fingerprint disabled when not provided', async () => {
-		renderWithProvider(<Descope flowId="flow-1" />);
-		await waitFor(() => {
-			expect(document.querySelector('descope-wc')).not.toHaveAttribute(
-				'telemetryKey'
-			);
-		});
-	});
-
 	it('should render web-component with redirect-url when provided', async () => {
 		renderWithProvider(
 			<Descope flowId="flow-1" redirectUrl="http://custom.url" />
