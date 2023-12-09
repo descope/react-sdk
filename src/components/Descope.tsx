@@ -115,7 +115,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			}
 		}, [innerRef, logger]);
 
-		const { form: initialForm, client: initialClient } = useMemo(
+		const { form: stringifiedForm, client: stringifiedClient } = useMemo(
 			() => ({
 				form: JSON.stringify(form || {}),
 				client: JSON.stringify(client || {})
@@ -141,8 +141,8 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						theme={theme}
 						locale={locale}
 						debug={debug}
-						form={initialForm}
-						client={initialClient}
+						form={stringifiedForm}
+						client={stringifiedClient}
 						telemetryKey={telemetryKey}
 						redirectUrl={redirectUrl}
 						autoFocus={autoFocus}

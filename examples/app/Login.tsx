@@ -44,7 +44,7 @@ const Login = () => {
 				onSuccess={onSuccess}
 				onError={onError}
 				form={{ email: 'predefinedname@domain.com' }} // found in context key: form.email
-				client={{ isMobile: false }} // found in context key: client.isMobile
+				client={{ version: '1.0.2' }} // found in context key: client.version
 				debug={process.env.DESCOPE_DEBUG_MODE === 'true'}
 				theme={process.env.DESCOPE_THEME as any}
 				locale={process.env.DESCOPE_LOCALE as string}
