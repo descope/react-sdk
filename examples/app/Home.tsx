@@ -8,13 +8,17 @@ const getUserDisplayName = (user?: UserResponse) =>
 	user?.name || user?.loginIds?.[0] || '';
 
 const Home = () => {
-	const { logout } = useDescope();
+	// useSession retrieves authentication state, session loading status, and session token
 	const { isAuthenticated, isSessionLoading, sessionToken } = useSession();
+	// useUser retrieves the logged in user information
 	const { user } = useUser();
+	// useDescope retrieves Descope SDK for further operations related to authentication
+	// such as logout
+	const sdk = useDescope();
 
 	const onLogout = useCallback(() => {
-		logout();
-	}, [logout]);
+		sdk.logout();
+	}, [sdk]);
 
 	const onFetch = useCallback(async () => {
 		const data = await fetchData();
