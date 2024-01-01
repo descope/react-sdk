@@ -111,7 +111,7 @@ const App = () => {
 
 
             // form is an object the initial form context that is used in screens inputs in the flow execution.
-            // Used to inject predifined input values on flow start such as custom inputs, custom attrbiutes and other inputs.
+            // Used to inject predefined input values on flow start such as custom inputs, custom attributes and other inputs.
             // Keys passed can be accessed in flows actions, conditions and screens prefixed with "form.".
             // NOTE: form is not required. If not provided, 'form' context key will be empty before user input.
             // Example:
