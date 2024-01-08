@@ -370,6 +370,24 @@ DESCOPE_STEP_UP_FLOW_ID=step-up
 DESCOPE_TELEMETRY_KEY=""
 ```
 
+## Q & A
+
+### I updated the user in my backend, but the user / session token are not updated in the frontend
+
+The Descope SDK caches the user and session token in the frontend. If you update the user in your backend (using Descope Management SDK/API for example), you can call `me` / `refresh` from `useDescope` hook to refresh the user and session token. Example:
+
+```js
+const sdk = useDescope();
+
+const handleUpdateUser = useCallback(() => {
+	myBackendUpdateUser().then(() => {
+		sdk.me();
+		// or
+		sdk.refresh();
+	});
+}, [sdk]);
+```
+
 ## Learn More
 
 To learn more please see the [Descope Documentation and API reference page](https://docs.descope.com/).
