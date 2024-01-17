@@ -52,7 +52,7 @@ export interface IContext {
 	setSession: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export interface DescopeProps {
+export type DescopeProps = {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
@@ -71,7 +71,7 @@ export interface DescopeProps {
 	form?: Record<string, any>;
 	// use to override client context in flow execution
 	client?: Record<string, any>;
-}
+};
 
 export type { ILogger };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
