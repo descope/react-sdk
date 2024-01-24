@@ -10,12 +10,27 @@ import React, {
 import { baseHeaders } from '../constants';
 import Context from '../hooks/Context';
 import { DescopeProps } from '../types';
+import { getGlobalSdk } from '../sdk';
 
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
 const DescopeWC = lazy(async () => {
 	const module = await import('@descope/web-component');
 	// we want to override the web-component base headers so we can tell that is was used via the React SDK
-	module.default.sdkConfigOverrides = { baseHeaders };
+	module.default.sdkConfigOverrides = {
+		baseHeaders,
+		// the inner web-component will not persist the tokens
+		// So the global SDK hooks will handle the tokens according to the SDK configuration
+		persistTokens: false,
+		hooks: {
+			get beforeRequest() {
+				// Done we can use the same hooks in the web-component according to the SDK configuration
+				return getGlobalSdk().httpClient.hooks.beforeRequest;
+			},
+			set beforeRequest(_) {
+				/* empty */
+			}
+		}
+	};
 
 	return {
 		default: ({
