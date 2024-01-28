@@ -13,7 +13,7 @@ const Layout = () => (
 				margin: 'auto',
 				border: '1px solid lightgray',
 				padding: 20,
-				// maxWidth: '400px',
+				maxWidth: '600px',
 				boxShadow: '13px 13px 20px #cbced1, -13px -13px 20px #fff',
 				background: '#ecf0f3',
 				position: 'relative',
