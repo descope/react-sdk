@@ -14,6 +14,7 @@ Object.defineProperty(global, 'Response', {
 });
 
 jest.mock('@descope/web-component', () => ({ default: {} }));
+jest.mock('@descope/user-management-widget', () => ({ default: {} }));
 
 jest.mock('@descope/web-js-sdk', () => {
 	const sdk = {
