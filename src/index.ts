@@ -6,6 +6,7 @@ export {
 	SignUpOrInFlow
 } from './components/DefaultFlows';
 export { default as Descope } from './components/Descope';
+export { default as UserManagement } from './components/UsersManagement';
 export { default as useDescope } from './hooks/useDescope';
 export { default as useSession } from './hooks/useSession';
 export { default as useUser } from './hooks/useUser';
