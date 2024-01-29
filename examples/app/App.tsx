@@ -4,6 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import StepUp from './StepUp';
 import { useSession } from '../../src';
+import ManageUsers from './ManageUsers';
 
 const Layout = () => (
 	<div style={{ height: '100vh', position: 'relative' }}>
@@ -48,6 +49,14 @@ const App = () => (
 				element={
 					<ProtectedRoute>
 						<Home />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/user-management"
+				element={
+					<ProtectedRoute>
+						<ManageUsers />
 					</ProtectedRoute>
 				}
 			/>
