@@ -15,19 +15,19 @@ import { getGlobalSdk } from '../sdk';
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
 const DescopeWC = lazy(async () => {
 	const module = await import('@descope/web-component');
-	// we want to override the web-component base headers so we can tell that is was used via the React SDK
 	module.default.sdkConfigOverrides = {
+		// Overrides the web-component's base headers to indicate usage via the React SDK
 		baseHeaders,
-		// the inner web-component will not persist the tokens
-		// So the global SDK hooks will handle the tokens according to the SDK configuration
+		// Disables token persistence within the web-component to delegate token management
+		// to the global SDK hooks. This ensures token handling aligns with the SDK's configuration,
+		// and web-component requests leverage the global SDK's beforeRequest hooks for consistency
 		persistTokens: false,
 		hooks: {
 			get beforeRequest() {
-				// Done we can use the same hooks in the web-component according to the SDK configuration
+				// Retrieves the beforeRequest hook from the global SDK, which is initialized
+				// within the AuthProvider using the desired configuration. This approach ensures
+				// the web-component utilizes the same beforeRequest hooks as the global SDK
 				return getGlobalSdk().httpClient.hooks.beforeRequest;
-			},
-			set beforeRequest(_) {
-				/* empty */
 			}
 		}
 	};
