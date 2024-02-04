@@ -4,6 +4,7 @@ import type {
 	ThemeOptions
 } from '@descope/web-component';
 import DescopeWc from '@descope/web-component';
+import UserManagementWidget from '@descope/user-management-widget';
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
 import createSdk from './sdk';
@@ -12,6 +13,7 @@ declare global {
 	namespace JSX {
 		interface IntrinsicElements {
 			['descope-wc']: DescopeCustomElement;
+			['descope-user-management-widget']: UserManagementCustomElement;
 		}
 	}
 }
@@ -35,6 +37,10 @@ export type CustomElement<T, K extends string = ''> = Partial<
 export type DescopeCustomElement = CustomElement<
 	DescopeWc,
 	'success' | 'error'
+>;
+
+export type UserManagementCustomElement = CustomElement<
+	typeof UserManagementWidget & UserManagementProps
 >;
 
 export interface IContext {
@@ -71,6 +77,15 @@ export type DescopeProps = {
 	form?: Record<string, any>;
 	// use to override client context in flow execution
 	client?: Record<string, any>;
+};
+
+export type UserManagementProps = {
+	logger?: ILogger;
+	tenant: string;
+	// If theme is not provided - the OS theme will be used
+	theme?: ThemeOptions;
+	// If locale is not provided - the browser's locale will be used
+	debug?: boolean;
 };
 
 export type { ILogger };

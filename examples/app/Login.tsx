@@ -39,6 +39,7 @@ const Login = () => {
 	}
 	return (
 		<>
+			<h2>Login</h2>
 			<Descope
 				flowId={process.env.DESCOPE_FLOW_ID || 'sign-up-or-in'}
 				onSuccess={onSuccess}
