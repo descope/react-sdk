@@ -66,7 +66,7 @@ describe('Descope', () => {
 		});
 
 		// ensure beforeRequest hook was set with the correct value
-		const {beforeRequest} = DescopeWC.sdkConfigOverrides.hooks;
+		const { beforeRequest } = DescopeWC.sdkConfigOverrides.hooks;
 		expect((beforeRequest as jest.Mock).getMockName()).toBe(
 			'before-request-hook'
 		);
