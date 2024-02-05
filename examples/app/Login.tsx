@@ -50,6 +50,7 @@ const Login = () => {
 				alignItems: 'center'
 			}}
 		>
+			<h2>Login</h2>
 			{(isSessionLoading || flowLoading) && <div>Loading...</div>}
 			{!isSessionLoading && (
 				<Descope
