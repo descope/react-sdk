@@ -28,6 +28,10 @@ const DescopeWC = lazy(async () => {
 				// within the AuthProvider using the desired configuration. This approach ensures
 				// the web-component utilizes the same beforeRequest hooks as the global SDK
 				return getGlobalSdk().httpClient.hooks.beforeRequest;
+			},
+			set beforeRequest(_) {
+				// The empty setter prevents runtime errors when attempts are made to assign a value to 'beforeRequest'.
+				// JavaScript objects default to having both getters and setters
 			}
 		}
 	};
@@ -71,6 +75,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			flowId,
 			onSuccess,
 			onError,
+			onPageUpdated,
 			logger,
 			tenant,
 			theme,
@@ -110,9 +115,12 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			const ele = innerRef;
 			ele?.addEventListener('success', handleSuccess);
 			if (onError) ele?.addEventListener('error', onError);
+			if (onPageUpdated) ele?.addEventListener('page-updated', onPageUpdated);
 
 			return () => {
 				if (onError) ele?.removeEventListener('error', onError);
+				if (onPageUpdated)
+					ele?.removeEventListener('page-updated', onPageUpdated);
 
 				ele?.removeEventListener('success', handleSuccess);
 			};

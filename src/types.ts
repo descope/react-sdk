@@ -36,7 +36,7 @@ export type CustomElement<T, K extends string = ''> = Partial<
 
 export type DescopeCustomElement = CustomElement<
 	DescopeWc,
-	'success' | 'error'
+	'success' | 'error' | 'pageUpdated'
 >;
 
 export type UserManagementCustomElement = CustomElement<
@@ -62,6 +62,7 @@ export type DescopeProps = {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
+	onPageUpdated?: DescopeCustomElement['onerror'];
 	logger?: ILogger;
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
