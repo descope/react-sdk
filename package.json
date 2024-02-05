@@ -48,7 +48,7 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "3.7.3",
+		"@descope/web-component": "3.7.6",
 		"@descope/user-management-widget": "0.0.6"
 	},
 	"devDependencies": {
