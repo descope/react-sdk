@@ -3,6 +3,8 @@
 import createSdk from '@descope/web-js-sdk';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
+// eslint-disable-next-line import/no-named-default
+import { default as DescopeWC } from '@descope/web-component';
 import AuthProvider from '../../src/components/AuthProvider';
 import Descope from '../../src/components/Descope';
 
@@ -24,7 +26,8 @@ jest.mock('@descope/web-js-sdk', () => {
 		refresh: jest.fn(),
 		httpClient: {
 			hooks: {
-				afterRequest: jest.fn()
+				beforeRequest: jest.fn().mockName('before-request-hook'),
+				afterRequest: jest.fn().mockName('after-request-hook')
 			}
 		}
 	};
@@ -43,6 +46,32 @@ const renderWithProvider = (
 	);
 
 describe('Descope', () => {
+	it('Should init sdk config', async () => {
+		renderWithProvider(<Descope flowId="flow1" />, 'proj1', 'url1');
+
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
+
+		// ensure the sdk was created with the correct config
+		expect(DescopeWC.sdkConfigOverrides).toEqual({
+			baseHeaders: {
+				'x-descope-sdk-name': 'react',
+				'x-descope-sdk-version': 'one.two.three'
+			},
+			persistTokens: false,
+			hooks: {
+				beforeRequest: expect.any(Function)
+			}
+		});
+
+		// ensure beforeRequest hook was set with the correct value
+		const { beforeRequest } = DescopeWC.sdkConfigOverrides.hooks;
+		expect((beforeRequest as jest.Mock).getMockName()).toBe(
+			'before-request-hook'
+		);
+	});
+
 	it('should render the WC with the correct props', async () => {
 		renderWithProvider(<Descope flowId="flow1" />, 'proj1', 'url1');
 
