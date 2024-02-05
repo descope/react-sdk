@@ -24,12 +24,9 @@ const Login = () => {
 		setErrorMessage('Something went wrong');
 	}, [setErrorMessage]);
 
-	const onPageUpdated = useCallback((e) => {
-		const { isFirst } = e.detail;
-		if (isFirst) {
-			setFlowLoading(false);
-		}
-	}, []);
+	const onPageReady = useCallback(() => {
+		setFlowLoading(false);
+	}, [setFlowLoading]);
 
 	const errorTransformer = useCallback(
 		(error: { text: string; type: string }) => {
@@ -57,7 +54,7 @@ const Login = () => {
 					flowId={process.env.DESCOPE_FLOW_ID || 'sign-up-or-in'}
 					onSuccess={onSuccess}
 					onError={onError}
-					onPageUpdated={onPageUpdated}
+					onPageReady={onPageReady}
 					// form={{ email: 'predefinedname@domain.com' }} // found in context key: form.email
 					client={{ version: '1.0.2' }} // found in context key: client.version
 					debug={process.env.DESCOPE_DEBUG_MODE === 'true'}

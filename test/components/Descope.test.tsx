@@ -138,6 +138,20 @@ describe('Descope', () => {
 		expect(mockAfterRequest).toHaveBeenCalledBefore(onSuccess);
 	});
 
+	it('should register to the page-ready event when received an onPageReady cb', async () => {
+		const onPageReady = jest.fn();
+		renderWithProvider(<Descope flowId="flow-1" onPageReady={onPageReady} />);
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
+		fireEvent(
+			document.querySelector('descope-wc'),
+			new CustomEvent('page-ready', { detail: {} })
+		);
+
+		await waitFor(() => expect(onPageReady).toHaveBeenCalled());
+	});
+
 	it('should pass the ref to the wc element', async () => {
 		const ref = jest.fn();
 		renderWithProvider(<Descope flowId="flow-1" ref={ref} />);
