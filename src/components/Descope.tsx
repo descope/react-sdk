@@ -28,6 +28,10 @@ const DescopeWC = lazy(async () => {
 				// within the AuthProvider using the desired configuration. This approach ensures
 				// the web-component utilizes the same beforeRequest hooks as the global SDK
 				return getGlobalSdk().httpClient.hooks.beforeRequest;
+			},
+			set beforeRequest(_) {
+				// The empty setter prevents runtime errors when attempts are made to assign a value to 'beforeRequest'.
+				// JavaScript objects default to having both getters and setters
 			}
 		}
 	};
