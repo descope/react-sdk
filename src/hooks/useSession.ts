@@ -14,19 +14,22 @@ const useSession = () => {
 		isLoading.current = isSessionLoading;
 	}, [isSessionLoading]);
 
+	const shouldFetchSession = !session && !isSessionLoading;
+
 	// we want this to happen before returning a value so we are using "useMemo" and not "useEffect"
 	useMemo(() => {
-		if (!isSessionFetched) {
+		if (shouldFetchSession && !isSessionFetched) {
 			isLoading.current = true;
 		}
 	}, [isSessionFetched]);
 
+	// Fetch session if it's not already fetched
+	// We want this to happen only once, so the dependency array should not contain shouldFetchSession
 	useEffect(() => {
-		if (!session && !isSessionLoading) {
+		if (shouldFetchSession) {
 			fetchSession();
 		}
 	}, [fetchSession]);
-
 	return {
 		isSessionLoading: isLoading.current,
 		sessionToken: session,
