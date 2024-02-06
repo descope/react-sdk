@@ -16,17 +16,27 @@ const useSession = () => {
 
 	// we want this to happen before returning a value so we are using "useMemo" and not "useEffect"
 	useMemo(() => {
+		console.log('@@@ useSession memo1', {
+			isSessionFetched
+		});
 		if (!isSessionFetched) {
+			console.log('@@@ useSession memo1, changing to true');
 			isLoading.current = true;
 		}
 	}, [isSessionFetched]);
 
 	useEffect(() => {
+		console.log('@@@ useSession effect1', {
+			session: session ? 'exists' : 'does not exist',
+			isSessionLoading
+		});
 		if (!session && !isSessionLoading) {
+			console.log('@@@ useSession effect1 triggering fetchSession');
 			fetchSession();
 		}
 	}, [fetchSession]);
 
+	console.log('@@@ useSession returning isSessionLoading ', isLoading.current);
 	return {
 		isSessionLoading: isLoading.current,
 		sessionToken: session,

@@ -1,20 +1,12 @@
 /* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Descope, useSession } from '../../src';
+import { Descope } from '../../src';
 
 const Login = () => {
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const { isAuthenticated, isSessionLoading } = useSession();
-
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (isAuthenticated) {
-			navigate('/');
-		}
-	}, [navigate, isAuthenticated]);
 
 	const onSuccess = useCallback(() => {
 		navigate('/');
@@ -34,9 +26,6 @@ const Login = () => {
 		[]
 	);
 
-	if (isSessionLoading) {
-		return <div>Loading...</div>;
-	}
 	return (
 		<>
 			<h2>Login</h2>
