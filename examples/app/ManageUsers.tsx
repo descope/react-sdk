@@ -59,8 +59,8 @@ const ManageUsers = () => {
 					</p>
 				</div>
 			</header>
-			<h2>Home</h2>
-			<UserManagement tenant={process.env.DESCOPE_TENANT} />
+			<h2>Manage Users</h2>
+			<UserManagement tenant={process.env.DESCOPE_TENANT_ID} />
 		</>
 	);
 };
