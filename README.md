@@ -72,7 +72,7 @@ const App = () => {
             flowId="my-flow-id"
             onSuccess={(e) => console.log('Logged in!')}
             onError={(e) => console.log('Could not logged in')}
-						// onPageReady={() => {
+						// onReady={() => {
 						//   This event is triggered when the flow is ready to be displayed
 						//   Its useful for showing a loading indication before the page ready
 						//   console.log('Flow is ready');

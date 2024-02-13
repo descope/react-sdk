@@ -75,7 +75,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			flowId,
 			onSuccess,
 			onError,
-			onPageReady,
+			onReady,
 			logger,
 			tenant,
 			theme,
@@ -115,11 +115,11 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			const ele = innerRef;
 			ele?.addEventListener('success', handleSuccess);
 			if (onError) ele?.addEventListener('error', onError);
-			if (onPageReady) ele?.addEventListener('page-ready', onPageReady);
+			if (onReady) ele?.addEventListener('ready', onReady);
 
 			return () => {
 				if (onError) ele?.removeEventListener('error', onError);
-				if (onPageReady) ele?.removeEventListener('page-ready', onPageReady);
+				if (onReady) ele?.removeEventListener('ready', onReady);
 
 				ele?.removeEventListener('success', handleSuccess);
 			};
