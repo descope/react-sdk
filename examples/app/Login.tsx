@@ -5,7 +5,7 @@ import { Descope, useSession } from '../../src';
 
 const Login = () => {
 	const [errorMessage, setErrorMessage] = useState('');
-	const [flowLoading, setFlowLoading] = useState(true);
+	const [isFlowLoading, setIsFlowLoading] = useState(true);
 
 	const { isAuthenticated, isSessionLoading } = useSession();
 	const navigate = useNavigate();
@@ -25,8 +25,8 @@ const Login = () => {
 	}, [setErrorMessage]);
 
 	const onReady = useCallback(() => {
-		setFlowLoading(false);
-	}, [setFlowLoading]);
+		setIsFlowLoading(false);
+	}, [setIsFlowLoading]);
 
 	const errorTransformer = useCallback(
 		(error: { text: string; type: string }) => {
@@ -48,7 +48,7 @@ const Login = () => {
 			}}
 		>
 			<h2>Login</h2>
-			{(isSessionLoading || flowLoading) && <div>Loading...</div>}
+			{(isSessionLoading || isFlowLoading) && <div>Loading...</div>}
 			{!isSessionLoading && (
 				<Descope
 					flowId={process.env.DESCOPE_FLOW_ID || 'sign-up-or-in'}

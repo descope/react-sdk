@@ -125,6 +125,35 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			};
 		}, [innerRef, onError, handleSuccess]);
 
+		// Success event
+		useEffect(() => {
+			const ele = innerRef;
+			ele?.addEventListener('success', handleSuccess);
+			return () => {
+				ele?.removeEventListener('success', handleSuccess);
+			};
+		}, [innerRef, handleSuccess]);
+
+		// Error event
+		useEffect(() => {
+			const ele = innerRef;
+			if (onError) ele?.addEventListener('error', onError);
+
+			return () => {
+				if (onError) ele?.removeEventListener('error', onError);
+			};
+		}, [innerRef, onError]);
+
+		// Ready event
+		useEffect(() => {
+			const ele = innerRef;
+			if (onReady) ele?.addEventListener('ready', onReady);
+
+			return () => {
+				if (onReady) ele?.removeEventListener('error', onReady);
+			};
+		}, [innerRef, onReady]);
+
 		useEffect(() => {
 			if (innerRef) {
 				innerRef.errorTransformer = errorTransformer;
