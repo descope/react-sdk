@@ -1,6 +1,7 @@
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import { getJwtRoles, useDescope, useSession, useUser } from '../../src';
 
 const getUserDisplayName = (user?: UserResponse) =>
@@ -10,11 +11,26 @@ const Home = () => {
 	// useSession retrieves authentication state, session loading status, and session token
 	const { sessionToken } = useSession();
 	// useUser retrieves the logged in user information
-	const { user } = useUser();
+	const { user, isUserLoading } = useUser();
 	// useDescope retrieves Descope SDK for further operations related to authentication
 	// such as logout
 	const sdk = useDescope();
 
+	const selectTenant = useCallback(
+		(tenantId) => {
+			sdk.selectTenant(tenantId);
+		},
+		[sdk]
+	);
+
+	const selectedTenant = useMemo(() => {
+		const decoded = jwtDecode(sessionToken);
+		// The selected tenant is stored in the "dct" claim
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return decoded?.dct || '';
+	}, [sessionToken]);
+
+	// const currentTenant = sdk.Jwt
 	const onLogout = useCallback(() => {
 		sdk.logout();
 	}, [sdk]);
@@ -73,6 +89,33 @@ const Home = () => {
 			<p>
 				Roles: <span style={{ fontWeight: 'bold' }}>{roles || 'No Roles'}</span>
 			</p>
+			{!isUserLoading && (
+				<div>
+					<label htmlFor="tenants-select">
+						{' '}
+						Current Tenant:
+						<select
+							name="tenants"
+							id="tenants-select"
+							value={selectedTenant}
+							onChange={(e) => selectTenant(e.target.value)}
+						>
+							<option value="">
+								{selectedTenant ? 'Remove tenant selection' : 'Select Tenant'}
+							</option>
+							{user?.userTenants.map((tenant) => (
+								<option key={tenant.tenantId} value={tenant.tenantId}>
+									{tenant.tenantName}
+								</option>
+							))}
+						</select>
+					</label>
+					<p>
+						* The session token will be updated with the selected tenant under
+						the &quot;dct&quot; claim
+					</p>
+				</div>
+			)}
 		</>
 	);
 };

@@ -48,8 +48,8 @@
 		]
 	},
 	"dependencies": {
-		"@descope/web-component": "3.8.1",
-		"@descope/user-management-widget": "0.0.9"
+		"@descope/user-management-widget": "0.0.9",
+		"@descope/web-component": "3.8.1"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.0",
@@ -92,6 +92,7 @@
 		"husky": "^8.0.1",
 		"jest": "^27.3.1",
 		"jest-extended": "^3.2.2",
+		"jwt-decode": "^4.0.0",
 		"lint-staged": "^13.0.3",
 		"pretty-quick": "^3.1.3",
 		"react": "17.0.2",
