@@ -26,7 +26,7 @@ const Home = () => {
 	const selectedTenant = useMemo(() => {
 		const decoded = jwtDecode(sessionToken);
 		// The selected tenant is stored in the "dct" claim
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		// @ts-ignore-next-line
 		return decoded?.dct || '';
 	}, [sessionToken]);
 
