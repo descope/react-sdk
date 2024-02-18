@@ -11,7 +11,8 @@ import { UserManagementProps } from '../types';
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
 const UserManagementWC = lazy(async () => {
 	await import('@descope/user-management-widget');
-
+	// eslint-disable-next-line no-console
+	console.log('hey');
 	return {
 		default: ({ projectId, baseUrl, innerRef, tenant, theme, debug }) => (
 			<descope-user-management-widget
