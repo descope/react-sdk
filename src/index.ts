@@ -18,4 +18,7 @@ export {
 	getSessionToken
 } from './sdk';
 
+// Export ref to baseHeaders so it can be overridden
+export { baseHeaders } from './constants';
+
 export type { ILogger } from './types';
