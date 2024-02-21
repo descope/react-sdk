@@ -48,8 +48,8 @@
 		]
 	},
 	"dependencies": {
-		"@descope/user-management-widget": "0.0.9",
-		"@descope/web-component": "3.8.2"
+		"@descope/user-management-widget": "0.1.1",
+		"@descope/web-component": "3.8.4"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.0",
