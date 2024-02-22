@@ -7,6 +7,7 @@ import React from 'react';
 import { default as DescopeWC } from '@descope/web-component';
 import AuthProvider from '../../src/components/AuthProvider';
 import Descope from '../../src/components/Descope';
+import { baseHeaders } from '../../src';
 
 Object.defineProperty(global, 'Response', {
 	value: class {},
@@ -45,7 +46,18 @@ const renderWithProvider = (
 		</AuthProvider>
 	);
 
+const originalBaseHeaders = { ...baseHeaders };
 describe('Descope', () => {
+	afterEach(() => {
+		// Reset baseHeaders
+		Object.assign(baseHeaders, originalBaseHeaders);
+		Object.keys(baseHeaders).forEach((key) => {
+			if (!(key in originalBaseHeaders)) {
+				// if key is not in original baseHeaders, delete it
+				delete baseHeaders[key];
+			}
+		});
+	});
 	it('Should init sdk config', async () => {
 		renderWithProvider(<Descope flowId="flow1" />, 'proj1', 'url1');
 
@@ -70,6 +82,28 @@ describe('Descope', () => {
 		expect((beforeRequest as jest.Mock).getMockName()).toBe(
 			'before-request-hook'
 		);
+	});
+
+	it('Should be able to override bae headers', async () => {
+		renderWithProvider(<Descope flowId="flow1" />, 'proj1', 'url1');
+		baseHeaders['x-descope-sdk-name'] = 'foo';
+		baseHeaders['x-some-property'] = 'bar';
+		await waitFor(() => {
+			expect(document.querySelector('descope-wc')).toBeInTheDocument();
+		});
+
+		// ensure the sdk was created with the correct config
+		expect(DescopeWC.sdkConfigOverrides).toEqual({
+			baseHeaders: {
+				'x-descope-sdk-name': 'foo',
+				'x-descope-sdk-version': 'one.two.three',
+				'x-some-property': 'bar'
+			},
+			persistTokens: false,
+			hooks: {
+				beforeRequest: expect.any(Function)
+			}
+		});
 	});
 
 	it('should render the WC with the correct props', async () => {
