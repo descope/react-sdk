@@ -83,6 +83,7 @@ export type DescopeProps = {
 export type UserManagementProps = {
 	logger?: ILogger;
 	tenant: string;
+	widgetId: string;
 	// If theme is not provided - the OS theme will be used
 	theme?: ThemeOptions;
 	// If locale is not provided - the browser's locale will be used

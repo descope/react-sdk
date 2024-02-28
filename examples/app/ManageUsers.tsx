@@ -60,7 +60,10 @@ const ManageUsers = () => {
 				</div>
 			</header>
 			<h2>Manage Users</h2>
-			<UserManagement tenant={process.env.DESCOPE_TENANT_ID} />
+			<UserManagement
+				widgetId={process.env.DESCOPE_WIDGET_ID}
+				tenant={process.env.DESCOPE_TENANT_ID}
+			/>
 		</>
 	);
 };
