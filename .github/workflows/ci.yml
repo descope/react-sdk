@@ -129,3 +129,13 @@ jobs:
       - name: License validation
         shell: bash
         run: ./thirdPartyLicenseCollector_linux_amd64 -npm-project .
+      - name: Check current year in LICENSE
+        run: |
+          CURRENT_YEAR=$(date +"%Y")
+          LICENSE_YEAR=$(grep -oP '\d{4}' LICENSE | uniq)
+          if [ "$CURRENT_YEAR" != "$LICENSE_YEAR" ]; then
+            echo "The LICENSE file does not contain the current year ($CURRENT_YEAR)."
+            exit 1
+          else
+            echo "The LICENSE file contains the current year ($CURRENT_YEAR)."
+          fi
