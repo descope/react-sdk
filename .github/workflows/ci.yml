@@ -132,7 +132,7 @@ jobs:
       - name: Check current year in LICENSE
         run: |
           CURRENT_YEAR=$(date +"%Y")
-          LICENSE_YEAR=$(grep -oP '\d{4}' LICENSE | uniq)
+          LICENSE_YEAR=$(grep -oE '\b[0-9]{4}\b' LICENSE | uniq)
           if [ "$CURRENT_YEAR" != "$LICENSE_YEAR" ]; then
             echo "The LICENSE file does not contain the current year ($CURRENT_YEAR)."
             exit 1
