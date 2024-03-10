@@ -36,7 +36,7 @@ export type CustomElement<T, K extends string = ''> = Partial<
 
 export type DescopeCustomElement = CustomElement<
 	DescopeWc,
-	'success' | 'error'
+	'success' | 'error' | 'ready'
 >;
 
 export type UserManagementCustomElement = CustomElement<
@@ -62,6 +62,7 @@ export type DescopeProps = {
 	flowId: string;
 	onSuccess?: DescopeCustomElement['onsuccess'];
 	onError?: DescopeCustomElement['onerror'];
+	onReady?: DescopeCustomElement['onready'];
 	logger?: ILogger;
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
@@ -82,6 +83,7 @@ export type DescopeProps = {
 export type UserManagementProps = {
 	logger?: ILogger;
 	tenant: string;
+	widgetId: string;
 	// If theme is not provided - the OS theme will be used
 	theme?: ThemeOptions;
 	// If locale is not provided - the browser's locale will be used

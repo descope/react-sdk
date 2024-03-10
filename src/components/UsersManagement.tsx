@@ -13,9 +13,18 @@ const UserManagementWC = lazy(async () => {
 	await import('@descope/user-management-widget');
 
 	return {
-		default: ({ projectId, baseUrl, innerRef, tenant, theme, debug }) => (
+		default: ({
+			projectId,
+			baseUrl,
+			innerRef,
+			tenant,
+			widgetId,
+			theme,
+			debug
+		}) => (
 			<descope-user-management-widget
 				project-id={projectId}
+				widget-id={widgetId}
 				base-url={baseUrl}
 				theme={theme}
 				tenant={tenant}
@@ -27,7 +36,7 @@ const UserManagementWC = lazy(async () => {
 });
 
 const UserManagement = React.forwardRef<HTMLElement, UserManagementProps>(
-	({ logger, tenant, theme, debug }, ref) => {
+	({ logger, tenant, theme, debug, widgetId }, ref) => {
 		const [innerRef, setInnerRef] = useState(null);
 
 		useImperativeHandle(ref, () => innerRef);
@@ -44,6 +53,7 @@ const UserManagement = React.forwardRef<HTMLElement, UserManagementProps>(
 			<Suspense fallback={null}>
 				<UserManagementWC
 					projectId={projectId}
+					widgetId={widgetId}
 					baseUrl={baseUrl}
 					innerRef={setInnerRef}
 					tenant={tenant}

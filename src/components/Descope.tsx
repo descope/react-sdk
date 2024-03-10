@@ -10,12 +10,31 @@ import React, {
 import { baseHeaders } from '../constants';
 import Context from '../hooks/Context';
 import { DescopeProps } from '../types';
+import { getGlobalSdk } from '../sdk';
 
 // web-component code uses browser API, but can be used in SSR apps, hence the lazy loading
 const DescopeWC = lazy(async () => {
 	const module = await import('@descope/web-component');
-	// we want to override the web-component base headers so we can tell that is was used via the React SDK
-	module.default.sdkConfigOverrides = { baseHeaders };
+	module.default.sdkConfigOverrides = {
+		// Overrides the web-component's base headers to indicate usage via the React SDK
+		baseHeaders,
+		// Disables token persistence within the web-component to delegate token management
+		// to the global SDK hooks. This ensures token handling aligns with the SDK's configuration,
+		// and web-component requests leverage the global SDK's beforeRequest hooks for consistency
+		persistTokens: false,
+		hooks: {
+			get beforeRequest() {
+				// Retrieves the beforeRequest hook from the global SDK, which is initialized
+				// within the AuthProvider using the desired configuration. This approach ensures
+				// the web-component utilizes the same beforeRequest hooks as the global SDK
+				return getGlobalSdk().httpClient.hooks.beforeRequest;
+			},
+			set beforeRequest(_) {
+				// The empty setter prevents runtime errors when attempts are made to assign a value to 'beforeRequest'.
+				// JavaScript objects default to having both getters and setters
+			}
+		}
+	};
 
 	return {
 		default: ({
@@ -56,6 +75,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			flowId,
 			onSuccess,
 			onError,
+			onReady,
 			logger,
 			tenant,
 			theme,
@@ -95,13 +115,44 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			const ele = innerRef;
 			ele?.addEventListener('success', handleSuccess);
 			if (onError) ele?.addEventListener('error', onError);
+			if (onReady) ele?.addEventListener('ready', onReady);
 
 			return () => {
 				if (onError) ele?.removeEventListener('error', onError);
+				if (onReady) ele?.removeEventListener('ready', onReady);
 
 				ele?.removeEventListener('success', handleSuccess);
 			};
 		}, [innerRef, onError, handleSuccess]);
+
+		// Success event
+		useEffect(() => {
+			const ele = innerRef;
+			ele?.addEventListener('success', handleSuccess);
+			return () => {
+				ele?.removeEventListener('success', handleSuccess);
+			};
+		}, [innerRef, handleSuccess]);
+
+		// Error event
+		useEffect(() => {
+			const ele = innerRef;
+			if (onError) ele?.addEventListener('error', onError);
+
+			return () => {
+				if (onError) ele?.removeEventListener('error', onError);
+			};
+		}, [innerRef, onError]);
+
+		// Ready event
+		useEffect(() => {
+			const ele = innerRef;
+			if (onReady) ele?.addEventListener('ready', onReady);
+
+			return () => {
+				if (onReady) ele?.removeEventListener('error', onReady);
+			};
+		}, [innerRef, onReady]);
 
 		useEffect(() => {
 			if (innerRef) {

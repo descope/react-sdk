@@ -72,6 +72,11 @@ const App = () => {
             flowId="my-flow-id"
             onSuccess={(e) => console.log('Logged in!')}
             onError={(e) => console.log('Could not logged in')}
+						// onReady={() => {
+						//   This event is triggered when the flow is ready to be displayed
+						//   Its useful for showing a loading indication before the page ready
+						//   console.log('Flow is ready');
+						// }}
             // theme can be "light", "dark" or "os", which auto select a theme based on the OS theme. Default is "light"
             // theme="dark"
 
@@ -368,6 +373,24 @@ DESCOPE_DEBUG_MODE=true
 DESCOPE_STEP_UP_FLOW_ID=step-up
 # Telemetry key
 DESCOPE_TELEMETRY_KEY=""
+```
+
+## FAQ
+
+### I updated the user in my backend, but the user / session token are not updated in the frontend
+
+The Descope SDK caches the user and session token in the frontend. If you update the user in your backend (using Descope Management SDK/API for example), you can call `me` / `refresh` from `useDescope` hook to refresh the user and session token. Example:
+
+```js
+const sdk = useDescope();
+
+const handleUpdateUser = useCallback(() => {
+	myBackendUpdateUser().then(() => {
+		sdk.me();
+		// or
+		sdk.refresh();
+	});
+}, [sdk]);
 ```
 
 ## Learn More
