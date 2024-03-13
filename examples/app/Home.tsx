@@ -28,7 +28,7 @@ const Home = () => {
 		<>
 			<header
 				style={{
-					borderBottom: '1px solid gray',
+					borderBottom: '4px solid lightgray',
 					display: 'flex',
 					justifyContent: 'space-between'
 				}}
@@ -69,10 +69,15 @@ const Home = () => {
 					</p>
 				</div>
 			</header>
-			<h2>Home</h2>
-			<p>
-				Roles: <span style={{ fontWeight: 'bold' }}>{roles || 'No Roles'}</span>
-			</p>
+			<h2>Descope Demo App</h2>
+			<div
+				style={{
+					margin: '0 auto',
+					textAlign: 'center'
+				}}
+			>
+				<h1>Dashboard</h1>
+			</div>
 		</>
 	);
 };

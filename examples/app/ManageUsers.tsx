@@ -21,7 +21,7 @@ const ManageUsers = () => {
 		<>
 			<header
 				style={{
-					borderBottom: '1px solid gray',
+					borderBottom: '4px solid lightgray',
 					display: 'flex',
 					justifyContent: 'space-between'
 				}}
@@ -60,10 +60,20 @@ const ManageUsers = () => {
 				</div>
 			</header>
 			<h2>Manage Users</h2>
-			<UserManagement
-				widgetId={process.env.DESCOPE_WIDGET_ID}
-				tenant={process.env.DESCOPE_TENANT_ID}
-			/>
+			<div
+				style={{
+					borderRadius: 10,
+					fontFamily: 'Tahoma',
+					boxShadow: '0 0px 15px -3px #cbced1',
+					position: 'relative',
+					width: '100%'
+				}}
+			>
+				<UserManagement
+					widgetId={process.env.DESCOPE_WIDGET_ID}
+					tenant={process.env.DESCOPE_TENANT_ID}
+				/>
+			</div>
 		</>
 	);
 };
