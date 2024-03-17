@@ -312,6 +312,20 @@ you must also configure a custom domain, and set it as the `baseUrl` prop in the
 
 You can find an example react app in the [examples folder](./examples).
 
+### Widgets
+
+User Management Widget Example Usage:
+```js
+import { UserManagement } from '@descope/react-sdk';
+...
+			<UserManagement
+				widgetId="your-widget-id"
+				tenant="your-tenant-id"
+			/>
+```
+Example can be shown here: 
+[examples folder](./examples/app/ManageUsers.tsx).
+
 ### Setup
 
 To run the examples, set your `Project ID` by setting the `DESCOPE_PROJECT_ID` env var or directly
@@ -319,7 +333,7 @@ in the sample code.
 Find your Project ID in the [Descope console](https://app.descope.com/settings/project).
 
 ```bash
-export DESCOPE_PROJECT_ID=<Project-ID>
+export DESCOPE_PROJECT_ID=<Project-ID>examples/app/ManageUsers.tsx
 ```
 
 Alternatively, put the environment variable in `.env` file in the project root directory.
