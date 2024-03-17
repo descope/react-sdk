@@ -312,20 +312,6 @@ you must also configure a custom domain, and set it as the `baseUrl` prop in the
 
 You can find an example react app in the [examples folder](./examples).
 
-### Widgets
-
-User Management Widget Example Usage:
-```js
-import { UserManagement } from '@descope/react-sdk';
-...
-			<UserManagement
-				widgetId="your-widget-id"
-				tenant="your-tenant-id"
-			/>
-```
-Example can be shown here: 
-[examples folder](./examples/app/ManageUsers.tsx).
-
 ### Setup
 
 To run the examples, set your `Project ID` by setting the `DESCOPE_PROJECT_ID` env var or directly
@@ -333,7 +319,7 @@ in the sample code.
 Find your Project ID in the [Descope console](https://app.descope.com/settings/project).
 
 ```bash
-export DESCOPE_PROJECT_ID=<Project-ID>examples/app/ManageUsers.tsx
+export DESCOPE_PROJECT_ID=<Project-ID>
 ```
 
 Alternatively, put the environment variable in `.env` file in the project root directory.
@@ -388,6 +374,21 @@ DESCOPE_STEP_UP_FLOW_ID=step-up
 # Telemetry key
 DESCOPE_TELEMETRY_KEY=""
 ```
+### Widgets
+Widgets are components that let a Descoper expose management features for tenant-based implementation of B2B(Business To Business).
+This specific component lets you embed the Descope user management table in your customer's UI.
+The following is an example of how you can use the component:
+
+```js
+import { UserManagement } from '@descope/react-sdk';
+...
+			<UserManagement
+				widgetId="your-widget-id"
+				tenant="your-tenant-id"
+			/>
+```
+Example can be shown here: 
+[examples folder](./examples/app/ManageUsers.tsx).
 
 ## FAQ
 
