@@ -7,6 +7,8 @@ import DescopeWc from '@descope/web-component';
 import UserManagementWidget from '@descope/user-management-widget';
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
+import RoleManagementWidget from '@descope/role-management-widget';
+import AccessKeyManagementWidget from '@descope/access-key-management-widget';
 import createSdk from './sdk';
 
 declare global {
@@ -14,9 +16,21 @@ declare global {
 		interface IntrinsicElements {
 			['descope-wc']: DescopeCustomElement;
 			['descope-user-management-widget']: UserManagementCustomElement;
+			['descope-role-management-widget']: RoleManagementCustomElement;
+			['descope-access-key-management-widget']: AccessKeyManagementCustomElement;
 		}
 	}
 }
+
+type WidgetProps = {
+	logger?: ILogger;
+	tenant: string;
+	widgetId: string;
+	// If theme is not provided - the OS theme will be used
+	theme?: ThemeOptions;
+	// If locale is not provided - the browser's locale will be used
+	debug?: boolean;
+};
 
 export type User = UserResponse;
 
@@ -41,6 +55,14 @@ export type DescopeCustomElement = CustomElement<
 
 export type UserManagementCustomElement = CustomElement<
 	typeof UserManagementWidget & UserManagementProps
+>;
+
+export type RoleManagementCustomElement = CustomElement<
+	typeof RoleManagementWidget & RoleManagementProps
+>;
+
+export type AccessKeyManagementCustomElement = CustomElement<
+	typeof AccessKeyManagementWidget & AccessKeyManagementProps
 >;
 
 export interface IContext {
@@ -80,15 +102,11 @@ export type DescopeProps = {
 	client?: Record<string, any>;
 };
 
-export type UserManagementProps = {
-	logger?: ILogger;
-	tenant: string;
-	widgetId: string;
-	// If theme is not provided - the OS theme will be used
-	theme?: ThemeOptions;
-	// If locale is not provided - the browser's locale will be used
-	debug?: boolean;
-};
+export type UserManagementProps = WidgetProps;
+
+export type RoleManagementProps = WidgetProps;
+
+export type AccessKeyManagementProps = WidgetProps;
 
 export type { ILogger };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;
