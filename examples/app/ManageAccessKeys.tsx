@@ -1,12 +1,12 @@
 import type { UserResponse } from '@descope/web-js-sdk';
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useDescope, useUser, UserManagement } from '../../src';
+import { useDescope, useUser, AccessKeyManagement } from '../../src';
 
 const getUserDisplayName = (user?: UserResponse) =>
 	user?.name || user?.loginIds?.[0] || '';
 
-const ManageUsers = () => {
+const ManageAccessKeys = () => {
 	// useUser retrieves the logged in user information
 	const { user } = useUser();
 	// useDescope retrieves Descope SDK for further operations related to authentication
@@ -59,13 +59,13 @@ const ManageUsers = () => {
 					</p>
 				</div>
 			</header>
-			<h2>Manage Users</h2>
-			<UserManagement
-				widgetId="user-management-widget"
+			<h2>Manage Access Keys</h2>
+			<AccessKeyManagement
+				widgetId="access-key-management-widget"
 				tenant={process.env.DESCOPE_TENANT_ID}
 			/>
 		</>
 	);
 };
 
-export default ManageUsers;
+export default ManageAccessKeys;
