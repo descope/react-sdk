@@ -51,7 +51,7 @@
 		"@descope/user-management-widget": "0.4.5",
 		"@descope/role-management-widget": "0.1.5",
 		"@descope/access-key-management-widget": "0.1.5",
-		"@descope/web-component": "3.8.10"
+		"@descope/web-component": "3.8.15"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.0",
