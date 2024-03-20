@@ -308,6 +308,105 @@ Descope SDK is automatically refreshes the session token when it is about to exp
 If the Descope project settings are configured to manage tokens in cookies.
 you must also configure a custom domain, and set it as the `baseUrl` prop in the `AuthProvider` component. See the above [`AuthProvider` usage](https://github.com/descope/react-sdk#wrap-your-app-with-auth-provider) for usage example.
 
+### Widgets
+
+Widgets are components that allow you to expose management features for tenant-based implementation. In certain scenarios, your customers may require the capability to perform managerial actions independently, alleviating the necessity to contact you. Widgets serve as a feature enabling you to delegate these capabilities to your customers in a modular manner.
+
+Important Note:
+
+- For the user to be able to use the widget, he needs to be assigned the `Tenant Admin` Role.
+
+#### User Management
+
+The `User Management` widget will let you embed a user table in your site to view and change information, exposing the following fields:
+
+`LoginId`, `Status`, `Name`, `Email`, `Phone`, `Roles`
+
+The widget also lets you:
+
+- Create a new user.
+- Edit an existing user.
+- Activate / disable an existing user.
+- Reset an existing user's password.
+- Reset an existing user's passkey.
+- Delete an existing user.
+
+###### Implementation
+
+```js
+import { UserManagement } from '@descope/react-sdk';
+...
+			<UserManagement
+                widgetId="user-management-widget"
+				tenant="your-tenant-id"
+			/>
+```
+
+Example:
+[Manage Users](./examples/app/ManageUsers.tsx)
+
+#### Role Management
+
+The `Role Management` widget lets you delegate the role management to your customer.
+Not only viewing the roles but also adding permissions, renaming, and changing the description of an existing role.
+
+The widget exposes this information about the roles:
+
+`Name`, `Description`, `Permissions`, `Editable`
+
+The widget also lets you:
+
+- Create new roles.
+- delete an existing role.
+
+Note:
+
+- The `Editable` field is determined by the user's access to the role - meaning that project-level roles are not editable by tenant level users.
+- You need to pre-define the permissions that the user can use, which are not editable in the widget.
+
+###### Implementation
+
+```js
+import { RoleManagement } from '@descope/react-sdk';
+...
+    <RoleManagement
+                widgetId="role-management-widget"
+				tenant="your-tenant-id"
+			/>
+```
+
+Example:
+[Manage Roles](./examples/app/ManageRoles.tsx)
+
+#### Access Key Management
+
+The `Access Key Management` widget lets you delegate the creation of access keys to your users and also provide information about existing ones:
+
+`Name` `Status` `Created By` `Expiration Time` `Roles` `Client ID`
+
+The widget also lets you:
+
+- Enable / disable an existing access key.
+- Delete an exising access key.
+
+Note:
+
+- You cannot edit an existing key's information, through the widget.
+
+###### Implementation
+
+```js
+import { AccessKeyManagement } from '@descope/react-sdk';
+...
+    <AccessKeyManagement
+    			widgetId="access-key-management-widget"
+				tenant="your-tenant-id"
+			/>
+```
+
+Example:
+[Manage Access Keys](./examples/app/ManageAccessKeys.tsx)
+
 ## Code Example
 
 You can find an example react app in the [examples folder](./examples).
@@ -374,24 +473,6 @@ DESCOPE_STEP_UP_FLOW_ID=step-up
 # Telemetry key
 DESCOPE_TELEMETRY_KEY=""
 ```
-
-### Widgets
-
-Widgets are components that let a Descoper expose management features for tenant-based implementation of B2B(Business To Business).
-This specific component lets you embed the Descope user management table in your customer's UI.
-The following is an example of how you can use the component:
-
-```js
-import { UserManagement } from '@descope/react-sdk';
-...
-			<UserManagement
-				widgetId="your-widget-id"
-				tenant="your-tenant-id"
-			/>
-```
-
-Example can be shown here:
-[examples folder](./examples/app/ManageUsers.tsx).
 
 ## FAQ
 
