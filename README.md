@@ -374,7 +374,9 @@ DESCOPE_STEP_UP_FLOW_ID=step-up
 # Telemetry key
 DESCOPE_TELEMETRY_KEY=""
 ```
+
 ### Widgets
+
 Widgets are components that let a Descoper expose management features for tenant-based implementation of B2B(Business To Business).
 This specific component lets you embed the Descope user management table in your customer's UI.
 The following is an example of how you can use the component:
@@ -387,7 +389,8 @@ import { UserManagement } from '@descope/react-sdk';
 				tenant="your-tenant-id"
 			/>
 ```
-Example can be shown here: 
+
+Example can be shown here:
 [examples folder](./examples/app/ManageUsers.tsx).
 
 ## FAQ
