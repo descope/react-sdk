@@ -318,7 +318,7 @@ Important Note:
 
 #### User Management
 
-The `User Management` widget will let you embed a user table in your site to view and change information, exposing the following fields:
+The `UserManagement` widget will let you embed a user table in your site to view and change information, exposing the following fields:
 
 `LoginId`, `Status`, `Name`, `Email`, `Phone`, `Roles`
 The widget also lets you:
