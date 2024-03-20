@@ -321,7 +321,6 @@ Important Note:
 The `User Management` widget will let you embed a user table in your site to view and change information, exposing the following fields:
 
 `LoginId`, `Status`, `Name`, `Email`, `Phone`, `Roles`
-
 The widget also lets you:
 
 - Create a new user.
@@ -331,7 +330,7 @@ The widget also lets you:
 - Reset an existing user's passkey.
 - Delete an existing user.
 
-###### Implementation
+###### Usage
 
 ```js
 import { UserManagement } from '@descope/react-sdk';
@@ -349,7 +348,6 @@ Example:
 
 The `Role Management` widget lets you delegate the role management to your customer.
 Not only viewing the roles but also adding permissions, renaming, and changing the description of an existing role.
-
 The widget exposes this information about the roles:
 
 `Name`, `Description`, `Permissions`, `Editable`
@@ -364,7 +362,7 @@ Note:
 - The `Editable` field is determined by the user's access to the role - meaning that project-level roles are not editable by tenant level users.
 - You need to pre-define the permissions that the user can use, which are not editable in the widget.
 
-###### Implementation
+###### Usage
 
 ```js
 import { RoleManagement } from '@descope/react-sdk';
@@ -392,8 +390,9 @@ The widget also lets you:
 Note:
 
 - You cannot edit an existing key's information, through the widget.
+- Custom fields will also appear in the table.
 
-###### Implementation
+###### Usage
 
 ```js
 import { AccessKeyManagement } from '@descope/react-sdk';
