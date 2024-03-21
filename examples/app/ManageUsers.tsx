@@ -61,7 +61,7 @@ const ManageUsers = () => {
 			</header>
 			<h2>Manage Users</h2>
 			<UserManagement
-				widgetId="user-management-widget"
+				widgetId={process.env.DESCOPE_WIDGET_ID}
 				tenant={process.env.DESCOPE_TENANT_ID}
 			/>
 		</>

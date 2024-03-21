@@ -330,6 +330,10 @@ The widget also lets you:
 - Reset an existing user's passkey.
 - Delete an existing user.
 
+Note:
+
+- Custom fields will also appear in the table.
+
 ###### Usage
 
 ```js
@@ -390,7 +394,6 @@ The widget also lets you:
 Note:
 
 - You cannot edit an existing key's information, through the widget.
-- Custom fields will also appear in the table.
 
 ###### Usage
 
