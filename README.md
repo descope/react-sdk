@@ -318,9 +318,8 @@ Important Note:
 
 #### User Management
 
-The `User Management` widget will let you embed a user table in your site to view and change information, exposing the following fields:
+The `User Management` widget will let you embed a user table in your site to view and take action.
 
-`LoginId`, `Status`, `Name`, `Email`, `Phone`, `Roles`
 The widget lets you:
 
 - Create a new user
@@ -350,11 +349,11 @@ Example:
 
 #### Role Management
 
-The `Role Management` widget lets you delegate the role management to your customer.
+The `Role Management` widget will let you embed a role table in your site to view and take action.
 
 The widget lets you:
 
-- Create new role
+- Create a new role
 - Change an existing role's fields
 - Delete an existing role
 
@@ -379,7 +378,7 @@ Example:
 
 #### Access Key Management
 
-The `Access Key Management` widget lets you delegate the creation of access keys to your users and provide information on existing ones.
+The `Access Key Management` widget will let you embed an access key table in your site to view and take action.
 
 The widget lets you:
 
