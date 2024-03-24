@@ -5,6 +5,8 @@ import Login from './Login';
 import StepUp from './StepUp';
 import { useSession } from '../../src';
 import ManageUsers from './ManageUsers';
+import ManageRoles from './ManageRoles';
+import ManageAccessKeys from './ManageAccessKeys';
 
 const Layout = () => (
 	<div style={{ height: '100vh', position: 'relative' }}>
@@ -57,6 +59,22 @@ const App = () => (
 				element={
 					<ProtectedRoute>
 						<ManageUsers />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/role-management"
+				element={
+					<ProtectedRoute>
+						<ManageRoles />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/access-key-management"
+				element={
+					<ProtectedRoute>
+						<ManageAccessKeys />
 					</ProtectedRoute>
 				}
 			/>
