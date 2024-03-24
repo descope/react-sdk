@@ -338,10 +338,10 @@ Note:
 ```js
 import { UserManagement } from '@descope/react-sdk';
 ...
-    <UserManagement
-widgetId="user-management-widget"
-		tenant="tenant-id"
-	/>
+  <UserManagement
+    widgetId="user-management-widget"
+    tenant="tenant-id"
+  />
 ```
 
 Example:
@@ -367,10 +367,10 @@ Note:
 ```js
 import { RoleManagement } from '@descope/react-sdk';
 ...
-    <RoleManagement
-widgetId="role-management-widget"
-		tenant="tenant-id"
-	/>
+  <RoleManagement
+    widgetId="role-management-widget"
+    tenant="tenant-id"
+  />
 ```
 
 Example:
@@ -391,10 +391,10 @@ The widget lets you:
 ```js
 import { AccessKeyManagement } from '@descope/react-sdk';
 ...
-    <AccessKeyManagement
-widgetId="access-key-management-widget"
-		tenant="tenant-id"
-	/>
+  <AccessKeyManagement
+    widgetId="access-key-management-widget"
+    tenant="tenant-id"
+  />
 ```
 
 Example:
