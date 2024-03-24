@@ -338,7 +338,7 @@ Note:
 ```js
 import { UserManagement } from '@descope/react-sdk';
 ...
-	<UserManagement
+    <UserManagement
 widgetId="user-management-widget"
 		tenant="tenant-id"
 	/>
@@ -382,7 +382,7 @@ The `Access Key Management` widget will let you embed an access key table in you
 
 The widget lets you:
 
-- Create an access key
+- Create a new access key
 - Activate / deactivate an existing access key
 - Delete an exising access key
 
