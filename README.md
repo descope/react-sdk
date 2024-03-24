@@ -339,7 +339,7 @@ Note:
 import { UserManagement } from '@descope/react-sdk';
 ...
 	<UserManagement
-        widgetId="user-management-widget"
+widgetId="user-management-widget"
 		tenant="tenant-id"
 	/>
 ```
@@ -368,7 +368,7 @@ Note:
 import { RoleManagement } from '@descope/react-sdk';
 ...
     <RoleManagement
-        widgetId="role-management-widget"
+widgetId="role-management-widget"
 		tenant="tenant-id"
 	/>
 ```
@@ -392,7 +392,7 @@ The widget lets you:
 import { AccessKeyManagement } from '@descope/react-sdk';
 ...
     <AccessKeyManagement
-    	widgetId="access-key-management-widget"
+widgetId="access-key-management-widget"
 		tenant="tenant-id"
 	/>
 ```
