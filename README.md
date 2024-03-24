@@ -314,35 +314,35 @@ Widgets are components that allow you to expose management features for tenant-b
 
 Important Note:
 
-- For the user to be able to use the widget, he needs to be assigned the `Tenant Admin` Role.
+- For the user to be able to use the widget, they need to be assigned the `Tenant Admin` Role.
 
 #### User Management
 
-The `UserManagement` widget will let you embed a user table in your site to view and change information, exposing the following fields:
+The `User Management` widget will let you embed a user table in your site to view and change information, exposing the following fields:
 
 `LoginId`, `Status`, `Name`, `Email`, `Phone`, `Roles`
-The widget also lets you:
+The widget lets you:
 
-- Create a new user.
-- Edit an existing user.
-- Activate / disable an existing user.
-- Reset an existing user's password.
-- Reset an existing user's passkey.
-- Delete an existing user.
+- Create a new user
+- Edit an existing user
+- Activate / disable an existing user
+- Reset an existing user's password
+- Remove an existing user's passkey
+- Delete an existing user
 
 Note:
 
-- Custom fields will also appear in the table.
+- Custom fields also appear in the table.
 
 ###### Usage
 
 ```js
 import { UserManagement } from '@descope/react-sdk';
 ...
-			<UserManagement
-                widgetId="user-management-widget"
-				tenant="your-tenant-id"
-			/>
+	<UserManagement
+        widgetId="user-management-widget"
+		tenant="tenant-id"
+	/>
 ```
 
 Example:
@@ -351,15 +351,12 @@ Example:
 #### Role Management
 
 The `Role Management` widget lets you delegate the role management to your customer.
-Not only viewing the roles but also adding permissions, renaming, and changing the description of an existing role.
-The widget exposes this information about the roles:
 
-`Name`, `Description`, `Permissions`, `Editable`
+The widget lets you:
 
-The widget also lets you:
-
-- Create new roles.
-- delete an existing role.
+- Create new role
+- Change an existing role's fields
+- Delete an existing role
 
 Note:
 
@@ -372,9 +369,9 @@ Note:
 import { RoleManagement } from '@descope/react-sdk';
 ...
     <RoleManagement
-                widgetId="role-management-widget"
-				tenant="your-tenant-id"
-			/>
+        widgetId="role-management-widget"
+		tenant="tenant-id"
+	/>
 ```
 
 Example:
@@ -382,18 +379,13 @@ Example:
 
 #### Access Key Management
 
-The `Access Key Management` widget lets you delegate the creation of access keys to your users and also provide information about existing ones:
+The `Access Key Management` widget lets you delegate the creation of access keys to your users and provide information on existing ones.
 
-`Name` `Status` `Created By` `Expiration Time` `Roles` `Client ID`
+The widget lets you:
 
-The widget also lets you:
-
-- Enable / disable an existing access key.
-- Delete an exising access key.
-
-Note:
-
-- You cannot edit an existing key's information, through the widget.
+- Create an access key
+- Activate / deactivate an existing access key
+- Delete an exising access key
 
 ###### Usage
 
@@ -401,9 +393,9 @@ Note:
 import { AccessKeyManagement } from '@descope/react-sdk';
 ...
     <AccessKeyManagement
-    			widgetId="access-key-management-widget"
-				tenant="your-tenant-id"
-			/>
+    	widgetId="access-key-management-widget"
+		tenant="tenant-id"
+	/>
 ```
 
 Example:
