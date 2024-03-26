@@ -308,6 +308,24 @@ Descope SDK is automatically refreshes the session token when it is about to exp
 If the Descope project settings are configured to manage tokens in cookies.
 you must also configure a custom domain, and set it as the `baseUrl` prop in the `AuthProvider` component. See the above [`AuthProvider` usage](https://github.com/descope/react-sdk#wrap-your-app-with-auth-provider) for usage example.
 
+### Token Persistence
+
+Descope stores two tokens: the session token and the refresh token.
+
+- The refresh token is either stored in local storage or an `httpOnly` cookie. This is configurable in the Descope console.
+- The session token is stored in either local storage or a JS cookie. This behavior is configurable via the `sessionTokenViaCookie` prop in the `AuthProvider` component.
+
+However, for security reasons, you may choose not to store tokens in the browser. In this case, you can pass `persistTokens={false}` to the `AuthProvider` component. This prevents the SDK from storing the tokens in the browser.
+
+Notes:
+
+- You must configure the refresh token to be stored in an `httpOnly` cookie in the Descope console. Otherwise, the refresh token will not be stored, and when the page is refreshed, the user will be logged out.
+- You can still retrieve the session token using the `useSession` hook.
+
+### Last User Persistence
+
+Descope stores the last user information in local storage. If you wish to disable this feature, you can pass `storeLastAuthenticatedUser={false}` to the `AuthProvider` component. Please note that some features related to the last authenticated user may not function as expected if this behavior is disabled.
+
 ### Widgets
 
 Widgets are components that allow you to expose management features for tenant-based implementation. In certain scenarios, your customers may require the capability to perform managerial actions independently, alleviating the necessity to contact you. Widgets serve as a feature enabling you to delegate these capabilities to your customers in a modular manner.

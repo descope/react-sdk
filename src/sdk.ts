@@ -9,14 +9,23 @@ const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
 	config: P
 ) => {
 	const sdk = createSdk({
-		...config,
 		persistTokens: IS_BROWSER as true,
-		autoRefresh: IS_BROWSER as true
+		autoRefresh: IS_BROWSER as true,
+		...config
 	});
 	globalSdk = sdk;
 
 	return sdk;
 };
+
+// eslint-disable-next-line import/exports-last
+export const createTempSdk = () =>
+	createSdkWrapper({
+		projectId: 'temp pid',
+		persistTokens: false,
+		autoRefresh: false,
+		storeLastAuthenticatedUser: false
+	});
 
 /**
  * We want to make sure the getSessionToken fn is used only when persistTokens is on
@@ -25,7 +34,7 @@ const createSdkWrapper = <P extends Parameters<typeof createSdk>[0]>(
  * and we are creating a temp instance in order to export the getSessionToken
  * even before the SDK was init
  */
-globalSdk = createSdkWrapper({ projectId: 'temp pid' });
+globalSdk = createTempSdk();
 
 export const getSessionToken = () => {
 	if (IS_BROWSER) {
