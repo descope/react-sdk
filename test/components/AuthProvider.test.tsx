@@ -4,31 +4,7 @@ import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import AuthProvider from '../../src/components/AuthProvider';
 
-Object.defineProperty(global, 'Response', {
-	value: class {},
-	configurable: true,
-	writable: true
-});
-
-jest.mock('@descope/web-component', () => ({ default: {} }));
-
-jest.mock('@descope/web-js-sdk', () => {
-	const sdk = {
-		logout: jest.fn().mockName('logout'),
-		onSessionTokenChange: jest
-			.fn(() => () => {})
-			.mockName('onSessionTokenChange'),
-		onUserChange: jest.fn(() => () => {}).mockName('onUserChange'),
-		refresh: jest.fn(),
-		httpClient: {
-			hooks: {
-				beforeRequest: jest.fn().mockName('before-request-hook'),
-				afterRequest: jest.fn().mockName('after-request-hook')
-			}
-		}
-	};
-	return jest.fn(() => sdk);
-});
+jest.mock('@descope/web-js-sdk', () => jest.fn(() => {}));
 
 describe('AuthProvider', () => {
 	beforeEach(() => {
