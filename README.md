@@ -318,7 +318,7 @@ Important Note:
 
 #### User Management
 
-The `User Management` widget will let you embed a user table in your site to view and take action.
+The `UserManagement` widget will let you embed a user table in your site to view and take action.
 
 The widget lets you:
 
@@ -349,7 +349,7 @@ Example:
 
 #### Role Management
 
-The `Role Management` widget will let you embed a role table in your site to view and take action.
+The `RoleManagement` widget will let you embed a role table in your site to view and take action.
 
 The widget lets you:
 
@@ -378,7 +378,7 @@ Example:
 
 #### Access Key Management
 
-The `Access Key Management` widget will let you embed an access key table in your site to view and take action.
+The `AccessKeyManagement` widget will let you embed an access key table in your site to view and take action.
 
 The widget lets you:
 
