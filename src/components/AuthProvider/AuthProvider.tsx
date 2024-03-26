@@ -92,6 +92,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			isSessionFetched: isSessionFetched.current,
 			projectId,
 			baseUrl,
+			storeLastAuthenticatedUser,
 			setUser,
 			setSession,
 			sdk

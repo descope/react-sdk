@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Sdk } from '../types';
 import useContext from './useContext';
-import createSdk from '../sdk';
+import { createTempSdk } from '../sdk';
 
 const generateErrorMsg = (entryType: string) =>
 	`You can only use this ${entryType} after sdk initialization. Make sure to supply 'projectId' to <AuthProvider /> component`;
@@ -30,10 +30,7 @@ const useDescope = (): Sdk => {
 	return useMemo(() => {
 		if (!sdk) {
 			// In case the SDK is not initialized, we want to throw an error when the SDK functions are called
-			return new Proxy(
-				createSdk({ projectId: 'dummy' }),
-				proxyThrowHandler
-			) as Sdk;
+			return new Proxy(createTempSdk(), proxyThrowHandler) as Sdk;
 		}
 
 		return sdk;

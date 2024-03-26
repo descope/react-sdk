@@ -12,6 +12,8 @@ render(
 		<AuthProvider
 			projectId={process.env.DESCOPE_PROJECT_ID}
 			baseUrl={process.env.DESCOPE_BASE_URL}
+			persistTokens={false}
+			storeLastAuthenticatedUser={false}
 		>
 			<App />
 		</AuthProvider>

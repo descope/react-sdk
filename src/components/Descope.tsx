@@ -94,7 +94,8 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 
 		useImperativeHandle(ref, () => innerRef);
 
-		const { projectId, baseUrl, sdk } = React.useContext(Context);
+		const { projectId, baseUrl, storeLastAuthenticatedUser, sdk } =
+			React.useContext(Context);
 
 		const handleSuccess = useCallback(
 			async (e: CustomEvent) => {
@@ -197,6 +198,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						telemetryKey={telemetryKey}
 						redirectUrl={redirectUrl}
 						autoFocus={autoFocus}
+						storeLastAuthenticatedUser={storeLastAuthenticatedUser}
 					/>
 				</Suspense>
 			</form>
