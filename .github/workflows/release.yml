@@ -23,7 +23,7 @@ jobs:
 
       - name: Get token
         id: get_token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@v2
         with:
           private_key: ${{ secrets.RELEASE_APP_PEM }}
           app_id: ${{ secrets.RELEASE_APP_ID }}
