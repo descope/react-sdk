@@ -4,13 +4,19 @@ import createSdk from '../../sdk';
 
 type Config = Pick<
 	Parameters<typeof createSdk>[0],
-	'projectId' | 'baseUrl' | 'sessionTokenViaCookie'
+	| 'projectId'
+	| 'baseUrl'
+	| 'persistTokens'
+	| 'sessionTokenViaCookie'
+	| 'storeLastAuthenticatedUser'
 >;
 
 export default ({
 	projectId,
 	baseUrl,
-	sessionTokenViaCookie
+	persistTokens,
+	sessionTokenViaCookie,
+	storeLastAuthenticatedUser
 }: Config): ReturnType<typeof createSdk> =>
 	useMemo(() => {
 		if (!projectId) {
@@ -21,7 +27,8 @@ export default ({
 			baseUrl,
 			sessionTokenViaCookie,
 			baseHeaders,
-			persistToken: true,
+			persistTokens,
+			storeLastAuthenticatedUser,
 			autoRefresh: true
 		});
 	}, [projectId, baseUrl, sessionTokenViaCookie]);
