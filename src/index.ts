@@ -17,7 +17,9 @@ export {
 	getJwtRoles,
 	refresh,
 	getRefreshToken,
-	getSessionToken
+	getSessionToken,
+	isSessionTokenExpired,
+	isRefreshTokenExpired
 } from './sdk';
 
 // Export ref to baseHeaders so it can be overridden
