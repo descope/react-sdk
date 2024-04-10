@@ -55,6 +55,12 @@ export const getRefreshToken = () => {
 	return '';
 };
 
+export const isSessionTokenExpired = (token = getSessionToken()) =>
+	globalSdk?.isJwtExpired(token);
+
+export const isRefreshTokenExpired = (token = getRefreshToken()) =>
+	globalSdk?.isJwtExpired(token);
+
 export const getJwtPermissions = wrapInTry(
 	(token = getSessionToken(), tenant?: string) =>
 		globalSdk?.getJwtPermissions(token, tenant)
