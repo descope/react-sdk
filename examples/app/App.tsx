@@ -7,6 +7,7 @@ import { useSession } from '../../src';
 import ManageUsers from './ManageUsers';
 import ManageRoles from './ManageRoles';
 import ManageAccessKeys from './ManageAccessKeys';
+import ManageAudit from './ManageAudit';
 
 const Layout = () => (
 	<div style={{ height: '100vh', position: 'relative' }}>
@@ -75,6 +76,14 @@ const App = () => (
 				element={
 					<ProtectedRoute>
 						<ManageAccessKeys />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/audit-management"
+				element={
+					<ProtectedRoute>
+						<ManageAudit />
 					</ProtectedRoute>
 				}
 			/>

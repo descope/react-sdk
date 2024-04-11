@@ -420,6 +420,24 @@ import { AccessKeyManagement } from '@descope/react-sdk';
 Example:
 [Manage Access Keys](./examples/app/ManageAccessKeys.tsx)
 
+#### Audit Management
+
+The `AuditManagement` widget will let you embed an audit table in your site.
+
+###### Usage
+
+```js
+import { AuditManagement } from '@descope/react-sdk';
+...
+  <AuditManagement
+    widgetId="audit-management-widget"
+    tenant="tenant-id"
+  />
+```
+
+Example:
+[Manage Audit](./examples/app/ManageAudit.tsx)
+
 ## Code Example
 
 You can find an example react app in the [examples folder](./examples).
