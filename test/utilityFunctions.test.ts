@@ -3,12 +3,15 @@ import createSdk, {
 	getJwtPermissions,
 	getJwtRoles,
 	getRefreshToken,
-	getSessionToken
+	getSessionToken,
+	isSessionTokenExpired,
+	isRefreshTokenExpired
 } from '../src/sdk';
 
 jest.mock('@descope/web-js-sdk', () => () => ({
 	getSessionToken: jest.fn(),
 	getRefreshToken: jest.fn(),
+	isJwtExpired: jest.fn(),
 	getJwtPermissions: jest.fn(),
 	getJwtRoles: jest.fn(),
 	refresh: jest.fn()
@@ -89,6 +92,20 @@ describe('utility functions', () => {
 		(sdk.getSessionToken as jest.Mock).mockReturnValueOnce('session');
 		getJwtPermissions();
 		expect(sdk.getJwtPermissions).toHaveBeenCalledWith('session', undefined);
+	});
+
+	it('should call isSessionJwtExpired with the session token when not provided', () => {
+		(sdk.getSessionToken as jest.Mock).mockReturnValueOnce('session');
+		jest.spyOn(sdk, 'isJwtExpired').mockReturnValueOnce(false);
+		isSessionTokenExpired();
+		expect(sdk.isJwtExpired).toHaveBeenCalledWith('session');
+	});
+
+	it('should call isRefreshJwtExpired with the refresh token when not provided', () => {
+		(sdk.getRefreshToken as jest.Mock).mockReturnValueOnce('refresh');
+		jest.spyOn(sdk, 'isJwtExpired').mockReturnValueOnce(false);
+		isRefreshTokenExpired();
+		expect(sdk.isJwtExpired).toHaveBeenCalledWith('refresh');
 	});
 
 	it('should call getJwtRoles with the session token when not provided', () => {

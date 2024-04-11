@@ -14,11 +14,15 @@ import useSdk from './useSdk';
 interface IAuthProviderProps {
 	projectId: string;
 	baseUrl?: string;
+	// If true, tokens will be stored on local storage and can accessed with getToken function
+	persistTokens?: boolean;
 	// If true, session token (jwt) will be stored on cookie. Otherwise, the session token will be
 	// stored on local storage and can accessed with getSessionToken function
 	// Use this option if session token will stay small (less than 1k)
 	// NOTE: Session token can grow, especially in cases of using authorization, or adding custom claims
 	sessionTokenViaCookie?: boolean;
+	// If true, last authenticated user will be stored on local storage and can accessed with getUser function
+	storeLastAuthenticatedUser?: boolean;
 	children?: JSX.Element;
 }
 
@@ -26,6 +30,8 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	projectId,
 	baseUrl = '',
 	sessionTokenViaCookie = false,
+	persistTokens = true,
+	storeLastAuthenticatedUser = true,
 	children = undefined
 }) => {
 	const [user, setUser] = useState<User>();
@@ -34,7 +40,13 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	const [isUserLoading, setIsUserLoading] = useState(false);
 	const [isSessionLoading, setIsSessionLoading] = useState(false);
 
-	const sdk = useSdk({ projectId, baseUrl, sessionTokenViaCookie });
+	const sdk = useSdk({
+		projectId,
+		baseUrl,
+		persistTokens,
+		sessionTokenViaCookie,
+		storeLastAuthenticatedUser
+	});
 
 	useEffect(() => {
 		if (sdk) {
@@ -80,6 +92,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			isSessionFetched: isSessionFetched.current,
 			projectId,
 			baseUrl,
+			storeLastAuthenticatedUser,
 			setUser,
 			setSession,
 			sdk
