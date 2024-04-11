@@ -9,6 +9,7 @@ export { default as Descope } from './components/Descope';
 export { default as UserManagement } from './components/UserManagement';
 export { default as RoleManagement } from './components/RoleManagement';
 export { default as AccessKeyManagement } from './components/AccessKeyManagement';
+export { default as AuditManagement } from './components/AuditManagement';
 export { default as useDescope } from './hooks/useDescope';
 export { default as useSession } from './hooks/useSession';
 export { default as useUser } from './hooks/useUser';

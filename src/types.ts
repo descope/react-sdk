@@ -9,6 +9,7 @@ import type { UserResponse } from '@descope/web-js-sdk';
 import React, { DOMAttributes } from 'react';
 import RoleManagementWidget from '@descope/role-management-widget';
 import AccessKeyManagementWidget from '@descope/access-key-management-widget';
+import AuditManagementWidget from '@descope/audit-management-widget';
 import createSdk from './sdk';
 
 declare global {
@@ -18,6 +19,7 @@ declare global {
 			['descope-user-management-widget']: UserManagementCustomElement;
 			['descope-role-management-widget']: RoleManagementCustomElement;
 			['descope-access-key-management-widget']: AccessKeyManagementCustomElement;
+			['descope-audit-management-widget']: AuditManagementCustomElement;
 		}
 	}
 }
@@ -64,6 +66,10 @@ export type AccessKeyManagementCustomElement = CustomElement<
 	typeof AccessKeyManagementWidget & AccessKeyManagementProps
 >;
 
+export type AuditManagementCustomElement = CustomElement<
+	typeof AuditManagementWidget & AuditManagementProps
+>;
+
 export interface IContext {
 	fetchUser: () => void;
 	user: User;
@@ -106,6 +112,8 @@ export type UserManagementProps = WidgetProps;
 export type RoleManagementProps = WidgetProps;
 
 export type AccessKeyManagementProps = WidgetProps;
+
+export type AuditManagementProps = WidgetProps;
 
 export type { ILogger };
 export type DefaultFlowProps = Omit<DescopeProps, 'flowId'>;

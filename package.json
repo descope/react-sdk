@@ -48,9 +48,10 @@
 		]
 	},
 	"dependencies": {
-		"@descope/user-management-widget": "0.4.27",
-		"@descope/role-management-widget": "0.1.26",
 		"@descope/access-key-management-widget": "0.1.26",
+		"@descope/audit-management-widget": "0.1.0",
+		"@descope/role-management-widget": "0.1.26",
+		"@descope/user-management-widget": "0.4.27",
 		"@descope/web-component": "3.8.32"
 	},
 	"devDependencies": {

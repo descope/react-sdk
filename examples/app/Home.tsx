@@ -44,6 +44,9 @@ const Home = () => {
 						<a href="/access-key-management">Manage Access Keys</a>
 					</p>
 					<p>
+						<a href="/audit-management">Manage Audit</a>
+					</p>
+					<p>
 						{process.env.DESCOPE_STEP_UP_FLOW_ID && (
 							<Link id="step-up-button" to="/step-up">
 								Step Up
