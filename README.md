@@ -411,13 +411,17 @@ The widget lets you:
 ```js
 import { AccessKeyManagement } from '@descope/react-sdk';
 ...
-  // admin view: manage all tenant users' access keys
+  {
+	  /* admin view: manage all tenant users' access keys */
+  }
   <AccessKeyManagement
     widgetId="access-key-management-widget"
     tenant="tenant-id"
   />
 
-  // user view: mange access key for the logged-in tenant's user
+  {
+    /* user view: mange access key for the logged-in tenant's user */
+  }
   <AccessKeyManagement
     widgetId="user-access-key-management-widget"
     tenant="tenant-id"
