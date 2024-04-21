@@ -48,11 +48,11 @@
 		]
 	},
 	"dependencies": {
-		"@descope/access-key-management-widget": "0.1.36",
-		"@descope/audit-management-widget": "0.1.1",
-		"@descope/role-management-widget": "0.1.36",
-		"@descope/user-management-widget": "0.4.37",
-		"@descope/web-component": "3.9.0"
+		"@descope/access-key-management-widget": "0.1.44",
+		"@descope/audit-management-widget": "0.1.7",
+		"@descope/role-management-widget": "0.1.42",
+		"@descope/user-management-widget": "0.4.44",
+		"@descope/web-component": "3.11.1"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.0",
