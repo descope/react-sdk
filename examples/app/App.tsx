@@ -8,21 +8,28 @@ import ManageUsers from './ManageUsers';
 import ManageRoles from './ManageRoles';
 import ManageAccessKeys from './ManageAccessKeys';
 import ManageAudit from './ManageAudit';
+import Profile from './Profile';
 
 const Layout = () => (
-	<div style={{ height: '100vh', position: 'relative' }}>
+	<div
+		style={{
+			height: '100vh',
+			position: 'relative',
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center'
+		}}
+	>
 		<div
 			style={{
 				borderRadius: 10,
 				margin: 'auto',
 				border: '1px solid lightgray',
 				padding: 20,
-				maxWidth: '600px',
+				width: '600px',
 				boxShadow: '13px 13px 20px #cbced1, -13px -13px 20px #fff',
 				background: '#ecf0f3',
-				position: 'relative',
-				top: '50%',
-				transform: 'translateY(-50%)'
+				position: 'relative'
 			}}
 		>
 			<Outlet />
@@ -84,6 +91,14 @@ const App = () => (
 				element={
 					<ProtectedRoute>
 						<ManageAudit />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/profile"
+				element={
+					<ProtectedRoute>
+						<Profile />
 					</ProtectedRoute>
 				}
 			/>

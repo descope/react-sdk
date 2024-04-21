@@ -449,6 +449,29 @@ import { AuditManagement } from '@descope/react-sdk';
 Example:
 [Manage Audit](./examples/app/ManageAudit.tsx)
 
+#### User Profile
+
+The `UserProfile` widget will let you embed a user profile component in your app and let the logged in user update his profile
+
+The widget lets you:
+
+- Update the user profile picture
+- Update user personal information
+- Add/update authentication methods
+
+###### Usage
+
+```js
+import { UserProfile } from '@descope/react-sdk';
+...
+  <UserProfile
+    widgetId="user-profile-widget"
+  />
+```
+
+Example:
+[User Profile](./examples/app/Profile.tsx)
+
 ## Code Example
 
 You can find an example react app in the [examples folder](./examples).
