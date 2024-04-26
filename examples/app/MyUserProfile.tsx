@@ -6,7 +6,7 @@ import { useDescope, useUser, UserProfile } from '../../src';
 const getUserDisplayName = (user?: UserResponse) =>
 	user?.name || user?.loginIds?.[0] || '';
 
-const Profile = () => {
+const MyUserProfile = () => {
 	// useUser retrieves the logged in user information
 	const { user } = useUser();
 	// useDescope retrieves Descope SDK for further operations related to authentication
@@ -59,7 +59,7 @@ const Profile = () => {
 					</p>
 				</div>
 			</header>
-			<h2>Manage Users</h2>
+			<h2>My Profile</h2>
 			<UserProfile
 				widgetId="user-profile-widget"
 				onLogout={() => {
@@ -70,4 +70,4 @@ const Profile = () => {
 	);
 };
 
-export default Profile;
+export default MyUserProfile;

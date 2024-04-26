@@ -8,7 +8,7 @@ import ManageUsers from './ManageUsers';
 import ManageRoles from './ManageRoles';
 import ManageAccessKeys from './ManageAccessKeys';
 import ManageAudit from './ManageAudit';
-import Profile from './Profile';
+import MyUserProfile from './MyUserProfile';
 
 const Layout = () => (
 	<div
@@ -95,10 +95,10 @@ const App = () => (
 				}
 			/>
 			<Route
-				path="/profile"
+				path="/user-profile"
 				element={
 					<ProtectedRoute>
-						<Profile />
+						<MyUserProfile />
 					</ProtectedRoute>
 				}
 			/>
