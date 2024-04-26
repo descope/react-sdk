@@ -475,7 +475,7 @@ import { UserProfile } from '@descope/react-sdk';
 ```
 
 Example:
-[User Profile](./examples/app/Profile.tsx)
+[User Profile](./examples/app/MyUserProfile.tsx)
 
 ## Code Example
 
