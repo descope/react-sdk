@@ -338,7 +338,7 @@ Important Note:
 
 #### User Management
 
-The `UserManagement` widget will let you embed a user table in your site to view and take action.
+The `UserManagement` widget let you embed a user table in your site to view and take action.
 
 The widget lets you:
 
@@ -369,7 +369,7 @@ Example:
 
 #### Role Management
 
-The `RoleManagement` widget will let you embed a role table in your site to view and take action.
+The `RoleManagement` widget let you embed a role table in your site to view and take action.
 
 The widget lets you:
 
@@ -398,7 +398,7 @@ Example:
 
 #### Access Key Management
 
-The `AccessKeyManagement` widget will let you embed an access key table in your site to view and take action.
+The `AccessKeyManagement` widget let you embed an access key table in your site to view and take action.
 
 The widget lets you:
 
@@ -433,7 +433,7 @@ Example:
 
 #### Audit Management
 
-The `AuditManagement` widget will let you embed an audit table in your site.
+The `AuditManagement` widget let you embed an audit table in your site.
 
 ###### Usage
 
@@ -451,13 +451,14 @@ Example:
 
 #### User Profile
 
-The `UserProfile` widget will let you embed a user profile component in your app and let the logged in user update his profile
+The `UserProfile` widget let you embed a user profile component in your app and let the logged in user update his profile.
 
 The widget lets you:
 
-- Update the user profile picture
+- Update user profile picture
 - Update user personal information
-- Add/update authentication methods
+- Update authentication methods
+- Logout
 
 ###### Usage
 
