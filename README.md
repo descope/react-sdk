@@ -467,6 +467,10 @@ import { UserProfile } from '@descope/react-sdk';
 ...
   <UserProfile
     widgetId="user-profile-widget"
+    onLogout={() => {
+      // add here you own logout callback
+      window.location.href = '/login';
+    }}
   />
 ```
 
