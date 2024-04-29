@@ -47,6 +47,9 @@ const Home = () => {
 						<a href="/audit-management">Manage Audit</a>
 					</p>
 					<p>
+						<a href="/profile">User Profile</a>
+					</p>
+					<p>
 						{process.env.DESCOPE_STEP_UP_FLOW_ID && (
 							<Link id="step-up-button" to="/step-up">
 								Step Up
