@@ -139,7 +139,12 @@ describe('Descope', () => {
 	});
 
 	it('should pass logger and update web components logger', async () => {
-		const logger = { info: jest.fn(), error: jest.fn(), warn: jest.fn() };
+		const logger = {
+			info: jest.fn(),
+			error: jest.fn(),
+			warn: jest.fn(),
+			debug: jest.fn()
+		};
 		renderWithProvider(<Descope flowId="flow-1" logger={logger} />);
 		await waitFor(() => {
 			expect(document.querySelector('descope-wc')).toBeInTheDocument();
