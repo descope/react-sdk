@@ -41,6 +41,7 @@ const DescopeWC = lazy(async () => {
 			projectId,
 			flowId,
 			baseUrl,
+			baseStaticUrl,
 			innerRef,
 			tenant,
 			theme,
@@ -55,6 +56,7 @@ const DescopeWC = lazy(async () => {
 				project-id={projectId}
 				flow-id={flowId}
 				base-url={baseUrl}
+				base-static-url={baseStaticUrl}
 				ref={innerRef}
 				tenant={tenant}
 				theme={theme}
@@ -94,8 +96,13 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 
 		useImperativeHandle(ref, () => innerRef);
 
-		const { projectId, baseUrl, storeLastAuthenticatedUser, sdk } =
-			React.useContext(Context);
+		const {
+			projectId,
+			baseUrl,
+			baseStaticUrl,
+			storeLastAuthenticatedUser,
+			sdk
+		} = React.useContext(Context);
 
 		const handleSuccess = useCallback(
 			async (e: CustomEvent) => {
@@ -188,6 +195,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						projectId={projectId}
 						flowId={flowId}
 						baseUrl={baseUrl}
+						baseStaticUrl={baseStaticUrl}
 						innerRef={setInnerRef}
 						tenant={tenant}
 						theme={theme}

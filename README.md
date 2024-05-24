@@ -506,18 +506,19 @@ npm i && npm start
 
 See the following table for customization environment variables for the example app:
 
-| Env Variable            | Description                                                                                                   | Default value     |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------- |
-| DESCOPE_FLOW_ID         | Which flow ID to use in the login page                                                                        | **sign-up-or-in** |
-| DESCOPE_BASE_URL        | Custom Descope base URL                                                                                       | None              |
-| DESCOPE_THEME           | Flow theme                                                                                                    | None              |
-| DESCOPE_LOCALE          | Flow locale                                                                                                   | Browser's locale  |
-| DESCOPE_REDIRECT_URL    | Flow redirect URL for OAuth/SSO/Magic Link/Enchanted Link                                                     | None              |
-| DESCOPE_TENANT_ID       | Flow tenant ID for SSO/SAML                                                                                   | None              |
-| DESCOPE_DEBUG_MODE      | **"true"** - Enable debugger</br>**"false"** - Disable flow debugger                                          | None              |
-| DESCOPE_STEP_UP_FLOW_ID | Step up flow ID to show to logged in user (via button). e.g. "step-up". Button will be hidden if not provided | None              |
-| DESCOPE_TELEMETRY_KEY   | **String** - Telemetry public key provided by Descope Inc                                                     | None              |
-|                         |                                                                                                               |                   |
+| Env Variable            | Description                                                                                                   | Default value                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| DESCOPE_FLOW_ID         | Which flow ID to use in the login page                                                                        | **sign-up-or-in**                |
+| DESCOPE_BASE_URL        | Custom Descope base URL                                                                                       | None                             |
+| DESCOPE_BASE_STATIC_URL | Allows to override the base URL that is used to fetch static files                                            | https://static.descope.com/pages |
+| DESCOPE_THEME           | Flow theme                                                                                                    | None                             |
+| DESCOPE_LOCALE          | Flow locale                                                                                                   | Browser's locale                 |
+| DESCOPE_REDIRECT_URL    | Flow redirect URL for OAuth/SSO/Magic Link/Enchanted Link                                                     | None                             |
+| DESCOPE_TENANT_ID       | Flow tenant ID for SSO/SAML                                                                                   | None                             |
+| DESCOPE_DEBUG_MODE      | **"true"** - Enable debugger</br>**"false"** - Disable flow debugger                                          | None                             |
+| DESCOPE_STEP_UP_FLOW_ID | Step up flow ID to show to logged in user (via button). e.g. "step-up". Button will be hidden if not provided | None                             |
+| DESCOPE_TELEMETRY_KEY   | **String** - Telemetry public key provided by Descope Inc                                                     | None                             |
+|                         |                                                                                                               |                                  |
 
 Example for `.env` file template:
 
@@ -528,6 +529,8 @@ DESCOPE_PROJECT_ID="<Project-ID>"
 DESCOPE_FLOW_ID=""
 # Descope base URL
 DESCOPE_BASE_URL=""
+# Descope base static URL
+DESCOPE_BASE_STATIC_URL=""
 # Set flow theme to dark
 DESCOPE_THEME=dark
 # Set flow locale, default is browser's locale
