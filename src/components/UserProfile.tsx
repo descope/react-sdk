@@ -13,11 +13,20 @@ const UserProfileWC = lazy(async () => {
 	await import('@descope/user-profile-widget');
 
 	return {
-		default: ({ projectId, baseUrl, innerRef, widgetId, theme, debug }) => (
+		default: ({
+			projectId,
+			baseUrl,
+			baseStaticUrl,
+			innerRef,
+			widgetId,
+			theme,
+			debug
+		}) => (
 			<descope-user-profile-widget
 				project-id={projectId}
 				widget-id={widgetId}
 				base-url={baseUrl}
+				base-static-url={baseStaticUrl}
 				theme={theme}
 				debug={debug}
 				ref={innerRef}
@@ -32,7 +41,7 @@ const UserProfile = React.forwardRef<HTMLElement, UserProfileProps>(
 
 		useImperativeHandle(ref, () => innerRef);
 
-		const { projectId, baseUrl } = React.useContext(Context);
+		const { projectId, baseUrl, baseStaticUrl } = React.useContext(Context);
 
 		useEffect(() => {
 			if (innerRef && logger) {
@@ -54,6 +63,7 @@ const UserProfile = React.forwardRef<HTMLElement, UserProfileProps>(
 					projectId={projectId}
 					widgetId={widgetId}
 					baseUrl={baseUrl}
+					baseStaticUrl={baseStaticUrl}
 					innerRef={setInnerRef}
 					theme={theme}
 					debug={debug}
