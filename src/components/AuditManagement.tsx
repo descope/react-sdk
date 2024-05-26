@@ -16,6 +16,7 @@ const AuditManagementWC = lazy(async () => {
 		default: ({
 			projectId,
 			baseUrl,
+			baseStaticUrl,
 			innerRef,
 			tenant,
 			widgetId,
@@ -26,6 +27,7 @@ const AuditManagementWC = lazy(async () => {
 				project-id={projectId}
 				widget-id={widgetId}
 				base-url={baseUrl}
+				base-static-url={baseStaticUrl}
 				theme={theme}
 				tenant={tenant}
 				debug={debug}
@@ -41,7 +43,7 @@ const AuditManagement = React.forwardRef<HTMLElement, AuditManagementProps>(
 
 		useImperativeHandle(ref, () => innerRef);
 
-		const { projectId, baseUrl } = React.useContext(Context);
+		const { projectId, baseUrl, baseStaticUrl } = React.useContext(Context);
 
 		useEffect(() => {
 			if (innerRef && logger) {
@@ -55,6 +57,7 @@ const AuditManagement = React.forwardRef<HTMLElement, AuditManagementProps>(
 					projectId={projectId}
 					widgetId={widgetId}
 					baseUrl={baseUrl}
+					baseStaticUrl={baseStaticUrl}
 					innerRef={setInnerRef}
 					tenant={tenant}
 					theme={theme}
