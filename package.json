@@ -1,6 +1,6 @@
 {
 	"name": "@descope/react-sdk",
-	"version": "2.0.28",
+	"version": "2.0.32",
 	"description": "Descope React SDK",
 	"author": "Descope Team <info@descope.com>",
 	"homepage": "https://github.com/descope/react-sdk",
@@ -48,11 +48,11 @@
 		]
 	},
 	"dependencies": {
-		"@descope/access-key-management-widget": "0.1.58",
-		"@descope/audit-management-widget": "0.1.21",
-		"@descope/role-management-widget": "0.1.56",
-		"@descope/user-management-widget": "0.4.58",
-		"@descope/user-profile-widget": "0.0.23",
+		"@descope/access-key-management-widget": "0.1.71",
+		"@descope/audit-management-widget": "0.1.34",
+		"@descope/role-management-widget": "0.1.69",
+		"@descope/user-management-widget": "0.4.71",
+		"@descope/user-profile-widget": "0.0.37",
 		"@descope/web-component": "3.13.0"
 	},
 	"devDependencies": {

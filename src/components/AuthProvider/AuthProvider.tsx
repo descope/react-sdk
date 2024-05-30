@@ -14,6 +14,8 @@ import useSdk from './useSdk';
 interface IAuthProviderProps {
 	projectId: string;
 	baseUrl?: string;
+	// allows to override the base URL that is used to fetch static files
+	baseStaticUrl?: string;
 	// If true, tokens will be stored on local storage and can accessed with getToken function
 	persistTokens?: boolean;
 	// If true, session token (jwt) will be stored on cookie. Otherwise, the session token will be
@@ -29,6 +31,7 @@ interface IAuthProviderProps {
 const AuthProvider: FC<IAuthProviderProps> = ({
 	projectId,
 	baseUrl = '',
+	baseStaticUrl = '',
 	sessionTokenViaCookie = false,
 	persistTokens = true,
 	storeLastAuthenticatedUser = true,
@@ -92,6 +95,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			isSessionFetched: isSessionFetched.current,
 			projectId,
 			baseUrl,
+			baseStaticUrl,
 			storeLastAuthenticatedUser,
 			setUser,
 			setSession,
@@ -107,6 +111,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			isSessionFetched.current,
 			projectId,
 			baseUrl,
+			baseStaticUrl,
 			setUser,
 			setSession,
 			sdk

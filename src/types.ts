@@ -86,6 +86,7 @@ export interface IContext {
 	isSessionFetched: boolean;
 	projectId: string;
 	baseUrl?: string;
+	baseStaticUrl?: string;
 	storeLastAuthenticatedUser?: boolean;
 	sdk?: Sdk;
 	setUser: React.Dispatch<React.SetStateAction<User>>;
