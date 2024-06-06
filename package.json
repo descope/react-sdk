@@ -48,12 +48,12 @@
 		]
 	},
 	"dependencies": {
-		"@descope/access-key-management-widget": "0.1.78",
-		"@descope/audit-management-widget": "0.1.41",
-		"@descope/role-management-widget": "0.1.76",
-		"@descope/user-management-widget": "0.4.78",
-		"@descope/user-profile-widget": "0.0.47",
-		"@descope/web-component": "3.13.1"
+		"@descope/access-key-management-widget": "0.1.81",
+		"@descope/audit-management-widget": "0.1.44",
+		"@descope/role-management-widget": "0.1.79",
+		"@descope/user-management-widget": "0.4.81",
+		"@descope/user-profile-widget": "0.0.52",
+		"@descope/web-component": "3.15.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.0",

@@ -105,6 +105,7 @@ export type DescopeProps = {
 	// If locale is not provided - the browser's locale will be used
 	locale?: string;
 	autoFocus?: AutoFocusOptions;
+	validateOnBlur?: boolean;
 	debug?: boolean;
 	telemetryKey?: string;
 	redirectUrl?: string;

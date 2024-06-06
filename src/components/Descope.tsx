@@ -50,7 +50,8 @@ const DescopeWC = lazy(async () => {
 			redirectUrl,
 			client,
 			form,
-			autoFocus
+			autoFocus,
+			validateOnBlur
 		}) => (
 			<descope-wc
 				project-id={projectId}
@@ -66,6 +67,7 @@ const DescopeWC = lazy(async () => {
 				form={form}
 				redirect-url={redirectUrl}
 				auto-focus={autoFocus}
+				validate-on-blur={validateOnBlur}
 			/>
 		)
 	};
@@ -88,6 +90,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			telemetryKey,
 			redirectUrl,
 			autoFocus,
+			validateOnBlur,
 			errorTransformer
 		},
 		ref
@@ -206,6 +209,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						telemetryKey={telemetryKey}
 						redirectUrl={redirectUrl}
 						autoFocus={autoFocus}
+						validateOnBlur={validateOnBlur}
 						storeLastAuthenticatedUser={storeLastAuthenticatedUser}
 					/>
 				</Suspense>
