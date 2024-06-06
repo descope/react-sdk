@@ -176,7 +176,7 @@ const App = () => {
 	// useSession retrieves authentication state, session loading status, and session token
 	const { isAuthenticated, isSessionLoading, sessionToken } = useSession();
 	// useUser retrieves the logged in user information
-	const { user } = useUser();
+	const { user, isUserLoading } = useUser();
 	// useDescope retrieves Descope SDK for further operations related to authentication
 	// such as logout
 	const sdk = useDescope();
