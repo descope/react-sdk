@@ -74,7 +74,7 @@
 		"@types/react-dom": "18.2.12",
 		"@types/react-router-dom": "^5.3.3",
 		"babel-jest": "27.5.1",
-		"eslint": "8.51.0",
+		"eslint": "8.57.0",
 		"eslint-config-airbnb": "19.0.4",
 		"eslint-config-airbnb-typescript": "17.1.0",
 		"eslint-config-prettier": "8.10.0",
