@@ -82,7 +82,7 @@
 		"eslint-import-resolver-typescript": "2.7.1",
 		"eslint-plugin-import": "2.28.1",
 		"eslint-plugin-jest": "27.4.2",
-		"eslint-plugin-jest-dom": "4.0.3",
+		"eslint-plugin-jest-dom": "5.4.0",
 		"eslint-plugin-jest-formatting": "3.1.0",
 		"eslint-plugin-jsx-a11y": "6.7.1",
 		"eslint-plugin-n": "15.7.0",
