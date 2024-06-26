@@ -56,10 +56,10 @@
 		"@descope/web-component": "3.16.0"
 	},
 	"devDependencies": {
-		"@babel/core": "7.23.0",
-		"@babel/preset-env": "7.22.20",
-		"@babel/preset-react": "7.22.15",
-		"@babel/preset-typescript": "7.23.0",
+		"@babel/core": "7.24.7",
+		"@babel/preset-env": "7.24.7",
+		"@babel/preset-react": "7.24.7",
+		"@babel/preset-typescript": "7.24.7",
 		"@open-wc/rollup-plugin-html": "^1.2.5",
 		"@rollup/plugin-commonjs": "^25.0.0",
 		"@rollup/plugin-node-resolve": "^15.0.0",
