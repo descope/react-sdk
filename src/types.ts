@@ -35,26 +35,27 @@ type WidgetProps = {
 	debug?: boolean;
 };
 
+type FlowResponse = Awaited<ReturnType<Sdk['flow']['next']>>;
+
+type ErrorResponse = FlowResponse['error'];
+
+type JWTResponse = FlowResponse['data']['authInfo'];
+
+type CustomEventCb<T extends Record<string, any>> = (e: CustomEvent<T>) => void;
+
 export type User = UserResponse;
 
 export type Sdk = ReturnType<typeof createSdk>;
 
-export type CustomEvents<K extends string> = {
-	[key in K]: (event: CustomEvent) => void;
-};
-
-export type CustomElement<T, K extends string = ''> = Partial<
+export type CustomElement<T> = Partial<
 	T &
 		DOMAttributes<T> & {
 			children: React.ReactChild;
 			ref: React.Ref<HTMLElement>;
-		} & CustomEvents<`on${K}`>
+		}
 >;
 
-export type DescopeCustomElement = CustomElement<
-	DescopeWc,
-	'success' | 'error' | 'ready'
->;
+export type DescopeCustomElement = CustomElement<DescopeWc>;
 
 export type UserManagementCustomElement = CustomElement<
 	typeof UserManagementWidget & UserManagementProps
@@ -95,9 +96,9 @@ export interface IContext {
 
 export type DescopeProps = {
 	flowId: string;
-	onSuccess?: DescopeCustomElement['onsuccess'];
-	onError?: DescopeCustomElement['onerror'];
-	onReady?: DescopeCustomElement['onready'];
+	onSuccess?: CustomEventCb<JWTResponse>;
+	onError?: CustomEventCb<ErrorResponse>;
+	onReady?: CustomEventCb<{}>;
 	logger?: ILogger;
 	tenant?: string;
 	// If theme is not provided - the OS theme will be used
