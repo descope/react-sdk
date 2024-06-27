@@ -53,7 +53,7 @@
 		"@descope/role-management-widget": "0.1.85",
 		"@descope/user-management-widget": "0.4.88",
 		"@descope/user-profile-widget": "0.0.59",
-		"@descope/web-component": "3.16.0"
+		"@descope/web-component": "3.16.2"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.0",
