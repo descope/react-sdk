@@ -328,7 +328,7 @@ Notes:
 
 ### Last User Persistence
 
-Descope stores the last user information in local storage. If you wish to disable this feature, you can pass `storeLastAuthenticatedUser={false}` to the `AuthProvider` component. Please note that some features related to the last authenticated user may not function as expected if this behavior is disabled.
+Descope stores the last user information in local storage. If you wish to disable this feature, you can pass `storeLastAuthenticatedUser={false}` to the `AuthProvider` component. Please note that some features related to the last authenticated user may not function as expected if this behavior is disabled. Local storage is being cleared when the user logs out, if you want the avoid clearing the local storage, you can pass `keepLastAuthenticatedUserAfterLogout={true}` to the `AuthProvider` component.
 
 ### Widgets
 

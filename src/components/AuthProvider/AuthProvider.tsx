@@ -25,6 +25,8 @@ interface IAuthProviderProps {
 	sessionTokenViaCookie?: boolean;
 	// If true, last authenticated user will be stored on local storage and can accessed with getUser function
 	storeLastAuthenticatedUser?: boolean;
+	// If true, last authenticated user will not be removed after logout
+	keepLastAuthenticatedUserAfterLogout?: boolean;
 	children?: JSX.Element;
 }
 
@@ -35,6 +37,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 	sessionTokenViaCookie = false,
 	persistTokens = true,
 	storeLastAuthenticatedUser = true,
+	keepLastAuthenticatedUserAfterLogout = false,
 	children = undefined
 }) => {
 	const [user, setUser] = useState<User>();
@@ -48,7 +51,8 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 		baseUrl,
 		persistTokens,
 		sessionTokenViaCookie,
-		storeLastAuthenticatedUser
+		storeLastAuthenticatedUser,
+		keepLastAuthenticatedUserAfterLogout
 	});
 
 	useEffect(() => {
@@ -97,6 +101,7 @@ const AuthProvider: FC<IAuthProviderProps> = ({
 			baseUrl,
 			baseStaticUrl,
 			storeLastAuthenticatedUser,
+			keepLastAuthenticatedUserAfterLogout,
 			setUser,
 			setSession,
 			sdk
