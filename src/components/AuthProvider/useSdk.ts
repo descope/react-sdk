@@ -9,6 +9,7 @@ type Config = Pick<
 	| 'persistTokens'
 	| 'sessionTokenViaCookie'
 	| 'storeLastAuthenticatedUser'
+	| 'keepLastAuthenticatedUserAfterLogout'
 >;
 
 export default ({
@@ -16,7 +17,8 @@ export default ({
 	baseUrl,
 	persistTokens,
 	sessionTokenViaCookie,
-	storeLastAuthenticatedUser
+	storeLastAuthenticatedUser,
+	keepLastAuthenticatedUserAfterLogout
 }: Config): ReturnType<typeof createSdk> =>
 	useMemo(() => {
 		if (!projectId) {
@@ -29,6 +31,7 @@ export default ({
 			baseHeaders,
 			persistTokens,
 			storeLastAuthenticatedUser,
+			keepLastAuthenticatedUserAfterLogout,
 			autoRefresh: true
 		});
 	}, [projectId, baseUrl, sessionTokenViaCookie]);

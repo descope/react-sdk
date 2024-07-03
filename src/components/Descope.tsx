@@ -104,6 +104,7 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 			baseUrl,
 			baseStaticUrl,
 			storeLastAuthenticatedUser,
+			keepLastAuthenticatedUserAfterLogout,
 			sdk
 		} = React.useContext(Context);
 
@@ -211,6 +212,9 @@ const Descope = React.forwardRef<HTMLElement, DescopeProps>(
 						autoFocus={autoFocus}
 						validateOnBlur={validateOnBlur}
 						storeLastAuthenticatedUser={storeLastAuthenticatedUser}
+						keepLastAuthenticatedUserAfterLogout={
+							keepLastAuthenticatedUserAfterLogout
+						}
 					/>
 				</Suspense>
 			</form>
