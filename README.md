@@ -1,3 +1,9 @@
+# IMPORTANT NOTE: This repository is _DEPRECATED_.
+
+Descope React SDK has been moved to the [descope-js](https://github.com/descope/descope-js/tree/main/packages/sdks/react-sdk) repoistory.
+
+---
+
 # Descope SDK for React
 
 The Descope SDK for React provides convenient access to the Descope for an application written on top of React. You can read more on the [Descope Website](https://descope.com).
